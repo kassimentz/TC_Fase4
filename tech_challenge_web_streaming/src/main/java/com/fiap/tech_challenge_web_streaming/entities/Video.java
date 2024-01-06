@@ -1,6 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.entities;
 
-import nonapi.io.github.classgraph.json.Id;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;

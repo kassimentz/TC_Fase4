@@ -47,9 +47,9 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza Usuario")
-    public ResponseEntity<UsuarioResponseDTO> atualizarUsuario(@PathVariable String id, @Valid @RequestBody UsuarioRequestDTO usuario) {
+    public Mono<ResponseEntity<UsuarioResponseDTO>> atualizarUsuario(@PathVariable String id, @Valid @RequestBody UsuarioRequestDTO usuario) {
         Mono<UsuarioResponseDTO> usuarioAtualizado = usuarioGateway.atualiza(id, usuario);
-        return new ResponseEntity<>(usuarioAtualizado.block(), HttpStatus.OK);
+        return usuarioAtualizado.map(u -> new ResponseEntity<>(u, HttpStatus.OK));
     }
 
     @DeleteMapping("/{id}")

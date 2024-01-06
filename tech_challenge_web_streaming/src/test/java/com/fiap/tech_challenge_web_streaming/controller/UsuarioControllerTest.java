@@ -79,7 +79,7 @@ public class UsuarioControllerTest {
         UsuarioResponseDTO responseDTO = new UsuarioResponseDTO(testId, "New Test Name", "newtest@email.com", new ArrayList<>(), new ArrayList<>());
         when(usuarioGateway.atualiza(testId, requestDTO)).thenReturn(Mono.just(responseDTO));
 
-        ResponseEntity<UsuarioResponseDTO> result = usuarioController.atualizarUsuario(testId, requestDTO);
+        ResponseEntity<UsuarioResponseDTO> result = usuarioController.atualizarUsuario(testId, requestDTO).block();
 
         assertEquals(HttpStatus.OK, result.getStatusCode());
         assertEquals(responseDTO, result.getBody());
