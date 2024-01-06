@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.gateways;
 
+import com.fiap.tech_challenge_web_streaming.entities.Usuario;
 import com.fiap.tech_challenge_web_streaming.entities.Video;
 import com.fiap.tech_challenge_web_streaming.interfaces.VideoGatewayInterface;
 import com.fiap.tech_challenge_web_streaming.interfaces.VideoRepositoryInterface;
@@ -40,6 +41,8 @@ public class VideoGateway implements VideoGatewayInterface {
 
     @Override
     public Mono<Void> deleteVideo(String id) {
-        return videoRepository.deleteById(id);
+        Mono<Video> videoMono = videoRepository.findById(id);
+        return videoMono.flatMap(videoRepository::delete);
     }
+
 }
