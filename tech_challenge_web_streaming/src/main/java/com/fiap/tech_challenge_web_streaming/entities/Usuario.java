@@ -1,11 +1,15 @@
 package com.fiap.tech_challenge_web_streaming.entities;
 
 import com.fiap.tech_challenge_web_streaming.controllers.dto.UsuarioRequestDTO;
+import nonapi.io.github.classgraph.json.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
+@Document(collection = "usuarios")
 public class Usuario {
 
+    @Id
     private Long id;
     private String nome;
     private String email;

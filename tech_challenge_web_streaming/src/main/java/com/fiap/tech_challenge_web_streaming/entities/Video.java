@@ -1,9 +1,16 @@
 package com.fiap.tech_challenge_web_streaming.entities;
 
+import nonapi.io.github.classgraph.json.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDate;
 import java.util.List;
 
+@Document(collection = "videos")
 public class Video {
+
+    @Id
+    private Long id;
     private String titulo;
     private String descricao;
     private String url;
@@ -11,6 +18,14 @@ public class Video {
     private List<Categoria> categorias;
 
     public Video(){
+    }
+
+    public Long getId(){
+        return id;
+    }
+
+    public void setId(Long id){
+        this.id = id;
     }
 
     public String getTitulo(){

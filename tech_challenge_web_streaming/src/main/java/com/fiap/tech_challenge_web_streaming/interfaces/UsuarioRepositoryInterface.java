@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@Repository
 public interface UsuarioRepositoryInterface extends ReactiveMongoRepository<Usuario, Long> {
 
     Mono<Usuario> findById(Long id);
