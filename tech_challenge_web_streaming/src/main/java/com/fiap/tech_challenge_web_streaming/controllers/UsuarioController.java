@@ -38,7 +38,7 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Busca usuario por ID")
-    public Mono<ResponseEntity<Optional<UsuarioResponseDTO>>> userById(@PathVariable Long id) {
+    public Mono<ResponseEntity<Optional<UsuarioResponseDTO>>> userById(@PathVariable String id) {
         return usuarioGateway.listarPorId(id)
                 .map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK))
                 .switchIfEmpty(Mono.just(new ResponseEntity<>(HttpStatus.NOT_FOUND)));
@@ -47,14 +47,14 @@ public class UsuarioController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza Usuario")
-    public ResponseEntity<UsuarioResponseDTO> atualizarUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioRequestDTO usuario) {
+    public ResponseEntity<UsuarioResponseDTO> atualizarUsuario(@PathVariable String id, @Valid @RequestBody UsuarioRequestDTO usuario) {
         Mono<UsuarioResponseDTO> usuarioAtualizado = usuarioGateway.atualiza(id, usuario);
         return new ResponseEntity<>(usuarioAtualizado.block(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Deletar usuario por Id")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteById(@PathVariable String id) {
         usuarioGateway.deletar(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

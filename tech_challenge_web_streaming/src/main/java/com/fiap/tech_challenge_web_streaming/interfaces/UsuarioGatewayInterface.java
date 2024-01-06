@@ -14,9 +14,9 @@ public interface UsuarioGatewayInterface {
     Mono<UsuarioNovoResponseDTO> novo(UsuarioRequestDTO usuario);
     Flux<UsuarioResponseDTO> listar();
 
-    Mono<Optional<UsuarioResponseDTO>> listarPorId(Long id);
+    Mono<Optional<UsuarioResponseDTO>> listarPorId(String id);
 
-    Mono<UsuarioResponseDTO> atualiza(Long id, UsuarioRequestDTO usuario);
+    Mono<UsuarioResponseDTO> atualiza(String id, UsuarioRequestDTO usuario);
 
-    void deletar(Long id);
+    void deletar(String id);
 }

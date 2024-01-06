@@ -27,10 +27,17 @@ public class Usuario {
         this.recomendados = recomendados;
     }
 
+    public Usuario(String id, String nome, String email){
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+    }
+
     public Usuario(UsuarioRequestDTO requestDTO) {
         this.nome = requestDTO.getNome();
         this.email = requestDTO.getEmail();
     }
+
 
     public String getId(){
         return id;

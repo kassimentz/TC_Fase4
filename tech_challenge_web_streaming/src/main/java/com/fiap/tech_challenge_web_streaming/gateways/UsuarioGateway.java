@@ -43,7 +43,7 @@ public class UsuarioGateway implements UsuarioGatewayInterface {
     }
 
     @Override
-    public Mono<Optional<UsuarioResponseDTO>> listarPorId(Long id){
+    public Mono<Optional<UsuarioResponseDTO>> listarPorId(String id){
         Mono<Usuario> usuario = repository.findById(id);
         return usuario.map(u -> Optional.of(new UsuarioResponseDTO(
                 u.getId(),
@@ -55,7 +55,7 @@ public class UsuarioGateway implements UsuarioGatewayInterface {
     }
 
     @Override
-    public Mono<UsuarioResponseDTO> atualiza(Long id, UsuarioRequestDTO request){
+    public Mono<UsuarioResponseDTO> atualiza(String id, UsuarioRequestDTO request){
         Mono<Usuario> usuarioExistente = repository.findById(id);
         return usuarioExistente.map(usuario -> {
             usuario.setNome(request.getNome());
@@ -71,11 +71,7 @@ public class UsuarioGateway implements UsuarioGatewayInterface {
     }
 
     @Override
-    public void deletar(Long id){
-        Mono<Usuario> usuarioExistente = repository.findById(id);
-        usuarioExistente.map(usuario -> {
-            repository.delete(usuario);
-            return usuario; //return from map
-        });
+    public void deletar(String id){
+        repository.deleteById(id);
     }
 }
