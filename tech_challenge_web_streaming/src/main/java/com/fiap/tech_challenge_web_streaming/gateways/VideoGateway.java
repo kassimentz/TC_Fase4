@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class VideoGateway implements VideoGatewayInterface {
 
+    @Autowired
     private VideoRepositoryInterface videoRepository;
 
     @Override
