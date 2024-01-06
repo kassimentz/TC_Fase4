@@ -1,6 +1,7 @@
-package com.fiap.tech_challenge_web_streaming.controllers.dto;
+package com.fiap.tech_challenge_web_streaming.controllers.dto.usuario;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fiap.tech_challenge_web_streaming.entities.Usuario;
 import com.fiap.tech_challenge_web_streaming.entities.Video;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public class UsuarioResponseDTO {
 
     @JsonProperty
-    private Long id;
+    private String id;
     @JsonProperty
     private String nome;
     @JsonProperty
@@ -21,7 +22,7 @@ public class UsuarioResponseDTO {
     public UsuarioResponseDTO(){
     }
 
-    public UsuarioResponseDTO(Long id, String nome, String email, List<Video> favoritos, List<Video> recomendados){
+    public UsuarioResponseDTO(String id, String nome, String email, List<Video> favoritos, List<Video> recomendados){
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -29,11 +30,19 @@ public class UsuarioResponseDTO {
         this.recomendados = recomendados;
     }
 
-    public Long getId(){
+    public UsuarioResponseDTO(Usuario usuario) {
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.email = usuario.getEmail();
+        this.favoritos = usuario.getFavoritos();
+        this.recomendados = usuario.getRecomendados();
+    }
+
+    public String getId(){
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(String id){
         this.id = id;
     }
 

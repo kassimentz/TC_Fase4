@@ -1,7 +1,8 @@
 package com.fiap.tech_challenge_web_streaming.gateways;
 
-import com.fiap.tech_challenge_web_streaming.controllers.dto.UsuarioRequestDTO;
-import com.fiap.tech_challenge_web_streaming.controllers.dto.UsuarioResponseDTO;
+import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioNovoResponseDTO;
+import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
+import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioResponseDTO;
 import com.fiap.tech_challenge_web_streaming.entities.Usuario;
 import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioGatewayInterface;
 import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioRepositoryInterface;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,15 +20,13 @@ public class UsuarioGateway implements UsuarioGatewayInterface {
     private UsuarioRepositoryInterface repository;
 
     @Override
-    public Mono<UsuarioResponseDTO> novo(UsuarioRequestDTO request){
+    public Mono<UsuarioNovoResponseDTO> novo(UsuarioRequestDTO request){
         Usuario usuario = new Usuario(request);
         Mono<Usuario> saved = repository.save(usuario);
-        return saved.map(u -> new UsuarioResponseDTO(
+        return saved.map(u -> new UsuarioNovoResponseDTO(
                 u.getId(),
                 u.getNome(),
-                u.getEmail(),
-                u.getFavoritos(),
-                u.getRecomendados()
+                u.getEmail()
         ));
     }
 

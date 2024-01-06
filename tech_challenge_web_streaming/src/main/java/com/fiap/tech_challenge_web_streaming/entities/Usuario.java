@@ -1,6 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.entities;
 
-import com.fiap.tech_challenge_web_streaming.controllers.dto.UsuarioRequestDTO;
+import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import nonapi.io.github.classgraph.json.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public class Usuario {
 
     @Id
-    private Long id;
+    private String id;
     private String nome;
     private String email;
     private List<Video> favoritos;
@@ -19,7 +19,7 @@ public class Usuario {
     public Usuario(){
     }
 
-    public Usuario(Long id, String nome, String email, List<Video> favoritos, List<Video> recomendados){
+    public Usuario(String id, String nome, String email, List<Video> favoritos, List<Video> recomendados){
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -32,11 +32,11 @@ public class Usuario {
         this.email = requestDTO.getEmail();
     }
 
-    public Long getId(){
+    public String getId(){
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(String id){
         this.id = id;
     }
 

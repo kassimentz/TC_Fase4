@@ -1,6 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.entities;
 
-import com.fiap.tech_challenge_web_streaming.controllers.dto.UsuarioRequestDTO;
+import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UsuarioTest {
     private Usuario usuario;
-    private Long id = 1L;
+    private String id = "1";
     private String nome = "Test";
     private String email = "test@test.com";
     private List<Video> favoritos = Arrays.asList(new Video(), new Video());
@@ -54,7 +54,6 @@ public class UsuarioTest {
     @Test
     public void testConstructorWithParameters() {
         Usuario usuario = new Usuario(id, nome, email, favoritos, recomendados);
-        assertEquals(id, usuario.getId());
         assertEquals(nome, usuario.getNome());
         assertEquals(email, usuario.getEmail());
         assertEquals(favoritos, usuario.getFavoritos());

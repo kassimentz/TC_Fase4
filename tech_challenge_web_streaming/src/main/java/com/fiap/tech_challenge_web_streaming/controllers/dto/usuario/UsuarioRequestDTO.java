@@ -1,4 +1,4 @@
-package com.fiap.tech_challenge_web_streaming.controllers.dto;
+package com.fiap.tech_challenge_web_streaming.controllers.dto.usuario;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotBlank;
 public class UsuarioRequestDTO {
 
     @JsonProperty
-    @Email(message = "Digite um nome válido")
     @NotBlank(message = "O nome não pode ser nulo")
     private String nome;
 
@@ -17,6 +16,11 @@ public class UsuarioRequestDTO {
     private String email;
 
     public UsuarioRequestDTO(){
+    }
+
+    public UsuarioRequestDTO(String nome, String email) {
+        this.nome = nome;
+        this.email = email;
     }
 
     public String getNome(){

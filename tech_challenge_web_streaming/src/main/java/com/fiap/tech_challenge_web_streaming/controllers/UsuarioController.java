@@ -1,7 +1,8 @@
 package com.fiap.tech_challenge_web_streaming.controllers;
 
-import com.fiap.tech_challenge_web_streaming.controllers.dto.UsuarioRequestDTO;
-import com.fiap.tech_challenge_web_streaming.controllers.dto.UsuarioResponseDTO;
+import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioNovoResponseDTO;
+import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
+import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioResponseDTO;
 import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioGatewayInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -23,9 +24,9 @@ public class UsuarioController {
 
     @PostMapping
     @Operation(summary = "Novo Usuário")
-    public ResponseEntity<UsuarioResponseDTO> createUser(@Valid @RequestBody UsuarioRequestDTO usuario) {
-        Mono<UsuarioResponseDTO> novoUsuario = usuarioGateway.novo(usuario);
-        return new ResponseEntity<>(novoUsuario.block(), HttpStatus.CREATED);
+    public Mono<ResponseEntity<UsuarioNovoResponseDTO>> createUser(@Valid @RequestBody UsuarioRequestDTO usuario) {
+        Mono<UsuarioNovoResponseDTO> novoUsuario = usuarioGateway.novo(usuario);
+        return novoUsuario.map(u -> new ResponseEntity<>(u, HttpStatus.CREATED));
     }
 
     @GetMapping

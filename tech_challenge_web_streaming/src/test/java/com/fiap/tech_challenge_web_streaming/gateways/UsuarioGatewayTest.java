@@ -1,7 +1,8 @@
 package com.fiap.tech_challenge_web_streaming.gateways;
 
-import com.fiap.tech_challenge_web_streaming.controllers.dto.UsuarioRequestDTO;
-import com.fiap.tech_challenge_web_streaming.controllers.dto.UsuarioResponseDTO;
+import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioNovoResponseDTO;
+import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
+import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioResponseDTO;
 import com.fiap.tech_challenge_web_streaming.entities.Usuario;
 import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioRepositoryInterface;
 import org.junit.jupiter.api.BeforeEach;
@@ -72,15 +73,13 @@ public class UsuarioGatewayTest {
         Usuario usuario = new Usuario(requestDTO);
         when(usuarioRepository.save(any(Usuario.class))).thenReturn(Mono.just(usuario));
 
-        Mono<UsuarioResponseDTO> result = usuarioGateway.novo(requestDTO);
+        Mono<UsuarioNovoResponseDTO> result = usuarioGateway.novo(requestDTO);
 
         StepVerifier.create(result)
-                .expectNext(new UsuarioResponseDTO(
+                .expectNext(new UsuarioNovoResponseDTO(
                         usuario.getId(),
                         usuario.getNome(),
-                        usuario.getEmail(),
-                        usuario.getFavoritos(),
-                        usuario.getRecomendados()
+                        usuario.getEmail()
                 ))
                 .verifyComplete();
 
