@@ -2,8 +2,11 @@ package com.fiap.tech_challenge_web_streaming.entities;
 
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Immutable;
 import org.springframework.data.mongodb.core.mapping.Document;
+import reactor.core.publisher.Mono;
 
+import java.util.Collections;
 import java.util.List;
 
 @Document(collection = "usuarios")
@@ -63,9 +66,9 @@ public class Usuario {
         this.email = email;
     }
 
-    public List<Video> getFavoritos(){
-        return favoritos;
-    }
+//    public List<Video> getFavoritos(){
+//        return favoritos;
+//    }
 
     public void setFavoritos(List<Video> favoritos){
         this.favoritos = favoritos;
@@ -77,5 +80,13 @@ public class Usuario {
 
     public void setRecomendados(List<Video> recomendados){
         this.recomendados = recomendados;
+    }
+
+    public void addFavorito(Video video) {
+        this.favoritos.add(video);
+    }
+
+    public List<Video> getFavoritos(){
+        return Collections.unmodifiableList(favoritos);
     }
 }

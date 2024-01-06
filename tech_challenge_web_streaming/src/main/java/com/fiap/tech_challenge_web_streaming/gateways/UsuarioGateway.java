@@ -74,4 +74,5 @@ public class UsuarioGateway implements UsuarioGatewayInterface {
     public void deletar(String id){
         repository.deleteById(id);
     }
+
 }

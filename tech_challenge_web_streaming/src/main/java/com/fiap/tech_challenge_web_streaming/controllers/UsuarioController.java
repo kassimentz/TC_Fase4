@@ -4,6 +4,7 @@ import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioNovo
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioResponseDTO;
 import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioGatewayInterface;
+import com.fiap.tech_challenge_web_streaming.usecases.UsuarioUC;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioGatewayInterface usuarioGateway;
+
+    @Autowired
+    private UsuarioUC usuarioUC;
 
     @PostMapping
     @Operation(summary = "Novo Usuário")
@@ -57,5 +61,12 @@ public class UsuarioController {
     public ResponseEntity<Void> deleteById(@PathVariable String id) {
         usuarioGateway.deletar(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/{id}/favoritos/{videoId}")
+    @Operation(summary = "Adiciona video aos favoritos")
+    public Mono<ResponseEntity<UsuarioResponseDTO>> addFavorito(@PathVariable String id, @PathVariable String videoId) {
+        Mono<UsuarioResponseDTO> usuario = usuarioUC.addFavorito(id, videoId);
+        return usuario.map(u -> new ResponseEntity<>(u, HttpStatus.OK));
     }
 }
