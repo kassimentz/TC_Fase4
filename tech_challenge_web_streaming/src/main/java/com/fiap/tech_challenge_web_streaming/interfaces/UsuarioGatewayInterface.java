@@ -18,6 +18,6 @@ public interface UsuarioGatewayInterface {
 
     Mono<UsuarioResponseDTO> atualiza(String id, UsuarioRequestDTO usuario);
 
-    void deletar(String id);
+    Mono<Void> deletar(String id);
 
 }

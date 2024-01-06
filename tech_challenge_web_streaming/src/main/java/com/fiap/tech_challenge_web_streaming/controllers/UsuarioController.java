@@ -59,7 +59,7 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Deletar usuario por Id")
     public ResponseEntity<Void> deleteById(@PathVariable String id) {
-        usuarioGateway.deletar(id);
+        usuarioGateway.deletar(id).subscribe();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

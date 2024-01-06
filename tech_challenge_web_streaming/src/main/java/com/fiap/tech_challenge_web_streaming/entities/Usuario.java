@@ -66,9 +66,9 @@ public class Usuario {
         this.email = email;
     }
 
-//    public List<Video> getFavoritos(){
-//        return favoritos;
-//    }
+    public List<Video> getFavoritos(){
+        return favoritos;
+    }
 
     public void setFavoritos(List<Video> favoritos){
         this.favoritos = favoritos;
@@ -86,7 +86,7 @@ public class Usuario {
         this.favoritos.add(video);
     }
 
-    public List<Video> getFavoritos(){
-        return Collections.unmodifiableList(favoritos);
-    }
+//    public List<Video> getFavoritos(){
+//        return Collections.unmodifiableList(favoritos);
+//    }
 }

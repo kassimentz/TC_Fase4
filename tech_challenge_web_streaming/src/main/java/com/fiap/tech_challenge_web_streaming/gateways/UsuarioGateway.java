@@ -71,8 +71,9 @@ public class UsuarioGateway implements UsuarioGatewayInterface {
     }
 
     @Override
-    public void deletar(String id){
-        repository.deleteById(id);
+    public Mono<Void> deletar(String id){
+        Mono<Usuario> usuario = repository.findById(id);
+        return usuario.flatMap(repository::delete);
     }
 
 }
