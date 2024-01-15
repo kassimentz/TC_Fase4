@@ -3,6 +3,7 @@ package com.fiap.tech_challenge_web_streaming.controllers;
 import com.fiap.tech_challenge_web_streaming.entities.Video;
 import com.fiap.tech_challenge_web_streaming.interfaces.VideoGatewayInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,11 @@ public class VideoController {
 
 
     @GetMapping
-    public ResponseEntity<Flux<Video>> getAllVideos(@RequestParam(value = "page", defaultValue = "0") int page,
-                                                    @RequestParam(value = "size", defaultValue = "10") int size,
-                                                    @RequestParam(value = "direcao", defaultValue = "DESC") String direcao,
-                                                    @RequestParam(value = "ordenacao", defaultValue = "id") String ordenacao){
-        Flux<Video> response = videoGatewayInterface.getAllVideos(PageRequest.of(page, size, Sort.Direction.valueOf(direcao), ordenacao));
+    public ResponseEntity<Flux<Page<Video>>> getAllVideos(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                           @RequestParam(value = "size", defaultValue = "10") int size,
+                                                           @RequestParam(value = "direcao", defaultValue = "DESC") String direcao,
+                                                           @RequestParam(value = "ordenacao", defaultValue = "id") String ordenacao){
+        Flux<Page<Video>> response = videoGatewayInterface.getAllVideos(PageRequest.of(page, size, Sort.Direction.valueOf(direcao), ordenacao));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

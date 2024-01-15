@@ -5,6 +5,8 @@ import com.fiap.tech_challenge_web_streaming.entities.Video;
 import com.fiap.tech_challenge_web_streaming.interfaces.VideoGatewayInterface;
 import com.fiap.tech_challenge_web_streaming.interfaces.VideoRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
@@ -24,11 +26,14 @@ public class VideoGateway implements VideoGatewayInterface {
     private ReactiveMongoTemplate reactiveMongoTemplate;
 
     @Override
-    public Flux<Video> getAllVideos(Pageable pageable) {
+    public Flux<Page<Video>> getAllVideos(Pageable pageable) {
         Query query = new Query().with(pageable);
-        return reactiveMongoTemplate.find(query, Video.class);
-    }
 
+        return reactiveMongoTemplate.find(query, Video.class)
+                .collectList()
+                .map(videoList -> new PageImpl<>(videoList, pageable, videoList.size()))
+                .flatMapMany(Flux::just);
+    }
 
     @Override
     public Mono<Video> getVideoById(String id) {

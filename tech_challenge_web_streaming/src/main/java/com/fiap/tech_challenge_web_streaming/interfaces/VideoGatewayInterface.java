@@ -4,6 +4,7 @@ import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioNovo
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioResponseDTO;
 import com.fiap.tech_challenge_web_streaming.entities.Video;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import java.util.Optional;
 
 public interface VideoGatewayInterface {
 
-    Flux<Video> getAllVideos(Pageable pageable);
+    Flux<Page<Video>> getAllVideos(Pageable pageable);
 
     Mono<Video> getVideoById(String id);
 
