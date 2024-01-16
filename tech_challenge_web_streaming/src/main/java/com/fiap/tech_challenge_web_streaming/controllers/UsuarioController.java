@@ -3,6 +3,7 @@ package com.fiap.tech_challenge_web_streaming.controllers;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioNovoResponseDTO;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioResponseDTO;
+import com.fiap.tech_challenge_web_streaming.entities.Video;
 import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioGatewayInterface;
 import com.fiap.tech_challenge_web_streaming.usecases.UsuarioUC;
 import io.swagger.v3.oas.annotations.Operation;
@@ -66,7 +67,12 @@ public class UsuarioController {
     @PostMapping("/{id}/favoritos/{videoId}")
     @Operation(summary = "Adiciona video aos favoritos")
     public Mono<ResponseEntity<UsuarioResponseDTO>> addFavorito(@PathVariable String id, @PathVariable String videoId) {
-        Mono<UsuarioResponseDTO> usuario = usuarioUC.addFavorito(id, videoId);
+        Mono<UsuarioResponseDTO> usuario = usuarioGateway.addVideoFavorito(id, videoId);
         return usuario.map(u -> new ResponseEntity<>(u, HttpStatus.OK));
+    }
+
+    @GetMapping("/{id}/recomendacoes")
+    public Flux<Video> getRecommendations(@PathVariable String id) {
+        return usuarioGateway.getRecomendacoes(id);
     }
 }

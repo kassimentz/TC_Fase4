@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -62,6 +63,12 @@ public class VideoGateway implements VideoGatewayInterface {
         return videoRepository.save(video);
     }
 
+    public Mono<Video> createVideo(Video video, MultipartFile file) {
+        // Implement your file handling logic here
+        // For example, you can save the file in a local directory or a cloud storage, and set the video's URL to the location of the saved file
+        return videoRepository.save(video);
+    }
+
     @Override
     public Mono<Video> updateVideo(String id, Video video) {
         return videoRepository.findById(id)
@@ -78,5 +85,10 @@ public class VideoGateway implements VideoGatewayInterface {
         Mono<Video> videoMono = videoRepository.findById(id);
         return videoMono.flatMap(videoRepository::delete);
     }
+
+//    public Mono<VideoStatistics> getStatistics() {
+//        // Implement your statistics logic here
+//        return Mono.empty();
+//    }
 
 }

@@ -11,25 +11,5 @@ import reactor.core.publisher.Mono;
 @Component
 public class UsuarioUC {
 
-    @Autowired
-    private UsuarioRepositoryInterface repository;
-
-    @Autowired
-    VideoRepositoryInterface videoRepository;
-
-    public Mono<UsuarioResponseDTO> addFavorito(String id, String idFilme){
-        Mono<Usuario> usuario = repository.findById(id);
-        return usuario.map(u -> {
-            u.addFavorito(videoRepository.findById(idFilme).block());
-            return u;
-        }).flatMap(repository::save)
-                .map(u -> new UsuarioResponseDTO(
-                        u.getId(),
-                        u.getNome(),
-                        u.getEmail(),
-                        u.getFavoritos(),
-                        u.getRecomendados()
-                ));
-    }
 
 }

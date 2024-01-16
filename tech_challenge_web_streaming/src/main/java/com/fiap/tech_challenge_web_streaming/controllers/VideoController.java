@@ -8,8 +8,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -50,10 +52,12 @@ public class VideoController {
                 .switchIfEmpty(Mono.just(new ResponseEntity<>(HttpStatus.NOT_FOUND)));
     }
 
-    @PostMapping
-    public Mono<ResponseEntity<Video>>createVideo(@RequestBody Video video) {
-        Mono<Video> response = videoGatewayInterface.createVideo(video);
-        return response.map(u -> new ResponseEntity<>(u, HttpStatus.CREATED));
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public Mono<ResponseEntity<Video>> createVideo(@RequestPart("video") MultipartFile file, @RequestPart("videoDetails") Mono<Video> video) {
+        return video
+                .flatMap(videoDetails -> videoGatewayInterface.createVideo(videoDetails, file))
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
@@ -67,5 +71,12 @@ public class VideoController {
         videoGatewayInterface.deleteVideo(id).subscribe();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+//    @GetMapping("/statistics")
+//    public Mono<ResponseEntity<VideoStatistics>> getStatistics() {
+//        return videoService.getStatistics()
+//                .map(ResponseEntity::ok)
+//                .defaultIfEmpty(ResponseEntity.notFound().build());
+//    }
 
 }

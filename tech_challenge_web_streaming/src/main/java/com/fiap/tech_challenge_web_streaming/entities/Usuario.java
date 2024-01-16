@@ -2,11 +2,9 @@ package com.fiap.tech_challenge_web_streaming.entities;
 
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Immutable;
 import org.springframework.data.mongodb.core.mapping.Document;
-import reactor.core.publisher.Mono;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "usuarios")
@@ -16,18 +14,13 @@ public class Usuario {
     private String id;
     private String nome;
     private String email;
-    private List<Video> favoritos;
-    private List<Video> recomendados;
+    private List<String> videosFavoritados;
+
+    private List<String> videosRecomendados;
 
     public Usuario(){
-    }
-
-    public Usuario(String id, String nome, String email, List<Video> favoritos, List<Video> recomendados){
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.favoritos = favoritos;
-        this.recomendados = recomendados;
+        this.videosFavoritados = new ArrayList<>();
+        this.videosRecomendados = new ArrayList<>();
     }
 
     public Usuario(String id, String nome, String email){
@@ -36,11 +29,18 @@ public class Usuario {
         this.email = email;
     }
 
-    public Usuario(UsuarioRequestDTO requestDTO) {
-        this.nome = requestDTO.getNome();
-        this.email = requestDTO.getEmail();
+    public Usuario(String id, String nome, String email, List<String> favoritos, List<String> videosRecomendados){
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.videosFavoritados = favoritos;
+        this.videosRecomendados = videosRecomendados;
     }
 
+    public Usuario(UsuarioRequestDTO request){
+        this.nome = request.getNome();
+        this.email = request.getEmail();
+    }
 
     public String getId(){
         return id;
@@ -66,27 +66,27 @@ public class Usuario {
         this.email = email;
     }
 
-    public List<Video> getFavoritos(){
-        return favoritos;
+    public List<String> getVideosFavoritados(){
+        return videosFavoritados;
     }
 
-    public void setFavoritos(List<Video> favoritos){
-        this.favoritos = favoritos;
+    public void setVideosFavoritados(List<String> videosFavoritados){
+        this.videosFavoritados = videosFavoritados;
     }
 
-    public List<Video> getRecomendados(){
-        return recomendados;
+    public void favoritarVideo(String idVideo) {
+        this.videosFavoritados.add(idVideo);
     }
 
-    public void setRecomendados(List<Video> recomendados){
-        this.recomendados = recomendados;
+    public List<String> getVideosRecomendados(){
+        return videosRecomendados;
     }
 
-    public void addFavorito(Video video) {
-        this.favoritos.add(video);
+    public void setVideosRecomendados(List<String> videosRecomendados){
+        this.videosRecomendados = videosRecomendados;
     }
 
-//    public List<Video> getFavoritos(){
-//        return Collections.unmodifiableList(favoritos);
-//    }
+    public void addVideoRecomendado(String idVideo) {
+        this.videosRecomendados.add(idVideo);
+    }
 }

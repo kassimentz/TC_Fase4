@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "videos")
@@ -17,7 +18,10 @@ public class Video {
     private LocalDate dataPublicacao;
     private List<Categoria> categorias;
 
+    private List<String> favoritadoPorUsuarios; // new field
+
     public Video(){
+        favoritadoPorUsuarios = new ArrayList<>();
     }
 
     public String getId(){
@@ -66,5 +70,17 @@ public class Video {
 
     public void setCategorias(List<Categoria> categorias){
         this.categorias = categorias;
+    }
+
+    public List<String> getFavoritadoPorUsuarios(){
+        return favoritadoPorUsuarios;
+    }
+
+    private void setFavoritadoPorUsuarios(List<String> favoritadoPorUsuarios){
+        this.favoritadoPorUsuarios = favoritadoPorUsuarios;
+    }
+
+    public void addFavoritadoPorUsuarios(String usuarioId) {
+        this.favoritadoPorUsuarios.add(usuarioId);
     }
 }

@@ -3,18 +3,19 @@ package com.fiap.tech_challenge_web_streaming.entities;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class UsuarioTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class UsuarioTest {
     private Usuario usuario;
     private String id = "1";
     private String nome = "Test";
     private String email = "test@test.com";
-    private List<Video> favoritos = Arrays.asList(new Video(), new Video());
-    private List<Video> recomendados = Arrays.asList(new Video(), new Video());
+    private List<String> favoritos = Arrays.asList("a", "b");
+    private List<String> recomendados = Arrays.asList("a", "b");
 
     @BeforeEach
     public void setUp() {
@@ -22,46 +23,60 @@ public class UsuarioTest {
     }
 
     @Test
-    public void testId() {
+    void testId() {
         usuario.setId(id);
         assertEquals(id, usuario.getId());
     }
 
     @Test
-    public void testNome() {
+    void testNome() {
         usuario.setNome(nome);
         assertEquals(nome, usuario.getNome());
     }
 
     @Test
-    public void testEmail() {
+    void testEmail() {
         usuario.setEmail(email);
         assertEquals(email, usuario.getEmail());
     }
 
     @Test
-    public void testFavoritos() {
-        usuario.setFavoritos(favoritos);
-        assertEquals(favoritos, usuario.getFavoritos());
+    void testFavoritos() {
+        usuario.setVideosFavoritados(favoritos);
+        assertEquals(favoritos, usuario.getVideosFavoritados());
     }
 
     @Test
-    public void testRecomendados() {
-        usuario.setRecomendados(recomendados);
-        assertEquals(recomendados, usuario.getRecomendados());
+    void testAddFavorito() {
+        String video = "sadasd";
+        usuario.favoritarVideo(video);
+        assertTrue(usuario.getVideosFavoritados().contains(video));
     }
 
     @Test
-    public void testConstructorWithParameters() {
+    void testRecomendados() {
+        usuario.setVideosRecomendados(recomendados);
+        assertEquals(recomendados, usuario.getVideosRecomendados());
+    }
+
+    @Test
+    void testAddRecomendado() {
+        String video = "sadasd";
+        usuario.addVideoRecomendado(video);
+        assertTrue(usuario.getVideosRecomendados().contains(video));
+    }
+
+    @Test
+    void testConstructorWithParameters() {
         Usuario usuario = new Usuario(id, nome, email, favoritos, recomendados);
         assertEquals(nome, usuario.getNome());
         assertEquals(email, usuario.getEmail());
-        assertEquals(favoritos, usuario.getFavoritos());
-        assertEquals(recomendados, usuario.getRecomendados());
+        assertEquals(favoritos, usuario.getVideosFavoritados());
+        assertEquals(recomendados, usuario.getVideosRecomendados());
     }
 
     @Test
-    public void testConstructorWithUsuarioRequestDTO() {
+    void testConstructorWithUsuarioRequestDTO() {
         UsuarioRequestDTO requestDTO = new UsuarioRequestDTO();
         requestDTO.setNome(nome);
         requestDTO.setEmail(email);
