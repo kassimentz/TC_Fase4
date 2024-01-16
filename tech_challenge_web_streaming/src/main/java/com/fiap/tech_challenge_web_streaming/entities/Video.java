@@ -16,7 +16,7 @@ public class Video {
     private String descricao;
     private String url;
     private LocalDate dataPublicacao;
-    private List<Categoria> categorias;
+    private Categoria categoria;
 
     private List<String> favoritadoPorUsuarios; // new field
 
@@ -64,12 +64,12 @@ public class Video {
         this.dataPublicacao = dataPublicacao;
     }
 
-    public List<Categoria> getCategorias(){
-        return categorias;
+    public Categoria getCategoria(){
+        return categoria;
     }
 
-    public void setCategorias(List<Categoria> categorias){
-        this.categorias = categorias;
+    public void setCategoria(Categoria categoria){
+        this.categoria = categoria;
     }
 
     public List<String> getFavoritadoPorUsuarios(){

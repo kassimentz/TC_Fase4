@@ -55,8 +55,8 @@ public class VideoTest {
 
     @Test
     public void testCategorias() {
-        List<Categoria> categorias = Arrays.asList(Categoria.PETS, Categoria.ENGRACADO);
-        video.setCategorias(categorias);
-        assertEquals(categorias, video.getCategorias());
+        Categoria categoria = Categoria.PETS;
+        video.setCategoria(categoria);
+        assertEquals(categoria, video.getCategoria());
     }
 }

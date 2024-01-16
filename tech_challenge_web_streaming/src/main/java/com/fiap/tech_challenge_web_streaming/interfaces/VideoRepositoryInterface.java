@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.interfaces;
 
+import com.fiap.tech_challenge_web_streaming.entities.Categoria;
 import com.fiap.tech_challenge_web_streaming.entities.Usuario;
 import com.fiap.tech_challenge_web_streaming.entities.Video;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
@@ -13,4 +14,6 @@ public interface VideoRepositoryInterface extends ReactiveMongoRepository<Video,
     Mono<Video> findById(String id);
 
     Flux<Video> findAll();
+
+    Flux<Video> findTop3ByCategoriaOrderByFavoritadoPorUsuariosDesc(Categoria categoria);
 }

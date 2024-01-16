@@ -86,6 +86,11 @@ public class VideoGateway implements VideoGatewayInterface {
         return videoMono.flatMap(videoRepository::delete);
     }
 
+    @Override
+    public Flux<Video> getTopVideosFavoritosPorCategoria(Categoria categoria){
+        return videoRepository.findTop3ByCategoriaOrderByFavoritadoPorUsuariosDesc(categoria);
+    }
+
 //    public Mono<VideoStatistics> getStatistics() {
 //        // Implement your statistics logic here
 //        return Mono.empty();

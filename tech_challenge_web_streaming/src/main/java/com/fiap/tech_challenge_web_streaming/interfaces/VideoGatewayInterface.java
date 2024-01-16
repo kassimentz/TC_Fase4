@@ -3,7 +3,9 @@ package com.fiap.tech_challenge_web_streaming.interfaces;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioNovoResponseDTO;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioResponseDTO;
+import com.fiap.tech_challenge_web_streaming.entities.Categoria;
 import com.fiap.tech_challenge_web_streaming.entities.Video;
+import org.reactivestreams.Publisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +31,8 @@ public interface VideoGatewayInterface {
     Mono<Video> updateVideo(String id, Video video);
 
     Mono<Void> deleteVideo(String id);
+
+    Flux<Video> getTopVideosFavoritosPorCategoria(Categoria categoria);
 
 //    Mono<VideoStatistics> getStatistics()
 

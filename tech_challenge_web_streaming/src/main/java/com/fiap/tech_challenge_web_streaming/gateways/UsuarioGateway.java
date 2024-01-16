@@ -3,10 +3,12 @@ package com.fiap.tech_challenge_web_streaming.gateways;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioNovoResponseDTO;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioResponseDTO;
+import com.fiap.tech_challenge_web_streaming.entities.Categoria;
 import com.fiap.tech_challenge_web_streaming.entities.Usuario;
 import com.fiap.tech_challenge_web_streaming.entities.Video;
 import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioGatewayInterface;
 import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioRepositoryInterface;
+import com.fiap.tech_challenge_web_streaming.interfaces.VideoGatewayInterface;
 import com.fiap.tech_challenge_web_streaming.interfaces.VideoRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,9 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioGateway implements UsuarioGatewayInterface {
@@ -24,6 +28,9 @@ public class UsuarioGateway implements UsuarioGatewayInterface {
 
     @Autowired
     private VideoRepositoryInterface videoRepository;
+
+    @Autowired
+    private VideoGatewayInterface videoGatewayInterface;
 
     @Override
     public Mono<UsuarioNovoResponseDTO> novo(UsuarioRequestDTO request){
@@ -84,9 +91,22 @@ public class UsuarioGateway implements UsuarioGatewayInterface {
         return usuario.flatMap(repository::delete);
     }
 
+
     @Override
     public Flux<Video> getRecomendacoes(String id){
-        return null;
+        return repository.findById(id)
+                .flatMapMany(user -> Flux.fromIterable(user.getVideosFavoritados()))
+                .flatMap(videoRepository::findById)
+                .collectList()
+                .flatMapMany(videos -> {
+                    Map<Categoria, Long> categoryCount = videos.stream()
+                            .collect(Collectors.groupingBy(Video::getCategoria, Collectors.counting()));
+                    return Flux.fromStream(categoryCount.entrySet().stream()
+                            .sorted(Map.Entry.<Categoria, Long>comparingByValue().reversed())
+                            .limit(3)
+                            .map(Map.Entry::getKey));
+                })
+                .flatMap(videoGatewayInterface::getTopVideosFavoritosPorCategoria);
     }
 
     @Override
