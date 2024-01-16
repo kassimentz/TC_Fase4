@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.gateways;
 
+import com.fiap.tech_challenge_web_streaming.entities.Categoria;
 import com.fiap.tech_challenge_web_streaming.entities.Usuario;
 import com.fiap.tech_challenge_web_streaming.entities.Video;
 import com.fiap.tech_challenge_web_streaming.interfaces.VideoGatewayInterface;
@@ -10,11 +11,13 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -26,14 +29,28 @@ public class VideoGateway implements VideoGatewayInterface {
     private ReactiveMongoTemplate reactiveMongoTemplate;
 
     @Override
-    public Flux<Page<Video>> getAllVideos(Pageable pageable) {
+    public Flux<Page<Video>> getAllVideos(Pageable pageable, String titulo, LocalDate dataPublicacao, String categoria) {
         Query query = new Query().with(pageable);
+
+        if (titulo != null) {
+            query.addCriteria(Criteria.where("titulo").regex(titulo, "i"));
+        }
+
+        if (dataPublicacao != null) {
+            query.addCriteria(Criteria.where("dataPublicacao").is(dataPublicacao));
+        }
+
+        if (categoria != null) {
+            query.addCriteria(Criteria.where("categorias").in(categoria));
+        }
+
 
         return reactiveMongoTemplate.find(query, Video.class)
                 .collectList()
                 .map(videoList -> new PageImpl<>(videoList, pageable, videoList.size()))
                 .flatMapMany(Flux::just);
     }
+
 
     @Override
     public Mono<Video> getVideoById(String id) {

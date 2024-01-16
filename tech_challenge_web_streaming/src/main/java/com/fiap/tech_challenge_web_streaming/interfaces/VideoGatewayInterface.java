@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 
 public interface VideoGatewayInterface {
 
-    Flux<Page<Video>> getAllVideos(Pageable pageable);
+    Flux<Page<Video>> getAllVideos(Pageable pageable, String titulo, LocalDate dataPublicacao, String categoria);
 
     Mono<Video> getVideoById(String id);
 
