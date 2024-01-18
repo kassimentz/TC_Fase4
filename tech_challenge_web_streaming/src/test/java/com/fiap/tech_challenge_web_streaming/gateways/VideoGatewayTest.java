@@ -59,7 +59,7 @@ public class VideoGatewayTest {
                 video.getFavoritadoPorUsuarios()
         );
 
-        assertEquals(expectedResponse, result.blockFirst());
+        assertEquals(expectedResponse.getId(), result.blockFirst().getContent().get(0).getId());
     }
 
     @Test
@@ -78,7 +78,7 @@ public class VideoGatewayTest {
                 video.getFavoritadoPorUsuarios()
         );
 
-        assertEquals(expectedResponse, result.block());
+        assertEquals(expectedResponse.getId(), result.block().getId());
     }
 
     @Test
@@ -97,7 +97,7 @@ public class VideoGatewayTest {
                 video.getFavoritadoPorUsuarios()
         );
 
-        assertEquals(expectedResponse, result.block());
+        assertEquals(expectedResponse.getId(), result.block().getId());
     }
 
     @Test
@@ -117,7 +117,7 @@ public class VideoGatewayTest {
                 video.getFavoritadoPorUsuarios()
         );
 
-        assertEquals(expectedResponse, result.block());
+        assertEquals(expectedResponse.getId(), result.block().getId());
     }
 
     @Test

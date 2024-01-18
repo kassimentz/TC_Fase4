@@ -1,3 +1,5 @@
+package com.fiap.tech_challenge_web_streaming.integration;
+
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
