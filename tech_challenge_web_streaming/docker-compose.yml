@@ -1,0 +1,13 @@
+version: '3.1'
+
+services: 
+  
+  mongo:
+    image: mongo:latest
+    restart: always
+    
+        
+  tech-challenge: 
+    image: tech-challenge:1.0.0
+    ports:
+      - 8080:8080  

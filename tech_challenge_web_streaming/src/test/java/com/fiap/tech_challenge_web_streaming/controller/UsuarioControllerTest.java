@@ -88,7 +88,7 @@ public class UsuarioControllerTest {
     @Test
     public void testDeleteById() {
         String testId = "1234";
-        doNothing().when(usuarioGateway).deletar(testId);
+        when(usuarioGateway.deletar(testId)).thenReturn(Mono.empty());
 
         ResponseEntity<Void> result = usuarioController.deleteById(testId);
 
