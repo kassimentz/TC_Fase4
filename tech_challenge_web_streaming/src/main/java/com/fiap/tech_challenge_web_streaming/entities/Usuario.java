@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Immutable;
 import org.springframework.data.mongodb.core.mapping.Document;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,18 +17,13 @@ public class Usuario {
     private String id;
     private String nome;
     private String email;
-    private List<Video> favoritos;
-    private List<Video> recomendados;
+    private List<Video> videosFavoritados;
+
+    private List<Video> videosRecomendados;
 
     public Usuario(){
-    }
-
-    public Usuario(String id, String nome, String email, List<Video> favoritos, List<Video> recomendados){
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.favoritos = favoritos;
-        this.recomendados = recomendados;
+        this.videosFavoritados = new ArrayList<>();
+        this.videosRecomendados = new ArrayList<>();
     }
 
     public Usuario(String id, String nome, String email){
@@ -36,11 +32,18 @@ public class Usuario {
         this.email = email;
     }
 
-    public Usuario(UsuarioRequestDTO requestDTO) {
-        this.nome = requestDTO.getNome();
-        this.email = requestDTO.getEmail();
+    public Usuario(String id, String nome, String email, List<Video> favoritos, List<Video> videosRecomendados){
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.videosFavoritados = favoritos;
+        this.videosRecomendados = videosRecomendados;
     }
 
+    public Usuario(UsuarioRequestDTO request){
+        this.nome = request.getNome();
+        this.email = request.getEmail();
+    }
 
     public String getId(){
         return id;
@@ -66,27 +69,27 @@ public class Usuario {
         this.email = email;
     }
 
-    public List<Video> getFavoritos(){
-        return favoritos;
+    public List<Video> getVideosFavoritados(){
+        return videosFavoritados;
     }
 
-    public void setFavoritos(List<Video> favoritos){
-        this.favoritos = favoritos;
+    public void setVideosFavoritados(List<Video> videosFavoritados){
+        this.videosFavoritados = videosFavoritados;
     }
 
-    public List<Video> getRecomendados(){
-        return recomendados;
+    public void favoritarVideo(Video video){
+        this.videosFavoritados.add(video);
     }
 
-    public void setRecomendados(List<Video> recomendados){
-        this.recomendados = recomendados;
+    public List<Video> getVideosRecomendados(){
+        return videosRecomendados;
     }
 
-    public void addFavorito(Video video) {
-        this.favoritos.add(video);
+    public void setVideosRecomendados(List<Video> videosRecomendados){
+        this.videosRecomendados = videosRecomendados;
     }
 
-//    public List<Video> getFavoritos(){
-//        return Collections.unmodifiableList(favoritos);
-//    }
+    public void addVideoRecomendado(Video video){
+        this.videosRecomendados.add(video);
+    }
 }

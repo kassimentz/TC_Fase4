@@ -36,9 +36,7 @@ public class UsuarioGateway implements UsuarioGatewayInterface {
                 .map(usuario -> new UsuarioResponseDTO(
                         usuario.getId(),
                         usuario.getNome(),
-                        usuario.getEmail(),
-                        usuario.getFavoritos(),
-                        usuario.getRecomendados()
+                        usuario.getEmail()
                 ));
     }
 
@@ -49,8 +47,8 @@ public class UsuarioGateway implements UsuarioGatewayInterface {
                 u.getId(),
                 u.getNome(),
                 u.getEmail(),
-                u.getFavoritos(),
-                u.getRecomendados()
+                u.getVideosFavoritados(),
+                u.getVideosRecomendados()
         )));
     }
 
@@ -65,8 +63,8 @@ public class UsuarioGateway implements UsuarioGatewayInterface {
                 u.getId(),
                 u.getNome(),
                 u.getEmail(),
-                u.getFavoritos(),
-                u.getRecomendados()
+                u.getVideosFavoritados(),
+                u.getVideosRecomendados()
         ));
     }
 

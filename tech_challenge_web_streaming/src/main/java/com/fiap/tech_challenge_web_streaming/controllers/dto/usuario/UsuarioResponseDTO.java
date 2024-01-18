@@ -7,7 +7,6 @@ import com.fiap.tech_challenge_web_streaming.entities.Video;
 import java.util.List;
 
 public class UsuarioResponseDTO {
-
     @JsonProperty
     private String id;
     @JsonProperty
@@ -30,12 +29,16 @@ public class UsuarioResponseDTO {
         this.recomendados = recomendados;
     }
 
+    public UsuarioResponseDTO(String id, String nome, String email){
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+    }
+
     public UsuarioResponseDTO(Usuario usuario) {
         this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();
-        this.favoritos = usuario.getFavoritos();
-        this.recomendados = usuario.getRecomendados();
     }
 
     public String getId(){

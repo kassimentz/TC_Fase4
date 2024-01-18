@@ -16,9 +16,11 @@ public class UsuarioRepositoryTest {
     @Autowired
     private UsuarioRepositoryInterface usuarioRepository;
 
+    private Usuario usuario;
+
     @BeforeEach
     public void setUp() {
-        Usuario usuario = new Usuario();
+        usuario = new Usuario();
         usuario.setId("1234");
         usuario.setNome("Test Name");
         usuario.setEmail("test@email.com");
@@ -30,10 +32,10 @@ public class UsuarioRepositoryTest {
         Mono<Usuario> usuarioMono = usuarioRepository.findById("1234");
 
         StepVerifier.create(usuarioMono)
-                .expectNextMatches(usuario ->
-                        usuario.getId().equals("1234") &&
-                                usuario.getNome().equals("Test Name") &&
-                                usuario.getEmail().equals("test@email.com")
+                .expectNextMatches(foundUsuario ->
+                        foundUsuario.getId().equals(usuario.getId()) &&
+                                foundUsuario.getNome().equals(usuario.getNome()) &&
+                                foundUsuario.getEmail().equals(usuario.getEmail())
                 )
                 .verifyComplete();
     }
@@ -43,11 +45,42 @@ public class UsuarioRepositoryTest {
         Flux<Usuario> usuarioFlux = usuarioRepository.findAll();
 
         StepVerifier.create(usuarioFlux)
-                .expectNextMatches(usuario ->
-                        usuario.getId().equals("1234") &&
-                                usuario.getNome().equals("Test Name") &&
-                                usuario.getEmail().equals("test@email.com")
+                .expectNextMatches(foundUsuario ->
+                        foundUsuario.getId().equals(usuario.getId()) &&
+                                foundUsuario.getNome().equals(usuario.getNome()) &&
+                                foundUsuario.getEmail().equals(usuario.getEmail())
                 )
+                .verifyComplete();
+    }
+
+    @Test
+    public void testSave() {
+        Usuario newUsuario = new Usuario();
+        newUsuario.setId("5678");
+        newUsuario.setNome("New Test Name");
+        newUsuario.setEmail("newtest@email.com");
+
+        Mono<Usuario> savedUsuarioMono = usuarioRepository.save(newUsuario);
+
+        StepVerifier.create(savedUsuarioMono)
+                .expectNextMatches(savedUsuario ->
+                        savedUsuario.getId().equals(newUsuario.getId()) &&
+                                savedUsuario.getNome().equals(newUsuario.getNome()) &&
+                                savedUsuario.getEmail().equals(newUsuario.getEmail())
+                )
+                .verifyComplete();
+    }
+
+    @Test
+    public void testDelete() {
+        Mono<Void> deleted = usuarioRepository.delete(usuario);
+
+        StepVerifier.create(deleted)
+                .verifyComplete();
+
+        Mono<Usuario> usuarioMono = usuarioRepository.findById(usuario.getId());
+
+        StepVerifier.create(usuarioMono)
                 .verifyComplete();
     }
 }

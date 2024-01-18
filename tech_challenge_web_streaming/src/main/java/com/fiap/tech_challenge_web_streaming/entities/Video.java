@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "videos")
@@ -15,9 +16,22 @@ public class Video {
     private String descricao;
     private String url;
     private LocalDate dataPublicacao;
-    private List<Categoria> categorias;
+    private Categoria categoria;
+
+    private List<String> favoritadoPorUsuarios; // new field
 
     public Video(){
+        favoritadoPorUsuarios = new ArrayList<>();
+    }
+
+    public Video(String id, String titulo, String descricao, String url, LocalDate dataPublicacao, Categoria categoria, List<String> favoritadoPorUsuarios){
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.url = url;
+        this.dataPublicacao = dataPublicacao;
+        this.categoria = categoria;
+        this.favoritadoPorUsuarios = favoritadoPorUsuarios;
     }
 
     public String getId(){
@@ -60,11 +74,23 @@ public class Video {
         this.dataPublicacao = dataPublicacao;
     }
 
-    public List<Categoria> getCategorias(){
-        return categorias;
+    public Categoria getCategoria(){
+        return categoria;
     }
 
-    public void setCategorias(List<Categoria> categorias){
-        this.categorias = categorias;
+    public void setCategoria(Categoria categoria){
+        this.categoria = categoria;
+    }
+
+    public List<String> getFavoritadoPorUsuarios(){
+        return favoritadoPorUsuarios;
+    }
+
+    public void setFavoritadoPorUsuarios(List<String> favoritadoPorUsuarios){
+        this.favoritadoPorUsuarios = favoritadoPorUsuarios;
+    }
+
+    public void addFavoritadoPorUsuarios(String usuarioId) {
+        this.favoritadoPorUsuarios.add(usuarioId);
     }
 }

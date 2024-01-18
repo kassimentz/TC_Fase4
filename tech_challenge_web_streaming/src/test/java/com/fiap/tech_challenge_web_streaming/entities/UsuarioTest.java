@@ -41,14 +41,14 @@ public class UsuarioTest {
 
     @Test
     public void testFavoritos() {
-        usuario.setFavoritos(favoritos);
-        assertEquals(favoritos, usuario.getFavoritos());
+        usuario.setVideosFavoritados(favoritos);
+        assertEquals(favoritos, usuario.getVideosFavoritados());
     }
 
     @Test
     public void testRecomendados() {
-        usuario.setRecomendados(recomendados);
-        assertEquals(recomendados, usuario.getRecomendados());
+        usuario.setVideosRecomendados(recomendados);
+        assertEquals(recomendados, usuario.getVideosRecomendados());
     }
 
     @Test
@@ -56,17 +56,23 @@ public class UsuarioTest {
         Usuario usuario = new Usuario(id, nome, email, favoritos, recomendados);
         assertEquals(nome, usuario.getNome());
         assertEquals(email, usuario.getEmail());
-        assertEquals(favoritos, usuario.getFavoritos());
-        assertEquals(recomendados, usuario.getRecomendados());
+        assertEquals(favoritos, usuario.getVideosFavoritados());
+        assertEquals(recomendados, usuario.getVideosRecomendados());
     }
 
     @Test
-    public void testConstructorWithUsuarioRequestDTO() {
-        UsuarioRequestDTO requestDTO = new UsuarioRequestDTO();
-        requestDTO.setNome(nome);
-        requestDTO.setEmail(email);
-        Usuario usuario = new Usuario(requestDTO);
-        assertEquals(nome, usuario.getNome());
-        assertEquals(email, usuario.getEmail());
+    public void testFavoritarVideo() {
+        Video video = new Video();
+        usuario.favoritarVideo(video);
+        assertEquals(1, usuario.getVideosFavoritados().size());
+        assertEquals(video, usuario.getVideosFavoritados().get(0));
+    }
+
+    @Test
+    public void testAddVideoRecomendado() {
+        Video video = new Video();
+        usuario.addVideoRecomendado(video);
+        assertEquals(1, usuario.getVideosRecomendados().size());
+        assertEquals(video, usuario.getVideosRecomendados().get(0));
     }
 }

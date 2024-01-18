@@ -4,7 +4,9 @@ import com.fiap.tech_challenge_web_streaming.controllers.UsuarioController;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioNovoResponseDTO;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioResponseDTO;
+import com.fiap.tech_challenge_web_streaming.entities.Video;
 import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioGatewayInterface;
+import com.fiap.tech_challenge_web_streaming.usecases.UsuarioUC;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -31,6 +33,9 @@ public class UsuarioControllerTest {
 
     @Mock
     private UsuarioGatewayInterface usuarioGateway;
+
+    @Mock
+    private UsuarioUC usuarioUC;
 
     @BeforeEach
     public void setUp() {
@@ -93,5 +98,28 @@ public class UsuarioControllerTest {
         ResponseEntity<Void> result = usuarioController.deleteById(testId);
 
         assertEquals(HttpStatus.NO_CONTENT, result.getStatusCode());
+    }
+
+    @Test
+    public void testAddFavorito() {
+        String testId = "1234";
+        String videoId = "5678";
+        UsuarioResponseDTO responseDTO = new UsuarioResponseDTO(testId, "Test Name", "test@email.com", new ArrayList<>(), new ArrayList<>());
+        when(usuarioUC.addVideoFavorito(testId, videoId)).thenReturn(Mono.just(responseDTO));
+
+        ResponseEntity<UsuarioResponseDTO> result = usuarioController.addFavorito(testId, videoId).block();
+
+        assertEquals(HttpStatus.OK, result.getStatusCode());
+        assertEquals(responseDTO, result.getBody());
+    }
+
+    @Test
+    public void testGetRecommendations() {
+        String testId = "1234";
+        when(usuarioUC.getRecomendacoes(testId)).thenReturn(Flux.empty());
+
+        Flux<Video> result = usuarioController.getRecommendations(testId);
+
+        assertEquals(0, result.collectList().block().size());
     }
 }

@@ -12,6 +12,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class VideoTest {
 
     private Video video;
+    private String id = "1";
+    private String titulo = "Test Title";
+    private String descricao = "Test Description";
+    private String url = "http://test.com";
+    private LocalDate dataPublicacao = LocalDate.now();
+    private Categoria categoria = Categoria.PETS;
+    private List<String> favoritadoPorUsuarios = Arrays.asList("user1", "user2");
 
     @BeforeEach
     public void setUp() {
@@ -20,43 +27,51 @@ public class VideoTest {
 
     @Test
     public void testId() {
-        String id = "1234";
         video.setId(id);
         assertEquals(id, video.getId());
     }
 
     @Test
     public void testTitulo() {
-        String titulo = "Test Title";
         video.setTitulo(titulo);
         assertEquals(titulo, video.getTitulo());
     }
 
     @Test
     public void testDescricao() {
-        String descricao = "Test Description";
         video.setDescricao(descricao);
         assertEquals(descricao, video.getDescricao());
     }
 
     @Test
     public void testUrl() {
-        String url = "http://test.com";
         video.setUrl(url);
         assertEquals(url, video.getUrl());
     }
 
     @Test
     public void testDataPublicacao() {
-        LocalDate dataPublicacao = LocalDate.now();
         video.setDataPublicacao(dataPublicacao);
         assertEquals(dataPublicacao, video.getDataPublicacao());
     }
 
     @Test
-    public void testCategorias() {
-        List<Categoria> categorias = Arrays.asList(Categoria.PETS, Categoria.ENGRACADO);
-        video.setCategorias(categorias);
-        assertEquals(categorias, video.getCategorias());
+    public void testCategoria() {
+        video.setCategoria(categoria);
+        assertEquals(categoria, video.getCategoria());
+    }
+
+    @Test
+    public void testFavoritadoPorUsuarios() {
+        video.setFavoritadoPorUsuarios(favoritadoPorUsuarios);
+        assertEquals(favoritadoPorUsuarios, video.getFavoritadoPorUsuarios());
+    }
+
+    @Test
+    public void testAddFavoritadoPorUsuarios() {
+        String usuarioId = "user3";
+        video.addFavoritadoPorUsuarios(usuarioId);
+        assertEquals(1, video.getFavoritadoPorUsuarios().size());
+        assertEquals(usuarioId, video.getFavoritadoPorUsuarios().get(0));
     }
 }
