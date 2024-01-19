@@ -6,7 +6,7 @@ import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequ
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioResponseDTO;
 import com.fiap.tech_challenge_web_streaming.entities.Video;
 import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioGatewayInterface;
-import com.fiap.tech_challenge_web_streaming.usecases.UsuarioUC;
+import com.fiap.tech_challenge_web_streaming.usecases.UseCases;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,7 +19,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,7 +34,7 @@ public class UsuarioControllerTest {
     private UsuarioGatewayInterface usuarioGateway;
 
     @Mock
-    private UsuarioUC usuarioUC;
+    private UseCases usuarioUC;
 
     @BeforeEach
     public void setUp() {

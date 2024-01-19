@@ -5,7 +5,7 @@ import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequ
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioResponseDTO;
 import com.fiap.tech_challenge_web_streaming.entities.Video;
 import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioGatewayInterface;
-import com.fiap.tech_challenge_web_streaming.usecases.UsuarioUC;
+import com.fiap.tech_challenge_web_streaming.usecases.UseCases;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class UsuarioController {
     private UsuarioGatewayInterface usuarioGateway;
 
     @Autowired
-    private UsuarioUC usuarioUC;
+    private UseCases usuarioUC;
 
     @PostMapping
     public Mono<ResponseEntity<UsuarioNovoResponseDTO>> createUser(@Valid @RequestBody UsuarioRequestDTO usuario) {

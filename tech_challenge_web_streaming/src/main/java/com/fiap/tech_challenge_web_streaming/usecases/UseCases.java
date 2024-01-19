@@ -12,11 +12,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class UsuarioUC {
+public class UseCases {
 
     @Autowired
     private UsuarioRepositoryInterface userRepository;
@@ -46,16 +46,19 @@ public class UsuarioUC {
     public Flux<Video> getRecomendacoes(String idUsuario){
         return userRepository.findById(idUsuario)
                 .flatMapMany(user -> {
-                    List<String> categoriasFavoritas = user.getVideosFavoritados().stream()
+                    Set<String> categoriasFavoritas = user.getVideosFavoritados().stream()
                             .map(Video::getCategoria)
                             .map(Categoria::getCategoria)
-                            .toList();
-                    return videoRepository.findAll()
-                            .filter(video -> !user.getVideosFavoritados().contains(video))
+                            .collect(Collectors.toSet());
+                    Flux<Video> videoFlux = videoRepository.findAll()
+                            .filterWhen(video -> Mono.just(!user.getVideosFavoritados().contains(video)))
                             .filter(video -> categoriasFavoritas.contains(video.getCategoria().getCategoria()))
-                            .sort((v1, v2) -> v2.getFavoritadoPorUsuarios().size() - v1.getFavoritadoPorUsuarios().size())
-                            .take(3);
+                            .sort((v1, v2) -> v2.getFavoritadoPorUsuarios().size() - v1.getFavoritadoPorUsuarios().size());
+                    return videoRepository.count()
+                            .flatMapMany(count -> {
+                                long limit = Math.min(count, 3);
+                                return videoFlux.take(limit);
+                            });
                 });
     }
-
 }

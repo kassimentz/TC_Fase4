@@ -151,11 +151,18 @@ public class UsuarioGatewayTest {
     @Test
     @DisplayName("Deve deletar o usuario")
     public void shouldDeleteUserWithGivenId() {
-        String testId = "1234";
+        Usuario usuario = new Usuario();
+        usuario.setId(testId);
 
-        when(usuarioGateway.deletar(testId)).thenReturn(Mono.empty());
-        usuarioGateway.deletar(testId);
+        when(usuarioRepository.findById(testId)).thenReturn(Mono.just(usuario));
+        when(usuarioRepository.delete(usuario)).thenReturn(Mono.empty());
 
-        verify(usuarioGateway, times(1)).deletar(testId);
+        Mono<Void> result = usuarioGateway.deletar(testId);
+
+        StepVerifier.create(result)
+                .verifyComplete();
+
+        verify(usuarioRepository, times(1)).findById(testId);
+        verify(usuarioRepository, times(1)).delete(usuario);
     }
 }

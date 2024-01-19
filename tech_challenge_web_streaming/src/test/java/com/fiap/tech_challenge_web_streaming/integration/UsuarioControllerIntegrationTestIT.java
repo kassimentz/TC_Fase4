@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.integration;
 
+import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,8 +10,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UsuarioControllerIntegrationTestIT {
@@ -25,25 +25,18 @@ public class UsuarioControllerIntegrationTestIT {
 
     @Test
     public void testCreateUser() {
+        UsuarioRequestDTO requestDTO = new UsuarioRequestDTO("Test Name", "test@email.com");
+
         given()
                 .contentType(ContentType.JSON)
-                .body("{\"name\":\"Test Name\",\"email\":\"test@email.com\"}")
+                .body(requestDTO)
                 .when()
                 .post("/usuarios")
                 .then()
                 .statusCode(201)
-                .body("name", equalTo("Test Name"))
-                .body("email", equalTo("test@email.com"));
-
-//        given()
-//                .contentType(ContentType.JSON)
-//                .body("{\"name\":\"Test Name\",\"email\":\"test@email.com\"}")
-//                .when()
-//                .post("/usuarios")
-//                .then()
-//                .statusCode(201)
-//                .body("name", equalTo("Test Name"))
-//                .body("email", equalTo("test@email.com"));
+                .body("nome", equalTo(requestDTO.getNome()))
+                .body("email", equalTo(requestDTO.getEmail()))
+                .body("id", notNullValue());
     }
 
     @Test
