@@ -153,9 +153,9 @@ public class UsuarioGatewayTest {
     public void shouldDeleteUserWithGivenId() {
         String testId = "1234";
 
-        when(usuarioRepository.deleteById(testId)).thenReturn(Mono.empty());
+        when(usuarioGateway.deletar(testId)).thenReturn(Mono.empty());
         usuarioGateway.deletar(testId);
 
-        verify(usuarioRepository, times(1)).deleteById(testId);
+        verify(usuarioGateway, times(1)).deletar(testId);
     }
 }

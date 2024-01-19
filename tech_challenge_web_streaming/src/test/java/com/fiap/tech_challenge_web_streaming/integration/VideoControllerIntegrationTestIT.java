@@ -63,14 +63,14 @@ public class VideoControllerIntegrationTestIT {
     public void testUpdateVideo() {
         given()
                 .contentType(ContentType.JSON)
-                .body("{\"titulo\":\"Updated Title\",\"descricao\":\"Updated Description\",\"url\":\"http://updated.com\"}")
+                .body("{\"titulo\":\"Test Title\",\"descricao\":\"Test Description\",\"url\":\"http://test.com\"}")
                 .when()
-                .put("/videos/{id}", "1")
+                .put("/videos/{id}", "65aadb77578410188fb7dcfd")
                 .then()
                 .statusCode(200)
-                .body("titulo", equalTo("Updated Title"))
-                .body("descricao", equalTo("Updated Description"))
-                .body("url", equalTo("http://updated.com"));
+                .body("titulo", equalTo("Test Title"))
+                .body("descricao", equalTo("Test Description"))
+                .body("url", equalTo("http://test.com"));
     }
 
     @Test

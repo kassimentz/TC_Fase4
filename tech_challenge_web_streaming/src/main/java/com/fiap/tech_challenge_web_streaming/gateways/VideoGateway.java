@@ -64,13 +64,14 @@ public class VideoGateway implements VideoGatewayInterface {
 
     @Override
     public Mono<Video> updateVideo(String id, Video video) {
-        return videoRepository.findById(id)
+        Mono<Video> RESPONSE =  videoRepository.findById(id)
                 .flatMap(existingVideo -> {
                     existingVideo.setTitulo(video.getTitulo());
                     existingVideo.setDescricao(video.getDescricao());
                     existingVideo.setUrl(video.getUrl());
                     return videoRepository.save(existingVideo);
                 });
+        return RESPONSE;
     }
 
     @Override

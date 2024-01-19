@@ -28,7 +28,6 @@ public class UsuarioController {
     private UsuarioUC usuarioUC;
 
     @PostMapping
-    @Operation(summary = "Novo Usuário")
     public Mono<ResponseEntity<UsuarioNovoResponseDTO>> createUser(@Valid @RequestBody UsuarioRequestDTO usuario) {
         Mono<UsuarioNovoResponseDTO> novoUsuario = usuarioGateway.novo(usuario);
         return novoUsuario.map(u -> new ResponseEntity<>(u, HttpStatus.CREATED));

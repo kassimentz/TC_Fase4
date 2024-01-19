@@ -34,6 +34,16 @@ public class UsuarioControllerIntegrationTestIT {
                 .statusCode(201)
                 .body("name", equalTo("Test Name"))
                 .body("email", equalTo("test@email.com"));
+
+//        given()
+//                .contentType(ContentType.JSON)
+//                .body("{\"name\":\"Test Name\",\"email\":\"test@email.com\"}")
+//                .when()
+//                .post("/usuarios")
+//                .then()
+//                .statusCode(201)
+//                .body("name", equalTo("Test Name"))
+//                .body("email", equalTo("test@email.com"));
     }
 
     @Test
