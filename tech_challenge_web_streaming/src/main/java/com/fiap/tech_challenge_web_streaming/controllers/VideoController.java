@@ -3,17 +3,25 @@ package com.fiap.tech_challenge_web_streaming.controllers;
 import com.fiap.tech_challenge_web_streaming.entities.Video;
 import com.fiap.tech_challenge_web_streaming.interfaces.VideoGatewayInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.Base64;
 
 @RestController
 @RequestMapping("/videos")
@@ -66,6 +74,21 @@ public class VideoController {
     public ResponseEntity<Void> deleteVideo(@PathVariable String id) {
         videoGatewayInterface.deleteVideo(id).subscribe();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @PostMapping("/uploadVideo")
+    public Mono<Video> uploadVideo(@RequestPart("file") FilePart filePart) {
+        return videoGatewayInterface.uploadVideo(filePart);
+    }
+
+    @GetMapping("/stream/{id}")
+    public Mono<Void> streamVideo(ServerHttpResponse response, @PathVariable String id) {
+        return videoGatewayInterface.getVideoById(id)
+                .flatMap(video -> {
+                    Path path = Paths.get(video.getUrl());
+                    FileSystemResource videoFile = new FileSystemResource(path);
+                    Flux<DataBuffer> dataBufferFlux = DataBufferUtils.read(videoFile, response.bufferFactory(), 4096);
+                    return response.writeWith(dataBufferFlux);
+                });
     }
 
 }

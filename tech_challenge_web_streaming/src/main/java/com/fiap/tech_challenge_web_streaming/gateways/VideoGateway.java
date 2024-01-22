@@ -1,24 +1,26 @@
 package com.fiap.tech_challenge_web_streaming.gateways;
 
-import com.fiap.tech_challenge_web_streaming.entities.Categoria;
-import com.fiap.tech_challenge_web_streaming.entities.Usuario;
 import com.fiap.tech_challenge_web_streaming.entities.Video;
 import com.fiap.tech_challenge_web_streaming.interfaces.VideoGatewayInterface;
 import com.fiap.tech_challenge_web_streaming.interfaces.VideoRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Base64;
+import java.util.stream.Collectors;
 
 @Service
 public class VideoGateway implements VideoGatewayInterface {
@@ -27,6 +29,22 @@ public class VideoGateway implements VideoGatewayInterface {
     private VideoRepositoryInterface videoRepository;
     @Autowired
     private ReactiveMongoTemplate reactiveMongoTemplate;
+
+    @Override
+    public Mono<Video> uploadVideo(FilePart filePart) {
+        Path destinationFile = Paths.get("src/main/resources/videos", filePart.filename());
+
+        return filePart.transferTo(destinationFile)
+                .then(Mono.fromCallable(() -> {
+                    Video video = new Video();
+                    video.setTitulo(filePart.filename());
+                    video.setUrl(destinationFile.toString());
+                    video.setDataPublicacao(LocalDate.now());
+                    return video;
+                }))
+                .flatMap(this::createVideo);
+    }
+
 
     @Override
     public Flux<Page<Video>> getAllVideos(Pageable pageable, String titulo, LocalDate dataPublicacao, String categoria) {

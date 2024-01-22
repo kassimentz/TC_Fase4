@@ -7,6 +7,7 @@ import com.fiap.tech_challenge_web_streaming.entities.Video;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -26,6 +27,5 @@ public interface VideoGatewayInterface {
     Mono<Video> updateVideo(String id, Video video);
 
     Mono<Void> deleteVideo(String id);
-
-
+    Mono<Video> uploadVideo(FilePart filePart);
 }
