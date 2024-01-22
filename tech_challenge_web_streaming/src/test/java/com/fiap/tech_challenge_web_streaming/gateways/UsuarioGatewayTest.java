@@ -3,8 +3,6 @@ package com.fiap.tech_challenge_web_streaming.gateways;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioNovoResponseDTO;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioRequestDTO;
 import com.fiap.tech_challenge_web_streaming.controllers.dto.usuario.UsuarioResponseDTO;
-import com.fiap.tech_challenge_web_streaming.entities.Usuario;
-import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioRepositoryInterface;
 import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

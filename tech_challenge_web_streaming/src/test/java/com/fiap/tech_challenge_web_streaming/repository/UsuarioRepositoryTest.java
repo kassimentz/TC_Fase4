@@ -1,7 +1,5 @@
 package com.fiap.tech_challenge_web_streaming.repository;
 
-import com.fiap.tech_challenge_web_streaming.entities.Usuario;
-import com.fiap.tech_challenge_web_streaming.interfaces.UsuarioRepositoryInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
