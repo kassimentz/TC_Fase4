@@ -87,4 +87,9 @@ public class VideoDatabaseGateway implements VideoGateway {
                 map(VideoEntity::toVideo);
 
     }
+
+    @Override
+    public Mono<Long> count() {
+        return this.repository.count();
+    }
 }

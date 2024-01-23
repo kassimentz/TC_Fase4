@@ -49,12 +49,4 @@ public class UsuarioDatabaseGateway implements UsuarioGateway {
                  UsuarioEntity::toUsuario
          );
     }
-
-    //TODO Implement After Video creation
-    @Override
-    public Mono<Usuario> adicionarFavorito() {
-        return null;
-    }
 }
-
-

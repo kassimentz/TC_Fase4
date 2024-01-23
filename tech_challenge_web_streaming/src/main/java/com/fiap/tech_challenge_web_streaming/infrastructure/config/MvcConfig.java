@@ -48,11 +48,18 @@ public class MvcConfig {
     }
 
     @Bean
-    public AddFavoritoUseCase addFavoritoUseCase(UsuarioRepository repository){
-        UsuarioGateway usuarioGateway = new UsuarioDatabaseGateway(repository);
-        return new AddFavoritoUseCase(usuarioGateway);
+    public AddFavoritoUseCase addFavoritoUseCase(UsuarioRepository usuarioRepository, VideoRepository videoRepository, ReactiveMongoTemplate reactiveMongoTemplate){
+        UsuarioGateway usuarioGateway = new UsuarioDatabaseGateway(usuarioRepository);
+        VideoGateway videoGateway = new VideoDatabaseGateway(videoRepository, reactiveMongoTemplate);
+        return new AddFavoritoUseCase(usuarioGateway, videoGateway);
     }
 
+    @Bean
+    public BuscarRecomendacoesUseCase buscarRecomendacoesUseCase(UsuarioRepository usuarioRepository, VideoRepository videoRepository, ReactiveMongoTemplate reactiveMongoTemplate){
+        UsuarioGateway usuarioGateway = new UsuarioDatabaseGateway(usuarioRepository);
+        VideoGateway videoGateway = new VideoDatabaseGateway(videoRepository, reactiveMongoTemplate);
+        return new BuscarRecomendacoesUseCase(usuarioGateway, videoGateway);
+    }
 
     @Bean
     public BuscarVideoUseCase buscarVideoUseCase(VideoRepository repository, ReactiveMongoTemplate template) {

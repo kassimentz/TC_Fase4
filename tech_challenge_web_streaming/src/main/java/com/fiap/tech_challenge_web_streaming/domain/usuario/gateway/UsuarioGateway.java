@@ -18,9 +18,4 @@ public interface UsuarioGateway {
 
     Mono<Usuario> buscarPorId(String id);
 
-    Mono<Usuario> adicionarFavorito();
-
-
-
-
 }

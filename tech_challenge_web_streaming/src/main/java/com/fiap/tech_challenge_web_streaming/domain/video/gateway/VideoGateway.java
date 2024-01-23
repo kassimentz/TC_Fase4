@@ -26,4 +26,6 @@ public interface VideoGateway {
 
     Mono<Video> criar (Video video);
 
+    Mono<Long> count();
+
 }
