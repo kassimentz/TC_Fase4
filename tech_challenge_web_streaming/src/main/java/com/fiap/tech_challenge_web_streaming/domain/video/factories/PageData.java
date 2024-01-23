@@ -2,7 +2,6 @@ package com.fiap.tech_challenge_web_streaming.domain.video.factories;
 
 public class PageData {
 
-
     private int page;
     private int size;
     private String direcao;
@@ -24,7 +23,7 @@ public class PageData {
         return ordenacao;
     }
 
-    private PageData(PageBuilder builder) {
+    public PageData(PageBuilder builder) {
         this.page = builder.page;
         this.size = builder.size;
         this.direcao = builder.direcao;

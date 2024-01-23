@@ -5,6 +5,7 @@ import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "usuarios")
@@ -18,6 +19,8 @@ public class UsuarioEntity {
     private List<Video> recomendados;
 
     public UsuarioEntity(){
+        favoritos = new ArrayList<>();
+        recomendados = new ArrayList<>();
     }
 
     public UsuarioEntity(String id, String nome, String email, List<Video> favoritos, List<Video> recomendados){
