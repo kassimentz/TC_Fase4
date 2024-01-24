@@ -10,7 +10,7 @@ public interface IUsuarioUpdateData {
 
     String email ();
 
-    List<com.fiap.tech_challenge_web_streaming.domain.video.entity.Video> favoritos ();
+    List<Video> favoritos ();
 
     List<Video> recomendados ();
 

@@ -25,6 +25,4 @@ public class BuscarTodosOsVideosController {
                 .map(v -> new ResponseEntity<>(new VideoPublicData(v), HttpStatus.OK));
     }
 
-
-
 }

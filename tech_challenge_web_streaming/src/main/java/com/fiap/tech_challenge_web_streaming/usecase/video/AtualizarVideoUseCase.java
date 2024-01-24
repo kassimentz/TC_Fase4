@@ -19,12 +19,8 @@ public class AtualizarVideoUseCase {
     public Mono<Video> execute(String id, IVideoUpdateData dados) throws VideoNaoEncontradoException {
 
         return this.videoGateway.buscarPorId(id)
+                .switchIfEmpty(Mono.error(new VideoNaoEncontradoException()))
                 .flatMap(video -> {
-
-
-                    if (video == null) {
-                        return Mono.error(new VideoNaoEncontradoException());
-                    }
 
                     //implementar possíveis validações negociais aqui
 

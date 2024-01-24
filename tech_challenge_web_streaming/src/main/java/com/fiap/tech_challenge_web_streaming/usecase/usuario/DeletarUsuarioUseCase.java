@@ -17,13 +17,7 @@ public class DeletarUsuarioUseCase {
     public Mono<Void> execute(String id) throws UsuarioNaoEncontradoException {
 
         return this.usuarioGateway.buscarPorId(id)
-                .flatMap(
-                        usuario -> {
-                            if (usuario == null) {
-                                return Mono.error(new UsuarioNaoEncontradoException());
-                            }
-                       return usuarioGateway.deletar(usuario);
-                        }
-                );
+                .switchIfEmpty(Mono.error(new UsuarioNaoEncontradoException()))
+                .flatMap(usuario -> usuarioGateway.deletar(usuario));
     }
 }

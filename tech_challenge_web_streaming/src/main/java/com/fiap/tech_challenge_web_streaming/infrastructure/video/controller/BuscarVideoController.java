@@ -29,8 +29,4 @@ public class BuscarVideoController {
         return videoEncontrado.map(v -> new ResponseEntity(new VideoPublicData(v), HttpStatus.OK));
     }
 
-
-
-
-
 }

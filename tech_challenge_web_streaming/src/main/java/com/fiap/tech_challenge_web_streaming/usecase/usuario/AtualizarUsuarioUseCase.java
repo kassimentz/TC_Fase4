@@ -14,25 +14,18 @@ public class AtualizarUsuarioUseCase {
         this.usuarioGateway = usuarioGateway;
     }
 
-    public Mono<Usuario> execute(String id, IUsuarioUpdateData dados) throws UsuarioNaoEncontradoException {
-
-       return this.usuarioGateway.buscarPorId(id)
-                .flatMap(usuario -> {
-
-
-                    if (usuario == null) {
-                       return Mono.error(new UsuarioNaoEncontradoException());
-                    }
-
-                    //implementar possíveis validações negociais aqui
-
-                    usuario.setNome(dados.nome());
-                    usuario.setEmail(dados.email());
-                    usuario.setFavoritos(dados.favoritos());
-                    usuario.setRecomendados(dados.recomendados());
-
-                    return this.usuarioGateway.atualizar(usuario);
-                });
+    public Mono<Usuario> execute(String id, IUsuarioUpdateData dados) {
+        return this.usuarioGateway.buscarPorId(id)
+                .switchIfEmpty(Mono.error(new UsuarioNaoEncontradoException()))
+                .flatMap(usuario -> updateUsuario(usuario, dados))
+                .flatMap(this.usuarioGateway::atualizar);
     }
 
+    private Mono<Usuario> updateUsuario(Usuario usuario, IUsuarioUpdateData dados) {
+        usuario.setNome(dados.nome());
+        usuario.setEmail(dados.email());
+        usuario.setFavoritos(dados.favoritos());
+        usuario.setRecomendados(dados.recomendados());
+        return Mono.just(usuario);
+    }
 }
