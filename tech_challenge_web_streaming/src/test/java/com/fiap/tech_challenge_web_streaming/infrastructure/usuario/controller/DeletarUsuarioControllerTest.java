@@ -1,10 +1,7 @@
 package com.fiap.tech_challenge_web_streaming.infrastructure.usuario.controller;
 
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.DeletarUsuarioUseCase;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
