@@ -19,11 +19,12 @@ public class Video {
     public Video() {}
 
 
-    public Video(String titulo, String descricao, LocalDate dataPublicacao, Categoria categoria) {
+    public Video(String titulo, String descricao, LocalDate dataPublicacao, Categoria categoria, String url) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.dataPublicacao = dataPublicacao;
         this.categoria = categoria;
+        this.url = url;
     }
 
     public Video(String id, String titulo, String descricao, String url, LocalDate dataPublicacao, Categoria categoria) {

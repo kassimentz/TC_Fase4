@@ -1,10 +1,12 @@
 package com.fiap.tech_challenge_web_streaming.infrastructure.config;
 
 import com.fiap.tech_challenge_web_streaming.domain.usuario.gateway.UsuarioGateway;
+import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoFileGateway;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.gateway.UsuarioDatabaseGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.repository.UsuarioRepository;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.gateway.VideoDatabaseGateway;
+import com.fiap.tech_challenge_web_streaming.infrastructure.video.gateway.VideoSaveLocalFileGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.repository.VideoRepository;
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.*;
 import com.fiap.tech_challenge_web_streaming.usecase.video.*;
@@ -83,7 +85,8 @@ public class MvcConfig {
     @Bean
     public CriarVideoUseCase criarVideoUseCase(VideoRepository repository, ReactiveMongoTemplate template) {
         VideoGateway videoGateway = new VideoDatabaseGateway(repository, template);
-        return new CriarVideoUseCase(videoGateway);
+        VideoFileGateway videoFileGateway = new VideoSaveLocalFileGateway();
+        return new CriarVideoUseCase(videoGateway, videoFileGateway);
     }
 
     @Bean

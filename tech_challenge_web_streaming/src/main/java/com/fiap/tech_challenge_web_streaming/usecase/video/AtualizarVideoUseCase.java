@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.usecase.video;
 
+import com.fiap.tech_challenge_web_streaming.domain.categoria.entity.Categoria;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.entity.Usuario;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.exception.UsuarioNaoEncontradoException;
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
@@ -27,9 +28,7 @@ public class AtualizarVideoUseCase {
                     video.setTitulo(dados.titulo());
                     video.setDescricao(dados.descricao());
                     video.setDataPublicacao(dados.dataPublicacao());
-
-                    //TODO colocar uma instancia de Categoria aqui, se necessário buscar uma para salvar através de um categoriaGateway
-                    video.setCategoria(null);
+                    video.setCategoria(Categoria.valueOf(dados.categoria()));
 
                     return this.videoGateway.atualizar(video);
                 });

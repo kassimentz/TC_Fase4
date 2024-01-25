@@ -4,7 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+src/**/resources/videos/**
+
 ### STS ###
+
 .apt_generated
 .classpath
 .factorypath

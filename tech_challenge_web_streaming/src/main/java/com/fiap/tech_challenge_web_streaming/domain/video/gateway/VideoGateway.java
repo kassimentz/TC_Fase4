@@ -13,7 +13,6 @@ import java.time.LocalDate;
 public interface VideoGateway {
 
 
-    //TODO olhar aqui para pegar a paginação a nível de infra: https://github.com/kassimentz/TC_Fase4/blob/main/tech_challenge_web_streaming/src/main/java/com/fiap/tech_challenge_web_streaming/gateways/VideoGateway.java
     Flux<Video> buscarTodosOsVideosPorAtributo(PageData dadosPaginacao, CriteriosBuscaVideo criteriosBuscaVideo);
 
     Flux<Video> buscarTodos();
