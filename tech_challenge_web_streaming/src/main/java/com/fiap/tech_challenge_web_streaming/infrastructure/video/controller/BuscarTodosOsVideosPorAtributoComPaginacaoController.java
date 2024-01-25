@@ -5,6 +5,8 @@ import com.fiap.tech_challenge_web_streaming.domain.video.factories.PageData;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoPublicData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.BuscarTodosOsVideosPorAtributoComPaginacaoUseCase;
 import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoPublicData;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
-
+@Tag(name = "Vídeo", description = "Vídeo API")
 @RestController
 public class BuscarTodosOsVideosPorAtributoComPaginacaoController {
 
@@ -26,7 +28,7 @@ public class BuscarTodosOsVideosPorAtributoComPaginacaoController {
     }
 
     @GetMapping("/videos/filtrar")
-
+    @Operation(summary = "Buscar Vídeos com paginação e filtrando por titulo/categoria/dataPublicacao")
     public Flux<ResponseEntity<IVideoPublicData>> getAllVideosPaginatedAndFiltered(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,

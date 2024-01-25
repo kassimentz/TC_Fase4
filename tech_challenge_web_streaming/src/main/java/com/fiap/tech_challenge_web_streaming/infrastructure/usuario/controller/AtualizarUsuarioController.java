@@ -7,12 +7,13 @@ import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioU
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.AtualizarUsuarioUseCase;
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.CriarUsuarioUseCase;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
-
+@Tag(name = "Usuário", description = "Usuário API")
 @RestController
 public class AtualizarUsuarioController {
 
