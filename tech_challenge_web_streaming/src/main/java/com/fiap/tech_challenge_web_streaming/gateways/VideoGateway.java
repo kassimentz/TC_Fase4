@@ -54,7 +54,11 @@ public class VideoGateway implements VideoGatewayInterface {
 
     @Override
     public Mono<Video> getVideoById(String id) {
-        return videoRepository.findById(id);
+        return videoRepository.findById(id)
+                .flatMap(video -> {
+                    video.setQtVisualizacao(video.getQtVisualizacao() + 1L);
+                    return videoRepository.save(video);
+                });
     }
 
     @Override
@@ -69,6 +73,7 @@ public class VideoGateway implements VideoGatewayInterface {
                     existingVideo.setTitulo(video.getTitulo());
                     existingVideo.setDescricao(video.getDescricao());
                     existingVideo.setUrl(video.getUrl());
+                    existingVideo.setQtVisualizacao(0L);
                     return videoRepository.save(existingVideo);
                 });
     }
