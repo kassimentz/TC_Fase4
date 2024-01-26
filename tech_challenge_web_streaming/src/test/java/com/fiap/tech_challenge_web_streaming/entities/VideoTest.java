@@ -47,6 +47,13 @@ public class VideoTest {
     }
 
     @Test
+    public void testQtVisualizacao() {
+        Long qtVisualizacao = 1L;
+        video.setQtVisualizacao(qtVisualizacao);
+        assertEquals(qtVisualizacao, video.getQtVisualizacao());
+    }
+
+    @Test
     public void testDataPublicacao() {
         LocalDate dataPublicacao = LocalDate.now();
         video.setDataPublicacao(dataPublicacao);

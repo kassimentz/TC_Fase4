@@ -15,56 +15,65 @@ public class Video {
     private String descricao;
     private String url;
     private LocalDate dataPublicacao;
+    private Long qtVisualizacao;
     private List<Categoria> categorias;
 
-    public Video(){
+    public Video() {
     }
 
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getTitulo(){
+    public String getTitulo() {
         return titulo;
     }
 
-    public void setTitulo(String titulo){
+    public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
-    public String getDescricao(){
+    public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao){
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
-    public String getUrl(){
+    public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url){
+    public void setUrl(String url) {
         this.url = url;
     }
 
-    public LocalDate getDataPublicacao(){
+    public LocalDate getDataPublicacao() {
         return dataPublicacao;
     }
 
-    public void setDataPublicacao(LocalDate dataPublicacao){
+    public void setDataPublicacao(LocalDate dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
     }
 
-    public List<Categoria> getCategorias(){
+    public List<Categoria> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(List<Categoria> categorias){
+    public void setCategorias(List<Categoria> categorias) {
         this.categorias = categorias;
+    }
+
+    public Long getQtVisualizacao() {
+        return qtVisualizacao;
+    }
+
+    public void setQtVisualizacao(Long qtVisualizacao) {
+        this.qtVisualizacao = qtVisualizacao;
     }
 }
