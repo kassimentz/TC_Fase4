@@ -2,6 +2,7 @@ package com.fiap.tech_challenge_web_streaming.domain.usuario.entity;
 
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
@@ -37,9 +38,15 @@ public class Usuario {
             this.email = email;
         }
 
+    public Usuario(String nome, String email) {
+            this.nome = nome;
+            this.email = email;
+            this.favoritos = new ArrayList<>();
+            this.recomendados = new ArrayList<>();
+    }
 
 
-        public String getId(){
+    public String getId(){
             return id;
         }
 

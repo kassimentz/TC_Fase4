@@ -10,8 +10,6 @@ public interface IUsuarioUpdateData {
 
     String email ();
 
-    List<Video> favoritos ();
 
-    List<Video> recomendados ();
 
 }

@@ -6,6 +6,7 @@ import com.fiap.tech_challenge_web_streaming.domain.usuario.exception.UsuarioNao
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.domain.video.exception.VideoNaoEncontradoException;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
+import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoUpdateData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoUpdateData;
 import reactor.core.publisher.Mono;
 
@@ -25,9 +26,17 @@ public class AtualizarVideoUseCase {
 
                     //implementar possíveis validações negociais aqui
 
+
+                    if (dados.titulo() != null)
                     video.setTitulo(dados.titulo());
+
+                    if(dados.descricao() != null)
                     video.setDescricao(dados.descricao());
+
+                    if (dados.dataPublicacao() != null)
                     video.setDataPublicacao(dados.dataPublicacao());
+
+                    if (dados.categoria() != null)
                     video.setCategoria(Categoria.valueOf(dados.categoria()));
 
                     return this.videoGateway.atualizar(video);

@@ -23,9 +23,10 @@ public class BuscarTodosOsVideosController {
 
     @GetMapping("/videos")
     @Operation(summary = "Buscar Todos os Vídeos")
-    public Flux<ResponseEntity<VideoPublicData>> getAllVideos (){
-        return buscarTodosOsVideosUseCase.execute()
-                .map(v -> new ResponseEntity<>(new VideoPublicData(v), HttpStatus.OK));
+    public ResponseEntity<Flux<VideoPublicData>> getAllVideos (){
+        Flux<VideoPublicData>  responseData = buscarTodosOsVideosUseCase.execute()
+                .map(VideoPublicData::new);
+        return new ResponseEntity<>(responseData, HttpStatus.OK);
     }
 
 }

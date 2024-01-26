@@ -29,7 +29,7 @@ public class BuscarTodosOsVideosPorAtributoComPaginacaoController {
 
     @GetMapping("/videos/filtrar")
     @Operation(summary = "Buscar Vídeos com paginação e filtrando por titulo/categoria/dataPublicacao")
-    public Flux<ResponseEntity<IVideoPublicData>> getAllVideosPaginatedAndFiltered(
+    public ResponseEntity<Flux<VideoPublicData>> getAllVideosPaginatedAndFiltered(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size,
             @RequestParam(value = "direcao", defaultValue = "DESC") String direcao,
@@ -51,8 +51,13 @@ public class BuscarTodosOsVideosPorAtributoComPaginacaoController {
                 .dataPublicacao(dataPublicacao)
                 .build();
 
-        return this.buscarTodosOsVideosPorAtributoComPaginacaoUseCase.execute(data, criteriosBuscaVideo)
-                .map(v -> new ResponseEntity<>(new VideoPublicData(v), HttpStatus.OK));
+
+        Flux<VideoPublicData> videoPublicDataFlux = this.buscarTodosOsVideosPorAtributoComPaginacaoUseCase.execute(data, criteriosBuscaVideo)
+                .map(VideoPublicData::new);
+
+        return new ResponseEntity<>(videoPublicDataFlux, HttpStatus.OK);
+
+
 
     }
 

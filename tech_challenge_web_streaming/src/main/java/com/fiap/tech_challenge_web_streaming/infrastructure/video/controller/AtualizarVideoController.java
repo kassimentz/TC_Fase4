@@ -1,6 +1,7 @@
 package com.fiap.tech_challenge_web_streaming.infrastructure.video.controller;
 
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoPublicData;
+import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoUpdateData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.AtualizarVideoUseCase;
 import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoPublicData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoUpdateData;
@@ -26,7 +27,7 @@ public class AtualizarVideoController {
 
     @PutMapping("/videos/{id}")
     @Operation(summary = "Atualizar Vídeo")
-    public Mono<ResponseEntity<IVideoPublicData>> atualizarVideo(@RequestBody IVideoUpdateData dados, @PathVariable String id) {
+    public Mono<ResponseEntity<VideoPublicData>> atualizarVideo(@RequestBody VideoUpdateData dados, @PathVariable String id) {
         return this.atualizarVideoUseCase.execute(id, dados)
                 .map(video -> new ResponseEntity(new VideoPublicData(video), HttpStatus.OK));
 

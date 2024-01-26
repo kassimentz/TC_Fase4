@@ -16,7 +16,7 @@ public class CriarUsuarioUseCase {
 
     public Mono<Usuario> executar(IUsuarioRequestData dados) {
 
-        Usuario usuario = new Usuario(dados.nome(), dados.email(), dados.favoritos(), dados.recomendados());
+        Usuario usuario = new Usuario(dados.nome(), dados.email());
 
        return this.usuarioGateway.criar(usuario);
 
