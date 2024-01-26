@@ -21,9 +21,12 @@ public class VideoEntity {
     private Categoria categoria;
 
 
-    public VideoEntity(){};
+    public VideoEntity() {
+    }
 
-    public VideoEntity(Video video){
+    ;
+
+    public VideoEntity(Video video) {
         this.id = video.getId();
         this.titulo = video.getTitulo();
         this.descricao = video.getDescricao();
@@ -34,11 +37,11 @@ public class VideoEntity {
 
     }
 
-    public Video toVideo(){
+    public Video toVideo() {
 
 
         return new Video(
-                this.id, this.titulo, this.descricao, this.url, this.dataPublicacao, this.categoria);
+                this.id, this.titulo, this.descricao, this.url, this.dataPublicacao, this.categoria, 0L);
     }
 
     public String getId() {

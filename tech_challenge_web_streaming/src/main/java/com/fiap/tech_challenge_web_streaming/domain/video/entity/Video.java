@@ -13,27 +13,29 @@ public class Video {
     private String url;
     private LocalDate dataPublicacao;
     private Categoria categoria;
-
+    private Long qtVisualizacao;
     private List<String> usuariosQueFavoritaram; // new field
 
     public Video() {}
 
 
-    public Video(String titulo, String descricao, LocalDate dataPublicacao, Categoria categoria, String url) {
+    public Video(String titulo, String descricao, LocalDate dataPublicacao, Categoria categoria, String url, Long qtVisualizacao) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.dataPublicacao = dataPublicacao;
         this.categoria = categoria;
         this.url = url;
+        this.qtVisualizacao = qtVisualizacao;
     }
 
-    public Video(String id, String titulo, String descricao, String url, LocalDate dataPublicacao, Categoria categoria) {
+    public Video(String id, String titulo, String descricao, String url, LocalDate dataPublicacao, Categoria categoria, Long qtVisualizacao) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
         this.url = url;
         this.dataPublicacao = dataPublicacao;
         this.categoria = categoria;
+        this.qtVisualizacao = qtVisualizacao;
     }
 
 
@@ -92,6 +94,14 @@ public class Video {
 
     public void setUsuariosQueFavoritaram(List<String> usuariosQueFavoritaram){
         this.usuariosQueFavoritaram = usuariosQueFavoritaram;
+    }
+
+    public Long getQtVisualizacao() {
+        return qtVisualizacao;
+    }
+
+    public void setQtVisualizacao(Long qtVisualizacao) {
+        this.qtVisualizacao = qtVisualizacao;
     }
 
     public void favoritarVideoPorUsuario(String usuarioId) {
