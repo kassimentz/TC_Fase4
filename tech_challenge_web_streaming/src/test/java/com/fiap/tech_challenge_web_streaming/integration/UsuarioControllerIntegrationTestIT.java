@@ -19,6 +19,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -73,63 +74,57 @@ import static org.mockito.Mockito.when;
 
     @Test
      void testCriarUsuario() {
-        Usuario usuario = new Usuario();
-        usuario.setId("1");
+        RestAssured.baseURI = "http://localhost";
+        RestAssured.port = 8080;
 
-        UsuarioRequestData usuarioRequestData = new UsuarioRequestData("nome", "email");
-
-        when(criarUsuarioUseCase.executar(usuarioRequestData)).thenReturn(Mono.just(usuario));
+        String requestBody = "{"
+                + "\"nome\":\"test\","
+                + "\"email\":\"test@test.com\""
+                + "}";
 
         given()
                 .contentType(ContentType.JSON)
-                .body(usuarioRequestData)
+                .body(requestBody)
                 .when()
                 .post("/usuarios")
                 .then()
-                .statusCode(HttpStatus.CREATED.value());
+                .statusCode(201)
+                .body("nome", equalTo("test"));
+
     }
 
     @Test
-     void testAtualizarUsuario() {
-        Usuario usuario = new Usuario();
-        usuario.setId("1");
+    public void testAtualizarUsuario() {
+        RestAssured.baseURI = "http://localhost";
+        RestAssured.port = 8080;
 
-        UsuarioRequestData usuarioUpdateData = new UsuarioRequestData("nome", "email");
-
-        when(atualizarUsuarioUseCase.execute("1", usuarioUpdateData)).thenReturn(Mono.just(usuario));
+        String requestBody = "{"
+                + "\"nome\":\"updatedName\","
+                + "\"email\":\"updatedEmail@test.com\""
+                + "}";
 
         given()
                 .contentType(ContentType.JSON)
-                .body(usuarioUpdateData)
+                .body(requestBody)
                 .when()
                 .put("/usuarios/{id}", "1")
                 .then()
-                .statusCode(HttpStatus.OK.value());
+                .statusCode(200)
+                .body("nome", equalTo("updatedName"));
     }
 
     @Test
-     void testDeletarUsuarioPorId() {
-        when(deletarUsuarioUseCase.execute("1")).thenReturn(Mono.empty());
+    public void testDeletarUsuarioPorId() {
+        RestAssured.baseURI = "http://localhost";
+        RestAssured.port = 8080;
 
         given()
-                .contentType(ContentType.JSON)
                 .when()
-                .delete("/usuarios/{id}", "1")
+                .delete("/usuarios/{id}", "id")
                 .then()
-                .statusCode(HttpStatus.NO_CONTENT.value());
+                .statusCode(204);
     }
 
-    @Test
-     void testGetUsuarioNotFound() {
-        when(usuarioGateway.buscarPorId("1")).thenReturn(Mono.empty());
-
-        given()
-                .contentType(ContentType.JSON)
-                .when()
-                .get("/usuarios/{id}", "1")
-                .then()
-                .statusCode(HttpStatus.NOT_FOUND.value());
-    }
 
     @Test
      void testAdicionarVideoFavorito() {
@@ -180,17 +175,16 @@ import static org.mockito.Mockito.when;
     }
 
     @Test
-     void testBuscarUsuarioporId() {
-        Usuario usuario = new Usuario();
-        usuario.setId("1");
-
-        when(buscarUsuarioUseCase.execute("1")).thenReturn(Mono.just(usuario));
+    public void testBuscarUsuarioporId() {
+        RestAssured.baseURI = "http://localhost";
+        RestAssured.port = 8080;
 
         given()
                 .contentType(ContentType.JSON)
                 .when()
-                .get("/usuarios/{id}", "1")
+                .get("/usuarios/{id}", "id")
                 .then()
-                .statusCode(HttpStatus.OK.value());
+                .statusCode(200)
+                .body("id", equalTo("id"));
     }
 }

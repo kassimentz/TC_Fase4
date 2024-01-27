@@ -13,16 +13,8 @@ public class DeletarVideoUseCase {
     }
 
     public Mono<Void> execute(String id) throws VideoNaoEncontradoException {
-
-        return this.videoGateway.buscarPorId(id)
-                .flatMap(
-                        video -> {
-                            if (video == null) {
-                                return Mono.error(new VideoNaoEncontradoException());
-                            }
-                            return videoGateway.deletar(video);
-                        }
-                );
+        return videoGateway.buscarPorId(id)
+                .switchIfEmpty(Mono.error(new VideoNaoEncontradoException()))
+                .flatMap(video -> videoGateway.deletar(video));
     }
-
 }
