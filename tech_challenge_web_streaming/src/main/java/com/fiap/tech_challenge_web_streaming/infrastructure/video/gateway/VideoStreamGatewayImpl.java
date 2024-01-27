@@ -6,7 +6,6 @@ import com.fiap.tech_challenge_web_streaming.infrastructure.video.repository.Vid
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
-import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -26,6 +25,11 @@ public class VideoStreamGatewayImpl implements VideoStreamGateway {
     public Mono<Void> streamVideoById(String id, ServerHttpResponse response) {
         return repository.findById(id)
                 .switchIfEmpty(Mono.error(VideoNaoEncontradoException::new))
+                .flatMap(video -> {
+                            video.setQtVisualizacao(video.getQtVisualizacao() + 1L);
+                            return repository.save(video);
+                        }
+                )
                 .flatMap(video -> {
                     Path path = Paths.get(video.getUrl());
                     FileSystemResource videoFile = new FileSystemResource(path);

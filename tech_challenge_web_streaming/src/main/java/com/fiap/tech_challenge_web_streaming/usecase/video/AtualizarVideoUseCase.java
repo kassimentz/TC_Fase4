@@ -1,12 +1,9 @@
 package com.fiap.tech_challenge_web_streaming.usecase.video;
 
 import com.fiap.tech_challenge_web_streaming.domain.categoria.entity.Categoria;
-import com.fiap.tech_challenge_web_streaming.domain.usuario.entity.Usuario;
-import com.fiap.tech_challenge_web_streaming.domain.usuario.exception.UsuarioNaoEncontradoException;
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.domain.video.exception.VideoNaoEncontradoException;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
-import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoUpdateData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoUpdateData;
 import reactor.core.publisher.Mono;
 

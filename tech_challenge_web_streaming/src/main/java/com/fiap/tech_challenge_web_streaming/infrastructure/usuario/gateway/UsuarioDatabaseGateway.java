@@ -8,9 +8,6 @@ import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.repository.U
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-import java.util.Optional;
-
 public class UsuarioDatabaseGateway implements UsuarioGateway {
 
     private final UsuarioRepository repository;

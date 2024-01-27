@@ -1,7 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto;
 
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
-import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioRequestData;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

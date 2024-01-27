@@ -5,7 +5,6 @@ import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoFileGateway;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoRequestData;
-import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoRequestData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

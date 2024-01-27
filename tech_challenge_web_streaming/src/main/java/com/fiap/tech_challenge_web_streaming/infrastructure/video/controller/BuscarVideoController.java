@@ -3,7 +3,6 @@ package com.fiap.tech_challenge_web_streaming.infrastructure.video.controller;
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoPublicData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.BuscarVideoUseCase;
-import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoPublicData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;

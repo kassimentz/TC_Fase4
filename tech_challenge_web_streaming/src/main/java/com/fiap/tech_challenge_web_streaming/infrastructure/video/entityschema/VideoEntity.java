@@ -1,8 +1,8 @@
     package com.fiap.tech_challenge_web_streaming.infrastructure.video.entityschema;
 
 
-    import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
     import com.fiap.tech_challenge_web_streaming.domain.categoria.entity.Categoria;
+    import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
     import org.springframework.data.annotation.Id;
     import org.springframework.data.mongodb.core.mapping.Document;
 

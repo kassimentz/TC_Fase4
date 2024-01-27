@@ -1,8 +1,10 @@
 package com.fiap.tech_challenge_web_streaming.exception;
 
 import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ErroValidacaoResponseTest {
