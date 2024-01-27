@@ -5,7 +5,6 @@ import com.fiap.tech_challenge_web_streaming.domain.usuario.gateway.UsuarioGatew
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioAddFavoritoRequestData;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioRequestData;
-import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioUpdateData;
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -95,7 +94,7 @@ import static org.mockito.Mockito.when;
         Usuario usuario = new Usuario();
         usuario.setId("1");
 
-        UsuarioUpdateData usuarioUpdateData = new UsuarioUpdateData("nome", "email");
+        UsuarioRequestData usuarioUpdateData = new UsuarioRequestData("nome", "email");
 
         when(atualizarUsuarioUseCase.execute("1", usuarioUpdateData)).thenReturn(Mono.just(usuario));
 

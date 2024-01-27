@@ -17,26 +17,29 @@ public class Video {
     private Long qtVisualizacao;
     private List<String> usuariosQueFavoritaram = new ArrayList<>();
 
-    public Video() {}
-
-
-    public Video(String titulo, String descricao, LocalDate dataPublicacao, Categoria categoria, String url, Long qtVisualizacao) {
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.dataPublicacao = dataPublicacao;
-        this.categoria = categoria;
-        this.url = url;
-        this.qtVisualizacao = qtVisualizacao;
+    public Video() {
+        this.dataPublicacao = LocalDate.now();
     }
 
-    public Video(String id, String titulo, String descricao, String url, LocalDate dataPublicacao, Categoria categoria, Long qtVisualizacao) {
+
+
+    public Video(String titulo, String descricao, Categoria categoria, String url) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+
+        this.categoria = categoria;
+        this.url = url;
+        this.dataPublicacao = LocalDate.now();
+    }
+
+    public Video(String id, String titulo, String descricao, String url, Categoria categoria) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
         this.url = url;
-        this.dataPublicacao = dataPublicacao;
+
         this.categoria = categoria;
-        this.qtVisualizacao = qtVisualizacao;
+        this.dataPublicacao = LocalDate.now();
     }
 
 
@@ -95,14 +98,6 @@ public class Video {
 
     public void setUsuariosQueFavoritaram(List<String> usuariosQueFavoritaram){
         this.usuariosQueFavoritaram = usuariosQueFavoritaram;
-    }
-
-    public Long getQtVisualizacao() {
-        return qtVisualizacao;
-    }
-
-    public void setQtVisualizacao(Long qtVisualizacao) {
-        this.qtVisualizacao = qtVisualizacao;
     }
 
     public void favoritarVideoPorUsuario(String usuarioId) {

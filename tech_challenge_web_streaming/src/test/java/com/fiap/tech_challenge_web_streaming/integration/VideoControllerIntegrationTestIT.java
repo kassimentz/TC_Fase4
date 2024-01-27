@@ -4,9 +4,8 @@ import com.fiap.tech_challenge_web_streaming.domain.categoria.entity.Categoria;
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.domain.video.factories.CriteriosBuscaVideo;
 import com.fiap.tech_challenge_web_streaming.domain.video.factories.PageData;
+import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoFileGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoRequestData;
-import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoUpdateData;
-import com.fiap.tech_challenge_web_streaming.usecase.usuario.DeletarUsuarioUseCase;
 import com.fiap.tech_challenge_web_streaming.usecase.video.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -17,9 +16,11 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.codec.multipart.FilePart;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.io.File;
 import java.time.LocalDate;
 
 import static io.restassured.RestAssured.given;
@@ -60,7 +61,7 @@ import static org.mockito.Mockito.when;
         Video video = new Video();
         video.setId("videoId");
 
-        VideoUpdateData videoUpdateData = new VideoUpdateData("title", "description", Categoria.TECNOLOGIA.name(), LocalDate.now());
+        VideoRequestData videoUpdateData = new VideoRequestData("title", "description", Categoria.TECNOLOGIA.name());
 
         when(atualizarVideoUseCase.execute("videoId", videoUpdateData)).thenReturn(Mono.just(video));
 
@@ -138,6 +139,21 @@ import static org.mockito.Mockito.when;
 //                .then()
 //                .statusCode(HttpStatus.CREATED.value());
 //    }
+
+//    @Test
+//    public void testCreateVideo() {
+////        File videoFile = new File("files/spring.webp");
+//        String videoMetadata = "{ \"titulo\": \"Titulo\", \"descricao\": \"Descricao\", \"categoria\": \"Pets\" }";
+//
+//        given()
+//                .multiPart("videoMetadata", videoMetadata, "application/json")
+////                .multiPart("videoFile", videoFile)
+//                .when()
+//                .post("/videos")
+//                .then()
+//                .statusCode(201);
+//    }
+
 
     @Test
      void testDeletarVideo() {

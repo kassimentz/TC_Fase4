@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
         MockitoAnnotations.openMocks(this);
         List<String> usuariosQueFavoritaram = new ArrayList<>();
         usuariosQueFavoritaram.add("1");
-        video = new Video("1", "Test Video", "This is a test video", "www.test.com", LocalDate.now(), categoria);
+        video = new Video("1", "Test Video", "This is a test video", "www.test.com", categoria);
         video.setUsuariosQueFavoritaram(usuariosQueFavoritaram);
     }
 

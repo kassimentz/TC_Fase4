@@ -35,10 +35,10 @@ class CriarVideoUseCaseTest {
 
     @Test
     void testExecute() {
-        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS, "url");
+        Video video = new Video("Titulo", "Descricao",  Categoria.PETS, "url");
         when(videoGateway.criar(any(Video.class))).thenReturn(Mono.just(video));
 
-        Mono<Video> result = criarVideoUseCase.execute(new VideoRequestData("Titulo", "Descricao", "Pets", LocalDate.now()), null);
+        Mono<Video> result = criarVideoUseCase.execute(new VideoRequestData("Titulo", "Descricao", "Pets"), null);
 
         StepVerifier.create(result)
                 .expectNext(video)

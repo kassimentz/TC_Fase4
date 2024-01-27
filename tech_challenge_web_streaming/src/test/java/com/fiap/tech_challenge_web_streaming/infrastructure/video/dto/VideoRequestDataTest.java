@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
     @Test
      void testVideoRequestData() {
-        VideoRequestData videoRequestData = new VideoRequestData("Titulo", "Descricao", "Pets", LocalDate.now());
+        VideoRequestData videoRequestData = new VideoRequestData("Titulo", "Descricao", "Pets");
 
         assertEquals("Titulo", videoRequestData.titulo());
         assertEquals("Descricao", videoRequestData.descricao());
         assertEquals("Pets", videoRequestData.categoria());
-        assertEquals(LocalDate.now(), videoRequestData.dataPublicacao());
+
     }
 }

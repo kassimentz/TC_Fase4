@@ -52,8 +52,8 @@ import static org.assertj.core.api.Assertions.assertThat;
         VideoEntity videoEntity = new VideoEntity();
         mongoTemplate.save(videoEntity);
 
-        Video video1 = new Video("1", "Test Video 1", "This is a test video", "www.test.com", LocalDate.now(), Categoria.PETS);
-        Video video2 = new Video("2", "Test Video 2", "This is another test video", "www.test.com", LocalDate.now(), Categoria.TECNOLOGIA);
+        Video video1 = new Video("1", "Test Video 1", "This is a test video", "www.test.com",  Categoria.PETS);
+        Video video2 = new Video("2", "Test Video 2", "This is another test video", "www.test.com", Categoria.TECNOLOGIA);
         Flux<Video> videos = Flux.just(video1, video2);
         PageData pageData = PageData.newPageBuilder().page(0).size(10).direcao("ASC").ordenacao("titulo").build();
         CriteriosBuscaVideo criteriosBuscaVideo = CriteriosBuscaVideo.newBuilder().titulo("Test Video").build();

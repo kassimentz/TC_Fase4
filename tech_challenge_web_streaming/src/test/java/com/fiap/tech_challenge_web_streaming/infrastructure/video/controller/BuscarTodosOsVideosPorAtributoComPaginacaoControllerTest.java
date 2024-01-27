@@ -36,7 +36,7 @@ class BuscarTodosOsVideosPorAtributoComPaginacaoControllerTest {
 
     @Test
     void testGetAllVideosPaginatedAndFiltered() {
-        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS, "url");
+        Video video = new Video("Titulo", "Descricao",  Categoria.PETS, "url");
         VideoPublicData videoPublicData = new VideoPublicData(video);
         when(buscarTodosOsVideosPorAtributoComPaginacaoUseCase.execute(any(PageData.class), any(CriteriosBuscaVideo.class))).thenReturn(Flux.just(video));
 

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
     @Test
      void testVideoPublicData() {
-        Video video = new Video("Titulo", "Descricao",  LocalDate.now(), Categoria.PETS, "url");
+        Video video = new Video("Titulo", "Descricao",  Categoria.PETS, "url");
         VideoPublicData videoPublicData = new VideoPublicData(video);
 
         assertEquals(video.getId(), videoPublicData.id());

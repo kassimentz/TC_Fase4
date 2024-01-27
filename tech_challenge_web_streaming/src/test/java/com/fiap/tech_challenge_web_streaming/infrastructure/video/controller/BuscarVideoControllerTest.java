@@ -34,7 +34,7 @@ class BuscarVideoControllerTest {
 
     @Test
     void testGetVideoById() {
-        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS, "url");
+        Video video = new Video("Titulo", "Descricao",  Categoria.PETS, "url");
         VideoPublicData videoPublicData = new VideoPublicData(video);
         when(buscarVideoUseCase.execute(any(String.class))).thenReturn(Mono.just(video));
 

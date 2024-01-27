@@ -2,7 +2,7 @@ package com.fiap.tech_challenge_web_streaming.infrastructure.usuario.controller;
 
 import com.fiap.tech_challenge_web_streaming.domain.usuario.entity.Usuario;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioPublicData;
-import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioUpdateData;
+import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioRequestData;
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.AtualizarUsuarioUseCase;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ class AtualizarUsuarioControllerTest {
         AtualizarUsuarioUseCase atualizarUsuarioUseCase = mock(AtualizarUsuarioUseCase.class);
         AtualizarUsuarioController controller = new AtualizarUsuarioController(atualizarUsuarioUseCase);
 
-        UsuarioUpdateData updateData = new UsuarioUpdateData("nome", "email");
+        UsuarioRequestData updateData = new UsuarioRequestData("nome", "email");
 
         Usuario usuario = new Usuario();
         usuario.setId("id");
