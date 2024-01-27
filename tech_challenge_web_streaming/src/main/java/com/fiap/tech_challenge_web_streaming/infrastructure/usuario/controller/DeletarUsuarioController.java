@@ -29,9 +29,7 @@ public class DeletarUsuarioController {
     @Operation(summary = "Deletar Usuario por ID")
     public Mono<ResponseEntity<Void>> deletarUsuarioPorId(@PathVariable String id) {
         return deletarUsuarioUseCase.execute(id)
-                .map(r -> {
-                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-                });
+                .then(Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)));
     }
 
 }

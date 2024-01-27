@@ -4,10 +4,11 @@ import com.fiap.tech_challenge_web_streaming.domain.usuario.entity.Usuario;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.gateway.UsuarioGateway;
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioAddFavoritoRequestData;
-import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioRequestData;
+
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -20,6 +21,7 @@ import reactor.core.publisher.Mono;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -51,6 +53,8 @@ import static org.mockito.Mockito.when;
     @Mock
     private DeletarUsuarioUseCase deletarUsuarioUseCase;
 
+    String idUsuario1, idUsuario2;
+
     @BeforeEach
      void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -58,45 +62,49 @@ import static org.mockito.Mockito.when;
     }
 
     @Test
-     void testGetUsuario() {
-        Usuario usuario = new Usuario();
-        usuario.setId("1");
-
-        when(usuarioGateway.buscarPorId("1")).thenReturn(Mono.just(usuario));
-
-        given()
-                .contentType(ContentType.JSON)
-                .when()
-                .get("/usuarios/{id}", "1")
-                .then()
-                .statusCode(HttpStatus.OK.value());
-    }
-
-    @Test
      void testCriarUsuario() {
-        RestAssured.baseURI = "http://localhost";
-        RestAssured.port = 8080;
 
         String requestBody = "{"
                 + "\"nome\":\"test\","
                 + "\"email\":\"test@test.com\""
                 + "}";
 
-        given()
+        String id = given()
                 .contentType(ContentType.JSON)
                 .body(requestBody)
                 .when()
                 .post("/usuarios")
                 .then()
                 .statusCode(201)
-                .body("nome", equalTo("test"));
+                .body("nome", equalTo("test"))
+                .extract()
+                .path("id");
 
+        idUsuario1 =  id;
+
+        requestBody = "{"
+                + "\"nome\":\"test2\","
+                + "\"email\":\"test2@test.com\""
+                + "}";
+
+        String id2 = given()
+                .contentType(ContentType.JSON)
+                .body(requestBody)
+                .when()
+                .post("/usuarios")
+                .then()
+                .statusCode(201)
+                .body("nome", equalTo("test2"))
+                .extract()
+                .path("id");
+
+            idUsuario2 = id2;
     }
 
     @Test
     public void testAtualizarUsuario() {
-        RestAssured.baseURI = "http://localhost";
-        RestAssured.port = 8080;
+
+        testCriarUsuario();
 
         String requestBody = "{"
                 + "\"nome\":\"updatedName\","
@@ -107,7 +115,7 @@ import static org.mockito.Mockito.when;
                 .contentType(ContentType.JSON)
                 .body(requestBody)
                 .when()
-                .put("/usuarios/{id}", "1")
+                .put("/usuarios/{id}", idUsuario1)
                 .then()
                 .statusCode(200)
                 .body("nome", equalTo("updatedName"));
@@ -115,12 +123,10 @@ import static org.mockito.Mockito.when;
 
     @Test
     public void testDeletarUsuarioPorId() {
-        RestAssured.baseURI = "http://localhost";
-        RestAssured.port = 8080;
-
+        testCriarUsuario();
         given()
                 .when()
-                .delete("/usuarios/{id}", "id")
+                .delete("/usuarios/{id}", idUsuario2)
                 .then()
                 .statusCode(204);
     }
@@ -176,15 +182,18 @@ import static org.mockito.Mockito.when;
 
     @Test
     public void testBuscarUsuarioporId() {
-        RestAssured.baseURI = "http://localhost";
-        RestAssured.port = 8080;
 
-        given()
-                .contentType(ContentType.JSON)
+        testCriarUsuario();
+
+        Response response = RestAssured
+                .given()
+                .baseUri("http://localhost")
+                .port(port)
                 .when()
-                .get("/usuarios/{id}", "id")
-                .then()
-                .statusCode(200)
-                .body("id", equalTo("id"));
+                .get("/usuarios/" + idUsuario1);
+
+        assertEquals(200, response.getStatusCode());
+        assertEquals(idUsuario1, response.jsonPath().getString("id"));
+
     }
 }
