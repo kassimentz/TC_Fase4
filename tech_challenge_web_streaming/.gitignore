@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 
 src/**/resources/videos/**
+!src/test/resources/videos/video.mp4
 
 ### STS ###
 

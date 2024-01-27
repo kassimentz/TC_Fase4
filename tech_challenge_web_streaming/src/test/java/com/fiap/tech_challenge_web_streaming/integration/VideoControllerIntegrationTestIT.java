@@ -82,7 +82,7 @@ import static org.mockito.Mockito.when;
     @Test
     public void testCreateVideo() throws IOException{
 
-        String videoMetadata = "{ \"titulo\": \"Titulo\", \"descricao\": \"Descricao\", \"categoria\": \"Pets\" }";
+        String videoMetadata = "{ \"titulo\": \"Titulo\", \"descricao\": \"Descricao\", \"categoria\": \"PETS\" }";
         File videoFile = new ClassPathResource("videos/video.mp4").getFile();
 
         given()
@@ -95,7 +95,7 @@ import static org.mockito.Mockito.when;
                 .statusCode(201)
                 .body("titulo", equalTo("Titulo"))
                 .body("descricao", equalTo("Descricao"))
-                .body("categoria", equalTo("Pets"));
+                .body("categoria", equalTo("PETS"));
 
     }
 
