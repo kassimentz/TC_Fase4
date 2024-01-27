@@ -10,21 +10,25 @@ import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoUpdat
 import com.fiap.tech_challenge_web_streaming.usecase.video.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.codec.multipart.FilePart;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -74,6 +78,27 @@ import static org.mockito.Mockito.when;
                 .then()
                 .statusCode(HttpStatus.OK.value());
     }
+
+    @Test
+    public void testCreateVideo() throws IOException{
+
+        String videoMetadata = "{ \"titulo\": \"Titulo\", \"descricao\": \"Descricao\", \"categoria\": \"Pets\" }";
+        File videoFile = new ClassPathResource("videos/video.mp4").getFile();
+
+        given()
+                .multiPart("videoMetadata", videoMetadata, "application/json")
+                .multiPart("videoFile", videoFile)
+                .contentType(ContentType.MULTIPART)
+                .when()
+                .post("/videos")
+                .then()
+                .statusCode(201)
+                .body("titulo", equalTo("Titulo"))
+                .body("descricao", equalTo("Descricao"))
+                .body("categoria", equalTo("Pets"));
+
+    }
+
 
     @Test
      void testBuscarTodosOsVideos() {
