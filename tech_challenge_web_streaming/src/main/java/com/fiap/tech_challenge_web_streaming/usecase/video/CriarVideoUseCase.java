@@ -22,12 +22,11 @@ public class CriarVideoUseCase {
 
     public Mono<Video> execute(IVideoRequestData videoMetadata, FilePart videoFile) {
 
-        //é aqui que entrará a lógica para salvar o arquivo do vídeo
+        //TODO é aqui que entrará a lógica para salvar o arquivo do vídeo
 
         return videoFileGateway.salvarArquivoVideo(videoFile)
                 .flatMap(videoUrl -> {
                     Video video = new Video(videoMetadata.titulo(), videoMetadata.descricao(),
-                            videoMetadata.dataPublicacao(),
                             Categoria.valueOf(videoMetadata.categoria()),
                             videoUrl);
                     return videoGateway.criar(video);

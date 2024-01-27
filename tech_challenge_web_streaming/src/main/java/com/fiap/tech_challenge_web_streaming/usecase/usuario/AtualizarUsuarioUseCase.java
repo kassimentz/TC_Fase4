@@ -3,7 +3,7 @@ package com.fiap.tech_challenge_web_streaming.usecase.usuario;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.entity.Usuario;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.exception.UsuarioNaoEncontradoException;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.gateway.UsuarioGateway;
-import com.fiap.tech_challenge_web_streaming.usecase.usuario.dto.IUsuarioUpdateData;
+import com.fiap.tech_challenge_web_streaming.usecase.usuario.dto.IUsuarioRequestData;
 import reactor.core.publisher.Mono;
 
 public class AtualizarUsuarioUseCase {
@@ -14,14 +14,14 @@ public class AtualizarUsuarioUseCase {
         this.usuarioGateway = usuarioGateway;
     }
 
-    public Mono<Usuario> execute(String id, IUsuarioUpdateData dados) {
+    public Mono<Usuario> execute(String id, IUsuarioRequestData dados) {
         return this.usuarioGateway.buscarPorId(id)
                 .switchIfEmpty(Mono.error(new UsuarioNaoEncontradoException()))
                 .flatMap(usuario -> updateUsuario(usuario, dados))
                 .flatMap(this.usuarioGateway::atualizar);
     }
 
-    private Mono<Usuario> updateUsuario(Usuario usuario, IUsuarioUpdateData dados) {
+    private Mono<Usuario> updateUsuario(Usuario usuario, IUsuarioRequestData dados) {
         if (dados.nome() != null && !dados.nome().isBlank())
         usuario.setNome(dados.nome());
         if (dados.email() != null && !dados.email().isBlank())

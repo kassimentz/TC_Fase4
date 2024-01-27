@@ -4,8 +4,8 @@ import com.fiap.tech_challenge_web_streaming.domain.categoria.entity.Categoria;
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.domain.video.exception.VideoNaoEncontradoException;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
-import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoUpdateData;
-import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoUpdateData;
+import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoRequestData;
+import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoRequestData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -37,7 +37,7 @@ class AtualizarVideoUseCaseTest {
         Video video = new Video();
         video.setId("1");
 
-        IVideoUpdateData videoUpdateData = new VideoUpdateData("test title", "test description", Categoria.PETS.name(), LocalDate.now());
+        VideoRequestData videoUpdateData = new VideoRequestData("test title", "test description", Categoria.PETS.name());
 
         when(videoGateway.buscarPorId(anyString())).thenReturn(Mono.just(video));
         when(videoGateway.atualizar(any(Video.class))).thenReturn(Mono.just(video));
@@ -53,7 +53,7 @@ class AtualizarVideoUseCaseTest {
     void testExecuteVideoNaoEncontrado() {
         when(videoGateway.buscarPorId(anyString())).thenReturn(Mono.empty());
 
-        IVideoUpdateData videoUpdateData = new VideoUpdateData("test title", "test description", Categoria.PETS.name(), LocalDate.now());
+        IVideoRequestData videoUpdateData = new VideoRequestData("test title", "test description", Categoria.PETS.name());
 
         Mono<Video> result = atualizarVideoUseCase.execute("1", videoUpdateData);
 

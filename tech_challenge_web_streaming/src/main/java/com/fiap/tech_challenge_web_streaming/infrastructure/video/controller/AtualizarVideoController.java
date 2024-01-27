@@ -1,12 +1,12 @@
 package com.fiap.tech_challenge_web_streaming.infrastructure.video.controller;
 
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoPublicData;
-import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoUpdateData;
+import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoRequestData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.AtualizarVideoUseCase;
-import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoPublicData;
-import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoUpdateData;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +27,7 @@ public class AtualizarVideoController {
 
     @PutMapping("/videos/{id}")
     @Operation(summary = "Atualizar Vídeo")
-    public Mono<ResponseEntity<VideoPublicData>> atualizarVideo(@RequestBody VideoUpdateData dados, @PathVariable String id) {
+    public Mono<ResponseEntity<VideoPublicData>> atualizarVideo(@Valid @RequestBody VideoRequestData dados, @PathVariable String id) {
         return this.atualizarVideoUseCase.execute(id, dados)
                 .map(video -> new ResponseEntity(new VideoPublicData(video), HttpStatus.OK));
 

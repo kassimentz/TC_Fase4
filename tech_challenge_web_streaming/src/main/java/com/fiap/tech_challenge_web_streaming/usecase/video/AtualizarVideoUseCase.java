@@ -1,13 +1,10 @@
 package com.fiap.tech_challenge_web_streaming.usecase.video;
 
 import com.fiap.tech_challenge_web_streaming.domain.categoria.entity.Categoria;
-import com.fiap.tech_challenge_web_streaming.domain.usuario.entity.Usuario;
-import com.fiap.tech_challenge_web_streaming.domain.usuario.exception.UsuarioNaoEncontradoException;
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.domain.video.exception.VideoNaoEncontradoException;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
-import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoUpdateData;
-import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoUpdateData;
+import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoRequestData;
 import reactor.core.publisher.Mono;
 
 public class AtualizarVideoUseCase {
@@ -18,7 +15,7 @@ public class AtualizarVideoUseCase {
         this.videoGateway = videoGateway;
     }
 
-    public Mono<Video> execute(String id, IVideoUpdateData dados) throws VideoNaoEncontradoException {
+    public Mono<Video> execute(String id, IVideoRequestData dados) throws VideoNaoEncontradoException {
 
         return this.videoGateway.buscarPorId(id)
                 .switchIfEmpty(Mono.error(new VideoNaoEncontradoException()))
@@ -26,15 +23,11 @@ public class AtualizarVideoUseCase {
 
                     //implementar possíveis validações negociais aqui
 
-
                     if (dados.titulo() != null)
                     video.setTitulo(dados.titulo());
 
                     if(dados.descricao() != null)
                     video.setDescricao(dados.descricao());
-
-                    if (dados.dataPublicacao() != null)
-                    video.setDataPublicacao(dados.dataPublicacao());
 
                     if (dados.categoria() != null)
                     video.setCategoria(Categoria.valueOf(dados.categoria()));

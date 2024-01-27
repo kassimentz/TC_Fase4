@@ -30,15 +30,13 @@ public class VideoEntity {
         this.url = video.getUrl();
         this.dataPublicacao = video.getDataPublicacao();
         this.categoria = video.getCategoria();
-
-
     }
 
     public Video toVideo(){
 
 
         return new Video(
-                this.id, this.titulo, this.descricao, this.url, this.dataPublicacao, this.categoria);
+                this.id, this.titulo, this.descricao, this.url,  this.categoria);
     }
 
     public String getId() {
