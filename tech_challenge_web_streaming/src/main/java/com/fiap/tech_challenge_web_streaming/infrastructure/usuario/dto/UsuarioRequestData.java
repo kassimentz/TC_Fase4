@@ -18,6 +18,7 @@ public record UsuarioRequestData(
         String nome,
 
         @Email(message = "Email inválido")
+        @NotBlank(message = "Email não pode ser vazio")
         String email
 
 
