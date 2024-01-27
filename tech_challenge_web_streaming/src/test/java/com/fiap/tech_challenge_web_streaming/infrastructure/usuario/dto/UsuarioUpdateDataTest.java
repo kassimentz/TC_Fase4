@@ -9,20 +9,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UsuarioUpdateDataTest {
+ class UsuarioUpdateDataTest {
 
     @Test
-    public void testFields() {
+     void testFields() {
         String expectedNome = "testNome";
         String expectedEmail = "testEmail";
         List<Video> expectedFavoritos = new ArrayList<>();
         List<Video> expectedRecomendados = new ArrayList<>();
 
-        UsuarioUpdateData updateData = new UsuarioUpdateData(expectedNome, expectedEmail, expectedFavoritos, expectedRecomendados);
+        UsuarioUpdateData updateData = new UsuarioUpdateData(expectedNome, expectedEmail);
 
         assertEquals(expectedNome, updateData.nome());
         assertEquals(expectedEmail, updateData.email());
-        assertEquals(expectedFavoritos, updateData.favoritos());
-        assertEquals(expectedRecomendados, updateData.recomendados());
+
     }
 }

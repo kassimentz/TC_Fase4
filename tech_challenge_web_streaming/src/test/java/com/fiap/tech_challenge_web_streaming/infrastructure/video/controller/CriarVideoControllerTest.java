@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.infrastructure.video.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fiap.tech_challenge_web_streaming.domain.categoria.entity.Categoria;
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoPublicData;
@@ -21,7 +22,7 @@ import java.time.LocalDate;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class CriarVideoControllerTest {
+class CriarVideoControllerTest {
 
     @Mock
     private CriarVideoUseCase criarVideoUseCase;
@@ -35,13 +36,12 @@ public class CriarVideoControllerTest {
     }
 
     @Test
-    public void testCreateVideo() {
-        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS);
-        IVideoRequestData videoData = new VideoRequestData("Titulo", "Descricao", "Pets", LocalDate.now());
-        IVideoPublicData videoPublicData = new VideoPublicData(video);
-        when(criarVideoUseCase.execute(any(IVideoRequestData.class))).thenReturn(Mono.just(video));
+    void testCreateVideo() throws JsonProcessingException{
+        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS, "url");
+        VideoPublicData videoPublicData = new VideoPublicData(video);
+        when(criarVideoUseCase.execute(any(IVideoRequestData.class), any())).thenReturn(Mono.just(video));
 
-        Mono<ResponseEntity<IVideoPublicData>> result = controller.createVideo(videoData);
+        Mono<ResponseEntity<VideoPublicData>> result = controller.createVideo(new VideoRequestData("Titulo", "Descricao",  "Pets", LocalDate.now()), null);
 
         StepVerifier.create(result)
                 .expectNext(new ResponseEntity<>(videoPublicData, HttpStatus.CREATED))

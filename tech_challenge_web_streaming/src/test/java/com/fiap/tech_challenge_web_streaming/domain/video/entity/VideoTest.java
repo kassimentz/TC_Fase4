@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class VideoTest {
+ class VideoTest {
 
     @Mock
     private Categoria categoria;
@@ -21,7 +21,7 @@ public class VideoTest {
     private Video video;
 
     @BeforeEach
-    public void setUp() {
+     void setUp() {
         MockitoAnnotations.openMocks(this);
         List<String> usuariosQueFavoritaram = new ArrayList<>();
         usuariosQueFavoritaram.add("1");
@@ -30,38 +30,38 @@ public class VideoTest {
     }
 
     @Test
-    public void testGetId() {
+     void testGetId() {
         assertEquals("1", video.getId());
     }
 
     @Test
-    public void testGetTitulo() {
+     void testGetTitulo() {
         assertEquals("Test Video", video.getTitulo());
     }
 
     @Test
-    public void testGetDescricao() {
+     void testGetDescricao() {
         assertEquals("This is a test video", video.getDescricao());
     }
 
     @Test
-    public void testGetUrl() {
+     void testGetUrl() {
         assertEquals("www.test.com", video.getUrl());
     }
 
     @Test
-    public void testGetCategoria() {
+     void testGetCategoria() {
         when(categoria.getCategoria()).thenReturn("Test Category");
         assertEquals("Test Category", video.getCategoria().getCategoria());
     }
 
     @Test
-    public void testGetUsuariosQueFavoritaram() {
+     void testGetUsuariosQueFavoritaram() {
         assertEquals("1", video.getUsuariosQueFavoritaram().get(0));
     }
 
     @Test
-    public void testFavoritarVideoPorUsuario() {
+     void testFavoritarVideoPorUsuario() {
         video.favoritarVideoPorUsuario("2");
         assertEquals("2", video.getUsuariosQueFavoritaram().get(1));
     }

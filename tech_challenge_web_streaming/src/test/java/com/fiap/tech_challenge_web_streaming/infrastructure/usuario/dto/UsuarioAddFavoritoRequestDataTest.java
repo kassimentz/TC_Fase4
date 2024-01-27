@@ -4,10 +4,10 @@ import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioA
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UsuarioAddFavoritoRequestDataTest {
+ class UsuarioAddFavoritoRequestDataTest {
 
     @Test
-    public void testVideoId() {
+     void testVideoId() {
         String expectedVideoId = "testVideoId";
         UsuarioAddFavoritoRequestData requestData = new UsuarioAddFavoritoRequestData(expectedVideoId);
         assertEquals(expectedVideoId, requestData.videoId());

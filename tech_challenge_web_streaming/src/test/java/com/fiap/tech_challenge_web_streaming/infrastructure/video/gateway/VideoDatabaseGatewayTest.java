@@ -23,7 +23,7 @@ import java.time.LocalDate;
 
 import static org.mockito.Mockito.*;
 
-public class VideoDatabaseGatewayTest {
+ class VideoDatabaseGatewayTest {
 
     @Mock
     private VideoRepository repository;
@@ -34,13 +34,13 @@ public class VideoDatabaseGatewayTest {
     private VideoDatabaseGateway videoDatabaseGateway;
 
     @BeforeEach
-    public void setUp() {
+     void setUp() {
         MockitoAnnotations.openMocks(this);
         videoDatabaseGateway = new VideoDatabaseGateway(repository, reactiveMongoTemplate);
     }
 
     @Test
-    public void testBuscarTodosOsVideosPorAtributo() {
+     void testBuscarTodosOsVideosPorAtributo() {
 
         Video video1 = new Video("1", "Test Video 1", "This is a test video", "www.test.com", LocalDate.now(), Categoria.PETS);
         Video video2 = new Video("2", "Test Video 2", "This is another test video", "www.test.com", LocalDate.now(), Categoria.TECNOLOGIA);
@@ -70,7 +70,7 @@ public class VideoDatabaseGatewayTest {
     }
 
     @Test
-    public void testBuscarTodos() {
+     void testBuscarTodos() {
         when(repository.findAll()).thenReturn(Flux.just(new VideoEntity()));
 
         Flux<Video> result = videoDatabaseGateway.buscarTodos();
@@ -83,7 +83,7 @@ public class VideoDatabaseGatewayTest {
     }
 
     @Test
-    public void testBuscarPorId() {
+     void testBuscarPorId() {
         when(repository.findById(anyString())).thenReturn(Mono.just(new VideoEntity()));
 
         Mono<Video> result = videoDatabaseGateway.buscarPorId("1");
@@ -96,7 +96,7 @@ public class VideoDatabaseGatewayTest {
     }
 
     @Test
-    public void testAtualizar() {
+     void testAtualizar() {
         when(repository.save(any(VideoEntity.class))).thenReturn(Mono.just(new VideoEntity()));
 
         Mono<Video> result = videoDatabaseGateway.atualizar(new Video());
@@ -109,7 +109,7 @@ public class VideoDatabaseGatewayTest {
     }
 
     @Test
-    public void testDeletar() {
+     void testDeletar() {
         when(repository.delete(any(VideoEntity.class))).thenReturn(Mono.empty());
 
         Mono<Void> result = videoDatabaseGateway.deletar(new Video());
@@ -121,7 +121,7 @@ public class VideoDatabaseGatewayTest {
     }
 
     @Test
-    public void testCriar() {
+     void testCriar() {
         when(repository.save(any(VideoEntity.class))).thenReturn(Mono.just(new VideoEntity()));
 
         Mono<Video> result = videoDatabaseGateway.criar(new Video());
@@ -134,7 +134,7 @@ public class VideoDatabaseGatewayTest {
     }
 
     @Test
-    public void testCount() {
+     void testCount() {
         when(repository.count()).thenReturn(Mono.just(1L));
 
         Mono<Long> result = videoDatabaseGateway.count();

@@ -25,7 +25,7 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataMongoTest
-public class VideoDatabaseGatewayDataMongoTest {
+ class VideoDatabaseGatewayDataMongoTest {
 
     @Autowired
     private VideoRepository repository;
@@ -36,7 +36,7 @@ public class VideoDatabaseGatewayDataMongoTest {
     private VideoDatabaseGateway videoDatabaseGateway;
 
     @BeforeEach
-    public void setUp() {
+     void setUp() {
         videoDatabaseGateway = new VideoDatabaseGateway(repository, mongoTemplate);
 
         for (int i = 1; i <= 5; i++) {
@@ -47,7 +47,7 @@ public class VideoDatabaseGatewayDataMongoTest {
     }
 
     @Test
-    public void testBuscarTodosOsVideosPorAtributo() {
+     void testBuscarTodosOsVideosPorAtributo() {
 
         VideoEntity videoEntity = new VideoEntity();
         mongoTemplate.save(videoEntity);
@@ -78,7 +78,7 @@ public class VideoDatabaseGatewayDataMongoTest {
     }
 
     @Test
-    public void testBuscarTodos() {
+     void testBuscarTodos() {
 
         VideoEntity videoEntity = new VideoEntity();
         mongoTemplate.save(videoEntity);
@@ -91,7 +91,7 @@ public class VideoDatabaseGatewayDataMongoTest {
     }
 
     @Test
-    public void testBuscarPorId() {
+     void testBuscarPorId() {
 
         VideoEntity videoEntity = new VideoEntity();
         videoEntity.setId("1");
@@ -105,7 +105,7 @@ public class VideoDatabaseGatewayDataMongoTest {
     }
 
     @Test
-    public void testAtualizar() {
+     void testAtualizar() {
 
         VideoEntity videoEntity = new VideoEntity();
         videoEntity.setId("1");
@@ -122,7 +122,7 @@ public class VideoDatabaseGatewayDataMongoTest {
     }
 
     @Test
-    public void testDeletar() {
+     void testDeletar() {
 
         VideoEntity videoEntity = new VideoEntity();
         videoEntity.setId("1");
@@ -138,7 +138,7 @@ public class VideoDatabaseGatewayDataMongoTest {
     }
 
     @Test
-    public void testCriar() {
+     void testCriar() {
 
         Video video = new Video();
         video.setId("1");
@@ -151,7 +151,7 @@ public class VideoDatabaseGatewayDataMongoTest {
     }
 
     @Test
-    public void testCount() {
+     void testCount() {
 
         VideoEntity videoEntity = new VideoEntity();
         videoEntity.setId("1");

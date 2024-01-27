@@ -13,7 +13,7 @@ import reactor.test.StepVerifier;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-public class DeletarVideoControllerTest {
+class DeletarVideoControllerTest {
 
     @Mock
     private DeletarVideoUseCase deletarVideoUseCase;
@@ -27,7 +27,7 @@ public class DeletarVideoControllerTest {
     }
 
     @Test
-    public void testDeletarVideo() {
+    void testDeletarVideo() {
         when(deletarVideoUseCase.execute(anyString())).thenReturn(Mono.empty());
 
         Mono<ResponseEntity<Void>> result = controller.deletarVideo("testId");

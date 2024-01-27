@@ -7,10 +7,10 @@ import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.*;
 
-public class DeletarUsuarioControllerTest {
+class DeletarUsuarioControllerTest {
 
     @Test
-    public void testDeletarUsuarioPorId() {
+    void testDeletarUsuarioPorId() {
         DeletarUsuarioUseCase deletarUsuarioUseCase = mock(DeletarUsuarioUseCase.class);
         DeletarUsuarioController controller = new DeletarUsuarioController(deletarUsuarioUseCase);
 

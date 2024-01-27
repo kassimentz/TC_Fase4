@@ -10,22 +10,22 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UsuarioPublicDataTest {
+ class UsuarioPublicDataTest {
 
     @Test
-    public void testFields() {
+     void testFields() {
         String expectedId = "testId";
         String expectedNome = "testNome";
         String expectedEmail = "testEmail";
         List<Video> expectedFavoritos = new ArrayList<>();
         List<Video> expectedRecomendados = new ArrayList<>();
 
-        UsuarioPublicData publicData = new UsuarioPublicData(expectedId, expectedNome, expectedEmail, expectedFavoritos, expectedRecomendados);
+        UsuarioPublicData Data = new UsuarioPublicData(expectedId, expectedNome, expectedEmail, expectedFavoritos, expectedRecomendados);
 
-        assertEquals(expectedId, publicData.id());
-        assertEquals(expectedNome, publicData.nome());
-        assertEquals(expectedEmail, publicData.email());
-        assertEquals(expectedFavoritos, publicData.favoritos());
-        assertEquals(expectedRecomendados, publicData.recomendados());
+        assertEquals(expectedId, Data.id());
+        assertEquals(expectedNome, Data.nome());
+        assertEquals(expectedEmail, Data.email());
+        assertEquals(expectedFavoritos, Data.favoritos());
+        assertEquals(expectedRecomendados, Data.recomendados());
     }
 }

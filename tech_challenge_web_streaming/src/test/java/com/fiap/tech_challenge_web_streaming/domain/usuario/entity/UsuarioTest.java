@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class UsuarioTest {
+ class UsuarioTest {
 
     @Mock
     private Video video;
@@ -20,7 +20,7 @@ public class UsuarioTest {
     private Usuario usuario;
 
     @BeforeEach
-    public void setUp() {
+     void setUp() {
         MockitoAnnotations.openMocks(this);
         List<Video> favoritos = new ArrayList<>();
         favoritos.add(video);
@@ -28,28 +28,28 @@ public class UsuarioTest {
     }
 
     @Test
-    public void testGetId() {
+     void testGetId() {
         assertEquals("1", usuario.getId());
     }
 
     @Test
-    public void testGetNome() {
+     void testGetNome() {
         assertEquals("Test User", usuario.getNome());
     }
 
     @Test
-    public void testGetEmail() {
+     void testGetEmail() {
         assertEquals("testuser@gmail.com", usuario.getEmail());
     }
 
     @Test
-    public void testGetFavoritos() {
+     void testGetFavoritos() {
         when(video.getId()).thenReturn("1");
         assertEquals("1", usuario.getFavoritos().get(0).getId());
     }
 
     @Test
-    public void testGetRecomendados() {
+     void testGetRecomendados() {
         assertEquals(0, usuario.getRecomendados().size());
     }
 }

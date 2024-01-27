@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class VideoRequestDataTest {
+ class VideoRequestDataTest {
 
     @Test
-    public void testVideoRequestData() {
+     void testVideoRequestData() {
         VideoRequestData videoRequestData = new VideoRequestData("Titulo", "Descricao", "Pets", LocalDate.now());
 
         assertEquals("Titulo", videoRequestData.titulo());

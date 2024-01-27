@@ -6,10 +6,10 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class VideoUpdateDataTest {
+ class VideoUpdateDataTest {
 
     @Test
-    public void testVideoUpdateData() {
+     void testVideoUpdateData() {
         VideoUpdateData videoUpdateData = new VideoUpdateData("Titulo", "Descricao", "Pets", LocalDate.now());
 
         assertEquals("Titulo", videoUpdateData.titulo());

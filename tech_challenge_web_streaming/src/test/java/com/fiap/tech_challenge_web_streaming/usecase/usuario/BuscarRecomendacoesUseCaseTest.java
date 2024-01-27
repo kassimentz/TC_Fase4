@@ -5,6 +5,7 @@ import com.fiap.tech_challenge_web_streaming.domain.usuario.entity.Usuario;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.gateway.UsuarioGateway;
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -19,7 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-public class BuscarRecomendacoesUseCaseTest {
+class BuscarRecomendacoesUseCaseTest {
 
     @Mock
     private UsuarioGateway usuarioGateway;
@@ -36,7 +37,7 @@ public class BuscarRecomendacoesUseCaseTest {
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
         Video video = new Video();
@@ -49,7 +50,6 @@ public class BuscarRecomendacoesUseCaseTest {
         when(videoGateway.count()).thenReturn(Mono.just(1L));
 
         Flux<Video> result = buscarRecomendacoesUseCase.execute("1");
-
-        assert result != null;
+        Assertions.assertNotNull(result);
     }
 }

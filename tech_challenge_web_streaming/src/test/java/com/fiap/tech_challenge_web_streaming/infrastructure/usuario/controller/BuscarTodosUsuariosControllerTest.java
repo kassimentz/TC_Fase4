@@ -11,10 +11,10 @@ import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.*;
 
-public class BuscarTodosUsuariosControllerTest {
+class BuscarTodosUsuariosControllerTest {
 
     @Test
-    public void testBuscarTodosUsuarios() {
+    void testBuscarTodosUsuarios() {
         BuscarTodosUsuariosUseCase buscarTodosUsuariosUseCase = mock(BuscarTodosUsuariosUseCase.class);
         BuscarTodosUsuariosController controller = new BuscarTodosUsuariosController(buscarTodosUsuariosUseCase);
 

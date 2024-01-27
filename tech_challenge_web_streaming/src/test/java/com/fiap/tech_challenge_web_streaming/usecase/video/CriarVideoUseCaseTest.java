@@ -1,6 +1,8 @@
 package com.fiap.tech_challenge_web_streaming.usecase.video;
 
+import com.fiap.tech_challenge_web_streaming.domain.categoria.entity.Categoria;
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
+import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoFileGateway;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoRequestData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoRequestData;
@@ -16,28 +18,27 @@ import java.time.LocalDate;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class CriarVideoUseCaseTest {
+class CriarVideoUseCaseTest {
 
     @Mock
     private VideoGateway videoGateway;
 
+    @Mock
+    private VideoFileGateway videoFileGateway;
     private CriarVideoUseCase criarVideoUseCase;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        criarVideoUseCase = new CriarVideoUseCase(videoGateway);
+        criarVideoUseCase = new CriarVideoUseCase(videoGateway, videoFileGateway);
     }
 
     @Test
-    public void testExecute() {
-        Video video = new Video("test title", "test description", LocalDate.now(), null);
-
-        IVideoRequestData videoRequestData = new VideoRequestData("test title", "test description", null, LocalDate.now());
-
+    void testExecute() {
+        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS, "url");
         when(videoGateway.criar(any(Video.class))).thenReturn(Mono.just(video));
 
-        Mono<Video> result = criarVideoUseCase.execute(videoRequestData);
+        Mono<Video> result = criarVideoUseCase.execute(new VideoRequestData("Titulo", "Descricao", "Pets", LocalDate.now()), null);
 
         StepVerifier.create(result)
                 .expectNext(video)

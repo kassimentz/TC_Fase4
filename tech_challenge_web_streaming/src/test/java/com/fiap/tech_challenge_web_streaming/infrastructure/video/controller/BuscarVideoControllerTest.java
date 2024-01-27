@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class BuscarVideoControllerTest {
+class BuscarVideoControllerTest {
 
     @Mock
     private BuscarVideoUseCase buscarVideoUseCase;
@@ -33,12 +33,12 @@ public class BuscarVideoControllerTest {
     }
 
     @Test
-    public void testGetVideoById() {
-        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS);
+    void testGetVideoById() {
+        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS, "url");
         VideoPublicData videoPublicData = new VideoPublicData(video);
         when(buscarVideoUseCase.execute(any(String.class))).thenReturn(Mono.just(video));
 
-        Mono<ResponseEntity<IVideoPublicData>> result = controller.getVideoById("testId");
+        Mono<ResponseEntity<VideoPublicData>> result = controller.getVideoById("testId");
 
         StepVerifier.create(result)
                 .expectNext(new ResponseEntity<>(videoPublicData, HttpStatus.OK))

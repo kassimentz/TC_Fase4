@@ -8,10 +8,10 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class VideoEntityTest {
+ class VideoEntityTest {
 
     @Test
-    public void testVideoEntity() {
+     void testVideoEntity() {
         VideoEntity videoEntity = new VideoEntity();
         videoEntity.setId("1");
         videoEntity.setTitulo("Titulo");
