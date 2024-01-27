@@ -29,7 +29,8 @@ public class CriarVideoUseCase {
                     Video video = new Video(videoMetadata.titulo(), videoMetadata.descricao(),
                             videoMetadata.dataPublicacao(),
                             Categoria.valueOf(videoMetadata.categoria()),
-                            videoUrl);
+                            videoUrl,
+                            0L);
                     return videoGateway.criar(video);
                 });
     }
