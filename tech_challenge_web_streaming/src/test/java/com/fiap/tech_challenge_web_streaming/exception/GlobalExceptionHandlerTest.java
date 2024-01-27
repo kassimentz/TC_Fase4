@@ -15,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class GlobalExceptionHandlerTest {
+class GlobalExceptionHandlerTest {
 
     @Test
-    public void testHandleValidationException() {
+    void testHandleValidationException() {
         MethodArgumentNotValidException ex = mock(MethodArgumentNotValidException.class);
         BindingResult bindingResult = mock(BindingResult.class);
         FieldError fieldError = new FieldError("objectName", "field", "defaultMessage");
@@ -36,7 +36,7 @@ public class GlobalExceptionHandlerTest {
     }
 
     @Test
-    public void testHandleHttpMessageConversionException() {
+    void testHandleHttpMessageConversionException() {
         HttpMessageConversionException ex = mock(HttpMessageConversionException.class);
 
         GlobalExceptionHandler handler = new GlobalExceptionHandler();
@@ -46,7 +46,7 @@ public class GlobalExceptionHandlerTest {
     }
 
     @Test
-    public void testRuntimeException() {
+    void testRuntimeException() {
         RuntimeException ex = mock(RuntimeException.class);
         when(ex.getMessage()).thenReturn("Test RuntimeException");
 

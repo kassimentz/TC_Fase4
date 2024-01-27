@@ -8,11 +8,11 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class VideoPublicDataTest {
+ class VideoPublicDataTest {
 
     @Test
-    public void testVideoPublicData() {
-        Video video = new Video("Titulo", "Descricao",  LocalDate.now(), Categoria.PETS);
+     void testVideoPublicData() {
+        Video video = new Video("Titulo", "Descricao",  LocalDate.now(), Categoria.PETS, "url");
         VideoPublicData videoPublicData = new VideoPublicData(video);
 
         assertEquals(video.getId(), videoPublicData.id());
@@ -20,5 +20,6 @@ public class VideoPublicDataTest {
         assertEquals(video.getDescricao(), videoPublicData.descricao());
         assertEquals(video.getCategoria().toString(), videoPublicData.categoria());
         assertEquals(video.getDataPublicacao(), videoPublicData.dataPublicacao());
+        assertEquals(video.getUrl(), videoPublicData.url());
     }
 }

@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class BuscarTodosOsVideosPorAtributoComPaginacaoControllerTest {
+class BuscarTodosOsVideosPorAtributoComPaginacaoControllerTest {
 
     @Mock
     private BuscarTodosOsVideosPorAtributoComPaginacaoUseCase buscarTodosOsVideosPorAtributoComPaginacaoUseCase;
@@ -35,15 +35,15 @@ public class BuscarTodosOsVideosPorAtributoComPaginacaoControllerTest {
     }
 
     @Test
-    public void testGetAllVideosPaginatedAndFiltered() {
-        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS);
+    void testGetAllVideosPaginatedAndFiltered() {
+        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS, "url");
         VideoPublicData videoPublicData = new VideoPublicData(video);
         when(buscarTodosOsVideosPorAtributoComPaginacaoUseCase.execute(any(PageData.class), any(CriteriosBuscaVideo.class))).thenReturn(Flux.just(video));
 
-        Flux<ResponseEntity<IVideoPublicData>> result = controller.getAllVideosPaginatedAndFiltered(0, 10, "DESC", "id", "Titulo", LocalDate.now(), "Pets");
+        ResponseEntity<Flux<VideoPublicData>> result = controller.getAllVideosPaginatedAndFiltered(0, 10, "DESC", "id", "Titulo", LocalDate.now(), "Pets");
 
-        StepVerifier.create(result)
-                .expectNext(new ResponseEntity<>(videoPublicData, HttpStatus.OK))
+        StepVerifier.create(result.getBody())
+                .expectNext(videoPublicData)
                 .verifyComplete();
     }
 }

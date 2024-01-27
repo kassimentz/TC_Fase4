@@ -16,7 +16,7 @@ import reactor.test.StepVerifier;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class AddFavoritoUseCaseTest {
+class AddFavoritoUseCaseTest {
 
     @Mock
     private UsuarioGateway usuarioGateway;
@@ -33,7 +33,7 @@ public class AddFavoritoUseCaseTest {
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
         Video video = new Video();

@@ -23,7 +23,7 @@ import static io.restassured.RestAssured.given;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UsuarioControllerIntegrationTestIT {
+ class UsuarioControllerIntegrationTestIT {
 
     @LocalServerPort
     private int port;
@@ -52,13 +52,13 @@ public class UsuarioControllerIntegrationTestIT {
     private DeletarUsuarioUseCase deletarUsuarioUseCase;
 
     @BeforeEach
-    public void setUp() {
+     void setUp() {
         MockitoAnnotations.openMocks(this);
         RestAssured.port = port;
     }
 
     @Test
-    public void testGetUsuario() {
+     void testGetUsuario() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 
@@ -73,11 +73,11 @@ public class UsuarioControllerIntegrationTestIT {
     }
 
     @Test
-    public void testCriarUsuario() {
+     void testCriarUsuario() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 
-        UsuarioRequestData usuarioRequestData = new UsuarioRequestData("nome", "email", null, null);
+        UsuarioRequestData usuarioRequestData = new UsuarioRequestData("nome", "email");
 
         when(criarUsuarioUseCase.executar(usuarioRequestData)).thenReturn(Mono.just(usuario));
 
@@ -91,11 +91,11 @@ public class UsuarioControllerIntegrationTestIT {
     }
 
     @Test
-    public void testAtualizarUsuario() {
+     void testAtualizarUsuario() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 
-        UsuarioUpdateData usuarioUpdateData = new UsuarioUpdateData("nome", "email", null, null);
+        UsuarioUpdateData usuarioUpdateData = new UsuarioUpdateData("nome", "email");
 
         when(atualizarUsuarioUseCase.execute("1", usuarioUpdateData)).thenReturn(Mono.just(usuario));
 
@@ -109,7 +109,7 @@ public class UsuarioControllerIntegrationTestIT {
     }
 
     @Test
-    public void testDeletarUsuarioPorId() {
+     void testDeletarUsuarioPorId() {
         when(deletarUsuarioUseCase.execute("1")).thenReturn(Mono.empty());
 
         given()
@@ -121,7 +121,7 @@ public class UsuarioControllerIntegrationTestIT {
     }
 
     @Test
-    public void testGetUsuarioNotFound() {
+     void testGetUsuarioNotFound() {
         when(usuarioGateway.buscarPorId("1")).thenReturn(Mono.empty());
 
         given()
@@ -133,7 +133,7 @@ public class UsuarioControllerIntegrationTestIT {
     }
 
     @Test
-    public void testAdicionarVideoFavorito() {
+     void testAdicionarVideoFavorito() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 
@@ -151,7 +151,7 @@ public class UsuarioControllerIntegrationTestIT {
     }
 
     @Test
-    public void testBuscarRecomendacoes() {
+     void testBuscarRecomendacoes() {
         Video video = new Video();
         video.setId("videoId");
 
@@ -166,7 +166,7 @@ public class UsuarioControllerIntegrationTestIT {
     }
 
     @Test
-    public void testBuscarTodosUsuarios() {
+     void testBuscarTodosUsuarios() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 
@@ -181,7 +181,7 @@ public class UsuarioControllerIntegrationTestIT {
     }
 
     @Test
-    public void testBuscarUsuarioporId() {
+     void testBuscarUsuarioporId() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 

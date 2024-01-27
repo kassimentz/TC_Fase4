@@ -37,12 +37,12 @@ class VideoGatewayTest {
     private ReactiveMongoTemplate reactiveMongoTemplate;
 
     @BeforeEach
-    public void setUp(){
+     void setUp(){
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testBuscarTodosOsVideosPorAtributo(){
+     void testBuscarTodosOsVideosPorAtributo(){
         Video video1 = new Video("1", "Test Video 1", "This is a test video", "www.test.com", LocalDate.now(), Categoria.PETS);
         Video video2 = new Video("2", "Test Video 2", "This is another test video", "www.test.com", LocalDate.now(), Categoria.TECNOLOGIA);
         Flux<Video> videos = Flux.just(video1, video2);
@@ -69,7 +69,7 @@ class VideoGatewayTest {
     }
 
     @Test
-    public void testBuscarTodos() {
+     void testBuscarTodos() {
 
         Video video1 = new Video("1", "Test Video 1", "This is a test video", "www.test.com", LocalDate.now(), Categoria.PETS);
         Video video2 = new Video("2", "Test Video 2", "This is another test video", "www.test.com", LocalDate.now(), Categoria.TECNOLOGIA);
@@ -85,7 +85,7 @@ class VideoGatewayTest {
     }
 
     @Test
-    public void testBuscarPorId() {
+     void testBuscarPorId() {
 
         String id = "1";
         Video video = new Video("1", "Test Video 1", "This is a test video", "www.test.com", LocalDate.now(), Categoria.PETS);
@@ -100,7 +100,7 @@ class VideoGatewayTest {
     }
 
     @Test
-    public void testAtualizar() {
+     void testAtualizar() {
 
         Video video = new Video("1", "Test Video 1", "This is a test video", "www.test.com", LocalDate.now(), Categoria.PETS);
         VideoEntity videoEntity = new VideoEntity(video);
@@ -114,7 +114,7 @@ class VideoGatewayTest {
     }
 
     @Test
-    public void testDeletar() {
+     void testDeletar() {
 
         Video video = new Video("1", "Test Video 1", "This is a test video", "www.test.com", LocalDate.now(), Categoria.PETS);
         VideoEntity videoEntity = new VideoEntity(video);
@@ -126,7 +126,7 @@ class VideoGatewayTest {
     }
 
     @Test
-    public void testCriar() {
+     void testCriar() {
 
         Video video = new Video("1", "Test Video 1", "This is a test video", "www.test.com", LocalDate.now(), Categoria.PETS);
         VideoEntity videoEntity = new VideoEntity(video);
@@ -138,7 +138,7 @@ class VideoGatewayTest {
     }
 
     @Test
-    public void testCount() {
+     void testCount() {
 
         Long expectedCount = 5L;
 

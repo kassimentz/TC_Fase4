@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-public class AtualizarVideoUseCaseTest {
+class AtualizarVideoUseCaseTest {
 
     @Mock
     private VideoGateway videoGateway;
@@ -33,7 +33,7 @@ public class AtualizarVideoUseCaseTest {
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Video video = new Video();
         video.setId("1");
 
@@ -50,7 +50,7 @@ public class AtualizarVideoUseCaseTest {
     }
 
     @Test
-    public void testExecuteVideoNaoEncontrado() {
+    void testExecuteVideoNaoEncontrado() {
         when(videoGateway.buscarPorId(anyString())).thenReturn(Mono.empty());
 
         IVideoUpdateData videoUpdateData = new VideoUpdateData("test title", "test description", Categoria.PETS.name(), LocalDate.now());

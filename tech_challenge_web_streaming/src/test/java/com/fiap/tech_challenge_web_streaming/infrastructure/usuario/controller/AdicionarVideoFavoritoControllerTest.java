@@ -12,10 +12,10 @@ import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.*;
 
-public class AdicionarVideoFavoritoControllerTest {
+class AdicionarVideoFavoritoControllerTest {
 
     @Test
-    public void testAdicionarVideoFavorito() {
+    void testAdicionarVideoFavorito() {
         AddFavoritoUseCase addFavoritoUseCase = mock(AddFavoritoUseCase.class);
         AdicionarVideoFavoritoController controller = new AdicionarVideoFavoritoController(addFavoritoUseCase);
 

@@ -17,7 +17,7 @@ import java.time.LocalDate;
 
 import static org.mockito.Mockito.when;
 
-public class BuscarTodosOsVideosControllerTest {
+class BuscarTodosOsVideosControllerTest {
 
     @Mock
     private BuscarTodosOsVideosUseCase buscarTodosOsVideosUseCase;
@@ -31,15 +31,15 @@ public class BuscarTodosOsVideosControllerTest {
     }
 
     @Test
-    public void testGetAllVideos() {
-        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS);
+    void testGetAllVideos() {
+        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS, "url");
         VideoPublicData videoPublicData = new VideoPublicData(video);
         when(buscarTodosOsVideosUseCase.execute()).thenReturn(Flux.just(video));
 
-        Flux<ResponseEntity<VideoPublicData>> result = controller.getAllVideos();
+        ResponseEntity<Flux<VideoPublicData>> result = controller.getAllVideos();
 
-        StepVerifier.create(result)
-                .expectNext(new ResponseEntity<>(videoPublicData, HttpStatus.OK))
-                .verifyComplete();
+       StepVerifier.create(result.getBody())
+                    .expectNext(videoPublicData)
+                    .verifyComplete();
     }
 }

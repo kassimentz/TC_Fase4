@@ -13,7 +13,7 @@ import reactor.test.StepVerifier;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-public class BuscarVideoUseCaseTest {
+class BuscarVideoUseCaseTest {
 
     @Mock
     private VideoGateway videoGateway;
@@ -27,7 +27,7 @@ public class BuscarVideoUseCaseTest {
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Video video = new Video();
         video.setId("1");
 
@@ -41,7 +41,7 @@ public class BuscarVideoUseCaseTest {
     }
 
     @Test
-    public void testExecuteVideoNaoEncontrado() {
+    void testExecuteVideoNaoEncontrado() {
         when(videoGateway.buscarPorId(anyString())).thenReturn(Mono.empty());
 
         Mono<Video> result = buscarVideoUseCase.execute("1");

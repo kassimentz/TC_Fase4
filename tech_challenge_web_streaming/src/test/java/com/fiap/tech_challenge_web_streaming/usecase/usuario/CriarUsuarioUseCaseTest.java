@@ -14,7 +14,7 @@ import reactor.test.StepVerifier;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class CriarUsuarioUseCaseTest {
+class CriarUsuarioUseCaseTest {
 
     @Mock
     private UsuarioGateway usuarioGateway;
@@ -28,11 +28,11 @@ public class CriarUsuarioUseCaseTest {
     }
 
     @Test
-    public void testExecutar() {
+    void testExecutar() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 
-        IUsuarioRequestData usuarioRequestData = new UsuarioRequestData("nome", "email", null, null);
+        IUsuarioRequestData usuarioRequestData = new UsuarioRequestData("nome", "email");
 
         when(usuarioGateway.criar(any(Usuario.class))).thenReturn(Mono.just(usuario));
 

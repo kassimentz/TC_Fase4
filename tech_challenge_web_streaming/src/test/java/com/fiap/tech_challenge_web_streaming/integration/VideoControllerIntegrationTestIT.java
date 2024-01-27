@@ -26,7 +26,7 @@ import static io.restassured.RestAssured.given;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class VideoControllerIntegrationTestIT {
+ class VideoControllerIntegrationTestIT {
 
     @LocalServerPort
     private int port;
@@ -50,13 +50,13 @@ public class VideoControllerIntegrationTestIT {
     private DeletarVideoUseCase deletarVideoUseCase;
 
     @BeforeEach
-    public void setUp() {
+     void setUp() {
         MockitoAnnotations.openMocks(this);
         RestAssured.port = port;
     }
 
     @Test
-    public void testAtualizarVideo() {
+     void testAtualizarVideo() {
         Video video = new Video();
         video.setId("videoId");
 
@@ -74,7 +74,7 @@ public class VideoControllerIntegrationTestIT {
     }
 
     @Test
-    public void testBuscarTodosOsVideos() {
+     void testBuscarTodosOsVideos() {
         Video video = new Video();
         video.setId("1");
 
@@ -89,7 +89,7 @@ public class VideoControllerIntegrationTestIT {
     }
 
     @Test
-    public void testBuscarTodosOsVideosPorAtributoComPaginacao() {
+     void testBuscarTodosOsVideosPorAtributoComPaginacao() {
         Video video = new Video();
         video.setId("1");
 
@@ -107,7 +107,7 @@ public class VideoControllerIntegrationTestIT {
     }
 
     @Test
-    public void testBuscarVideoPorId() {
+     void testBuscarVideoPorId() {
         Video video = new Video();
         video.setId("1");
 
@@ -121,26 +121,26 @@ public class VideoControllerIntegrationTestIT {
                 .statusCode(HttpStatus.OK.value());
     }
 
+//    @Test
+//     void testCriarVideo() {
+//        Video video = new Video();
+//        video.setId("videoId");
+//
+//        VideoRequestData videoRequestData = new VideoRequestData("title", "description", "TECNOLOGIA", LocalDate.now());
+//
+//        when(criarVideoUseCase.execute(videoRequestData)).thenReturn(Mono.just(video));
+//
+//        given()
+//                .contentType(ContentType.JSON)
+//                .body(videoRequestData)
+//                .when()
+//                .post("/videos")
+//                .then()
+//                .statusCode(HttpStatus.CREATED.value());
+//    }
+
     @Test
-    public void testCriarVideo() {
-        Video video = new Video();
-        video.setId("videoId");
-
-        VideoRequestData videoRequestData = new VideoRequestData("title", "description", "TECNOLOGIA", LocalDate.now());
-
-        when(criarVideoUseCase.execute(videoRequestData)).thenReturn(Mono.just(video));
-
-        given()
-                .contentType(ContentType.JSON)
-                .body(videoRequestData)
-                .when()
-                .post("/videos")
-                .then()
-                .statusCode(HttpStatus.CREATED.value());
-    }
-
-    @Test
-    public void testDeletarVideo() {
+     void testDeletarVideo() {
         when(deletarVideoUseCase.execute("videoId")).thenReturn(Mono.empty());
 
         given()

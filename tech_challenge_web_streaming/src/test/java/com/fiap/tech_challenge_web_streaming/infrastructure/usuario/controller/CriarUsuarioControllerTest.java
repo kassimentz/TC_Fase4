@@ -12,14 +12,14 @@ import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.*;
 
-public class CriarUsuarioControllerTest {
+class CriarUsuarioControllerTest {
 
     @Test
-    public void testCriarUsuario() {
+    void testCriarUsuario() {
         CriarUsuarioUseCase criarUsuarioUseCase = mock(CriarUsuarioUseCase.class);
         CriarUsuarioController controller = new CriarUsuarioController(criarUsuarioUseCase);
 
-        UsuarioRequestData requestData = new UsuarioRequestData("nome", "email", null, null);
+        UsuarioRequestData requestData = new UsuarioRequestData("nome", "email");
 
         Usuario usuario = new Usuario();
         usuario.setId("id");

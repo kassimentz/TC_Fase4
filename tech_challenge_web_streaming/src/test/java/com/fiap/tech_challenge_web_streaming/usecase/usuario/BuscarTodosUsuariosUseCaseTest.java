@@ -11,7 +11,7 @@ import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.when;
 
-public class BuscarTodosUsuariosUseCaseTest {
+class BuscarTodosUsuariosUseCaseTest {
 
     @Mock
     private UsuarioGateway usuarioGateway;
@@ -25,7 +25,7 @@ public class BuscarTodosUsuariosUseCaseTest {
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 

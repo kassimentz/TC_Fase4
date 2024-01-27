@@ -12,10 +12,10 @@ import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.*;
 
-public class BuscarUsuarioControllerTest {
+class BuscarUsuarioControllerTest {
 
     @Test
-    public void testBuscarUsuarioporId() {
+    void testBuscarUsuarioporId() {
         BuscarUsuarioUseCase buscarUsuarioUseCase = mock(BuscarUsuarioUseCase.class);
         BuscarUsuarioController controller = new BuscarUsuarioController(buscarUsuarioUseCase);
 
@@ -25,7 +25,7 @@ public class BuscarUsuarioControllerTest {
 
         when(buscarUsuarioUseCase.execute(anyString())).thenReturn(Mono.just(usuario));
 
-        Mono<ResponseEntity<IUsuarioPublicData>> response = controller.buscarUsuarioporId("id");
+        Mono<ResponseEntity<UsuarioPublicData>> response = controller.buscarUsuarioporId("id");
 
         StepVerifier.create(response)
                 .assertNext(res -> {
