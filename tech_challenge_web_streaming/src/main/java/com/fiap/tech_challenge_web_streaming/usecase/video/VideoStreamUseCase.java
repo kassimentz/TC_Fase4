@@ -6,7 +6,7 @@ import reactor.core.publisher.Mono;
 
 public class VideoStreamUseCase {
 
-    private VideoStreamGateway streamGateway;
+    private final VideoStreamGateway streamGateway;
 
     public VideoStreamUseCase(VideoStreamGateway streamGateway) {
         this.streamGateway = streamGateway;
