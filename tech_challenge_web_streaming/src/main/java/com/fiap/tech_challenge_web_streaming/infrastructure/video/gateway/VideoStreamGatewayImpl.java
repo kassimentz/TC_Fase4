@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.infrastructure.video.gateway;
 
+import com.fiap.tech_challenge_web_streaming.domain.video.exception.VideoNaoEncontradoException;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoStreamGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.repository.VideoRepository;
 import org.springframework.core.io.FileSystemResource;
@@ -24,6 +25,7 @@ public class VideoStreamGatewayImpl implements VideoStreamGateway {
     @Override
     public Mono<Void> streamVideoById(String id, ServerHttpResponse response) {
         return repository.findById(id)
+                .switchIfEmpty(Mono.error(VideoNaoEncontradoException::new))
                 .flatMap(video -> {
                     Path path = Paths.get(video.getUrl());
                     FileSystemResource videoFile = new FileSystemResource(path);
