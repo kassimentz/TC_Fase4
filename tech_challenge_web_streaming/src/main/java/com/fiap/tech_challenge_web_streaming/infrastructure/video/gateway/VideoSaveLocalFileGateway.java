@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 
 public class VideoSaveLocalFileGateway implements VideoFileGateway {
     @Override
-
     public Mono<String> salvarArquivoVideo(FilePart videoFile) {
 
         Path destinationFile = Paths.get("src/main/resources/videos", videoFile.filename());
