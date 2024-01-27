@@ -3,6 +3,7 @@ package com.fiap.tech_challenge_web_streaming.domain.video.entity;
 import com.fiap.tech_challenge_web_streaming.domain.categoria.entity.Categoria;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Video {

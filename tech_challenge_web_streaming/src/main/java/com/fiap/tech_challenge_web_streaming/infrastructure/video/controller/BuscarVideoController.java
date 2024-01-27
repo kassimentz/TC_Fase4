@@ -25,7 +25,7 @@ public class BuscarVideoController {
 
     @GetMapping("/videos/{id}")
     @Operation(summary = "Buscar Vídeo por ID")
-    public Mono<ResponseEntity<IVideoPublicData>> getVideoById(@PathVariable String id) {
+    public Mono<ResponseEntity<VideoPublicData>> getVideoById(@PathVariable String id) {
         Mono<Video> videoEncontrado = buscarVideoUseCase.execute(id);
         return videoEncontrado.map(v -> new ResponseEntity(new VideoPublicData(v), HttpStatus.OK));
     }

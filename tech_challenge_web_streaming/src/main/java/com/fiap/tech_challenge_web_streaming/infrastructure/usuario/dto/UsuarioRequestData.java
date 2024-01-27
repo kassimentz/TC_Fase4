@@ -10,9 +10,8 @@ public record UsuarioRequestData(
         //Incluir Spring Validation aqui
 
         String nome,
-        String email,
-        List<Video> favoritos,
-        List<Video> recomendados
+        String email
+
 
 
 ) implements IUsuarioRequestData {

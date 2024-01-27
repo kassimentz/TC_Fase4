@@ -38,6 +38,7 @@ public class UsuarioEntity {
     }
 
     public UsuarioEntity(Usuario usuario) {
+        this.id = usuario.getId();
         this.nome= usuario.getNome();
         this.email = usuario.getEmail();
         this.favoritos = usuario.getFavoritos();

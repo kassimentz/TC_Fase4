@@ -12,6 +12,4 @@ public record VideoUpdateData(
         String categoria,
         LocalDate dataPublicacao
 
-) implements IVideoUpdateData {
-
-}
+) implements IVideoUpdateData{}

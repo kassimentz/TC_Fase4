@@ -6,10 +6,24 @@ import java.time.LocalDate;
 
 public interface IVideoUpdateData {
 
-    String titulo();
-    String descricao();
-    LocalDate dataPublicacao();
 
-    String categoria();
+
+
+
+    default String titulo() {
+        return "";
+    }
+
+    default String descricao() {
+        return "";
+    }
+
+    default LocalDate dataPublicacao() {
+        return LocalDate.MIN;
+    }
+
+    default String categoria() {
+        return "";
+    }
 
 }

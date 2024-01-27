@@ -26,7 +26,7 @@ public class BuscarUsuarioController {
 
     @GetMapping("/usuarios/{id}")
     @Operation(summary = "Buscar usuário por ID")
-    public Mono<ResponseEntity<IUsuarioPublicData>> buscarUsuarioporId(@PathVariable String id) {
+    public Mono<ResponseEntity<UsuarioPublicData>> buscarUsuarioporId(@PathVariable String id) {
         Mono<Usuario> userEntity = buscarUsuarioUseCase.execute(id);
         return userEntity.map(
                 u -> {

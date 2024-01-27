@@ -23,7 +23,7 @@ public class BuscarTodosUsuariosController {
     }
 
 
-    //talvez deva substituir esse map por um collectlist antes dele
+
     @GetMapping("/usuarios")
     @Operation(summary = "Buscar todos os usuários")
     public ResponseEntity<Flux<UsuarioPublicData>> buscarTodosUsuarios() {
