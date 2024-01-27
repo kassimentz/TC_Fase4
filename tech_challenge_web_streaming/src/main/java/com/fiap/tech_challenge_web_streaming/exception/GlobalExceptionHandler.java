@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -43,25 +47,40 @@ public class GlobalExceptionHandler {
         ErrorMessage error = new ErrorMessage(errorMessage);
         return ResponseEntity.badRequest().body(error);
     }
+
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErrorMessage> runtimeException(RuntimeException ex) {
         String errorMessage = ex.getMessage();
+
+        Map<String, String> map = new HashMap<>();
+
+        Pattern pattern = Pattern.compile("\\[(.*?)\\].*?\\[(.*?)\\]");
+        Matcher matcher = pattern.matcher(errorMessage);
+
+        while (matcher.find()) {
+            map.put(matcher.group(1), matcher.group(2));
+        }
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            System.out.println("Field: " + entry.getKey() + ", Message: " + entry.getValue());
+        }
+
         ErrorMessage error = new ErrorMessage(errorMessage);
         return ResponseEntity.badRequest().body(error);
     }
 
-    @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<ErroValidacaoResponse> handleValidationParameterException(MissingServletRequestParameterException ex) {
-        ErroValidacaoResponse response = new ErroValidacaoResponse();
-        response.setStatus(400);
-        response.setMensagem("Erro de validação");
-
-        List<String> erros = new ArrayList<>();
-
-        String mensagemErro = "Campo '" + ex.getParameterName() + "': " + ex.getMessage();
-        erros.add(mensagemErro);
-        response.setErros(erros);
-
-        return ResponseEntity.badRequest().body(response);
-    }
+//    @ExceptionHandler({MissingServletRequestParameterException.class})
+//    public ResponseEntity<ErroValidacaoResponse> handleValidationParameterException(MissingServletRequestParameterException ex) {
+//        ErroValidacaoResponse response = new ErroValidacaoResponse();
+//        response.setStatus(400);
+//        response.setMensagem("Erro de validação");
+//
+//        List<String> erros = new ArrayList<>();
+//
+//        String mensagemErro = "Campo '" + ex.getParameterName() + "': " + ex.getMessage();
+//        erros.add(mensagemErro);
+//        response.setErros(erros);
+//
+//        return ResponseEntity.badRequest().body(response);
+//    }
 }
