@@ -29,6 +29,7 @@ public class Video {
         this.categoria = categoria;
         this.url = url;
         this.dataPublicacao = LocalDate.now();
+        this.qtVisualizacao = 0L;
     }
 
     public Video(String id, String titulo, String descricao, String url, Categoria categoria) {

@@ -28,8 +28,7 @@ public class CriarVideoUseCase {
                 .flatMap(videoUrl -> {
                     Video video = new Video(videoMetadata.titulo(), videoMetadata.descricao(),
                             Categoria.valueOf(videoMetadata.categoria()),
-                            videoUrl,
-                            0L);
+                            videoUrl);
                     return videoGateway.criar(video);
                 });
     }
