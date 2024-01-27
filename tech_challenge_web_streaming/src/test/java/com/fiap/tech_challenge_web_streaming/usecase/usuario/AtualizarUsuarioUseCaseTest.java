@@ -3,7 +3,9 @@ package com.fiap.tech_challenge_web_streaming.usecase.usuario;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.entity.Usuario;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.gateway.UsuarioGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioRequestData;
+import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioUpdateData;
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.dto.IUsuarioRequestData;
+import com.fiap.tech_challenge_web_streaming.usecase.usuario.dto.IUsuarioUpdateData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +35,7 @@ class AtualizarUsuarioUseCaseTest {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 
-        IUsuarioRequestData usuarioUpdateData = new UsuarioRequestData("nome atualizado", "email atualizado");
+        IUsuarioUpdateData usuarioUpdateData = new UsuarioUpdateData("nome atualizado", "email atualizado");
 
         when(usuarioGateway.buscarPorId(anyString())).thenReturn(Mono.just(usuario));
         when(usuarioGateway.atualizar(any(Usuario.class))).thenReturn(Mono.just(usuario));

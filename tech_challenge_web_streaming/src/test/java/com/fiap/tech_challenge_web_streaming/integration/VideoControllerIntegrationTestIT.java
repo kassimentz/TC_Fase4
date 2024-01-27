@@ -6,6 +6,7 @@ import com.fiap.tech_challenge_web_streaming.domain.video.factories.CriteriosBus
 import com.fiap.tech_challenge_web_streaming.domain.video.factories.PageData;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoFileGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoRequestData;
+import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoUpdateData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.*;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -61,7 +62,7 @@ import static org.mockito.Mockito.when;
         Video video = new Video();
         video.setId("videoId");
 
-        VideoRequestData videoUpdateData = new VideoRequestData("title", "description", Categoria.TECNOLOGIA.name());
+        VideoUpdateData videoUpdateData = new VideoUpdateData("title", "description", Categoria.TECNOLOGIA.name());
 
         when(atualizarVideoUseCase.execute("videoId", videoUpdateData)).thenReturn(Mono.just(video));
 

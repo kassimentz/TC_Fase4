@@ -14,7 +14,7 @@ public class Video {
     private String url;
     private LocalDate dataPublicacao;
     private Categoria categoria;
-    private Long qtVisualizacao;
+    private Long qtVisualizacao = 0L;
     private List<String> usuariosQueFavoritaram = new ArrayList<>();
 
     public Video() {

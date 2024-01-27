@@ -3,6 +3,7 @@ package com.fiap.tech_challenge_web_streaming.infrastructure.usuario.controller;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.entity.Usuario;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioPublicData;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioRequestData;
+import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioUpdateData;
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.AtualizarUsuarioUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,7 +25,7 @@ public class AtualizarUsuarioController {
 
     @PutMapping("/usuarios/{id}")
     @Operation(summary = "Atualizar Usuário")
-    public Mono<ResponseEntity<UsuarioPublicData>> atualizarUsuario(@PathVariable String id, @Valid @RequestBody UsuarioRequestData usuario) {
+    public Mono<ResponseEntity<UsuarioPublicData>> atualizarUsuario(@PathVariable String id, @Valid @RequestBody UsuarioUpdateData usuario) {
         Mono<Usuario> usuarioAtualizado = atualizarUsuarioUserCase.execute(id, usuario);
         return usuarioAtualizado.map(u -> new ResponseEntity<>(new UsuarioPublicData(u), HttpStatus.OK));
     }

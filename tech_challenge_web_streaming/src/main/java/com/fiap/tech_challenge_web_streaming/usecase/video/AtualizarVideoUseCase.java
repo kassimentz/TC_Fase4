@@ -5,6 +5,7 @@ import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.domain.video.exception.VideoNaoEncontradoException;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
 import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoRequestData;
+import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoUpdateData;
 import reactor.core.publisher.Mono;
 
 public class AtualizarVideoUseCase {
@@ -15,7 +16,7 @@ public class AtualizarVideoUseCase {
         this.videoGateway = videoGateway;
     }
 
-    public Mono<Video> execute(String id, IVideoRequestData dados) throws VideoNaoEncontradoException {
+    public Mono<Video> execute(String id, IVideoUpdateData dados) throws VideoNaoEncontradoException {
 
         return this.videoGateway.buscarPorId(id)
                 .switchIfEmpty(Mono.error(new VideoNaoEncontradoException()))
