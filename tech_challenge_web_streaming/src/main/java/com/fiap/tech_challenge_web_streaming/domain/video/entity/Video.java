@@ -3,6 +3,7 @@ package com.fiap.tech_challenge_web_streaming.domain.video.entity;
 import com.fiap.tech_challenge_web_streaming.domain.categoria.entity.Categoria;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Video {
@@ -14,7 +15,7 @@ public class Video {
     private LocalDate dataPublicacao;
     private Categoria categoria;
 
-    private List<String> usuariosQueFavoritaram; // new field
+    private List<String> usuariosQueFavoritaram = new ArrayList<>(); // new field
 
     public Video() {}
 

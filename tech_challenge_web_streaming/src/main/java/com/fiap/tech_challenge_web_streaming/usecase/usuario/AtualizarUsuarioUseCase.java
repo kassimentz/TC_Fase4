@@ -22,9 +22,9 @@ public class AtualizarUsuarioUseCase {
     }
 
     private Mono<Usuario> updateUsuario(Usuario usuario, IUsuarioUpdateData dados) {
-        if (dados.nome() != null)
+        if (dados.nome() != null && !dados.nome().isBlank())
         usuario.setNome(dados.nome());
-        if (dados.email() != null);
+        if (dados.email() != null && !dados.email().isBlank())
         usuario.setEmail(dados.email());
         return Mono.just(usuario);
     }
