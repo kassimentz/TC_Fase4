@@ -57,8 +57,6 @@ public class BuscarTodosOsVideosPorAtributoComPaginacaoController {
 
         return new ResponseEntity<>(videoPublicDataFlux, HttpStatus.OK);
 
-
-
     }
 
 }
