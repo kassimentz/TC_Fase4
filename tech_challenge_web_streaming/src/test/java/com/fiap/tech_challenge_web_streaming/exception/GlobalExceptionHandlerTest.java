@@ -19,20 +19,41 @@ import static org.mockito.Mockito.when;
 class GlobalExceptionHandlerTest {
 
     @Test
-    void handleValidationExceptionsTest() {
-
+    void testHandleValidationException() {
         MethodArgumentNotValidException ex = mock(MethodArgumentNotValidException.class);
         BindingResult bindingResult = mock(BindingResult.class);
+        FieldError fieldError = new FieldError("objectName", "field", "defaultMessage");
+        List<ObjectError> errors = new ArrayList<>();
+        errors.add(fieldError);
+        when(bindingResult.getAllErrors()).thenReturn(errors);
         when(ex.getBindingResult()).thenReturn(bindingResult);
 
-        List<FieldError> fieldErrors = new ArrayList<>();
-        fieldErrors.add(new FieldError("objectName", "field", "defaultMessage"));
+        GlobalExceptionHandler handler = new GlobalExceptionHandler();
+        ResponseEntity<ErroValidacaoResponse> response = handler.handleValidationException(ex);
 
-        when(bindingResult.getFieldErrors()).thenReturn(fieldErrors);
+        assertEquals(400, response.getBody().getStatus());
+        assertEquals("Erro de validação", response.getBody().getMensagem());
+        assertEquals("Campo 'field': defaultMessage", response.getBody().getErros().get(0));
+    }
 
-        GlobalExceptionHandler globalExceptionHandler = new GlobalExceptionHandler();
-        ResponseEntity<Object> responseEntity = globalExceptionHandler.handleValidationExceptions(ex, null);
+    @Test
+    void testHandleHttpMessageConversionException() {
+        HttpMessageConversionException ex = mock(HttpMessageConversionException.class);
 
-        assertEquals("field: defaultMessage", responseEntity.getBody());
+        GlobalExceptionHandler handler = new GlobalExceptionHandler();
+        ResponseEntity<ErrorMessage> response = handler.handleHttpMessageConversionException(ex);
+
+        assertEquals("Ocorreu um erro na desserialização do JSON. Verifique os tipos dos atributos.", response.getBody().getMessage());
+    }
+
+    @Test
+    void testRuntimeException() {
+        RuntimeException ex = mock(RuntimeException.class);
+        when(ex.getMessage()).thenReturn("Test RuntimeException");
+
+        GlobalExceptionHandler handler = new GlobalExceptionHandler();
+        ResponseEntity<ErrorMessage> response = handler.runtimeException(ex);
+
+        assertEquals("Test RuntimeException", response.getBody().getMessage());
     }
 }
