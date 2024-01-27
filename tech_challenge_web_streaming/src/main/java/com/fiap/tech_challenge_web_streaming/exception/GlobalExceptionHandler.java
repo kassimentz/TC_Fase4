@@ -51,20 +51,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErrorMessage> runtimeException(RuntimeException ex) {
         String errorMessage = ex.getMessage();
-
-        Map<String, String> map = new HashMap<>();
-
-        Pattern pattern = Pattern.compile("\\[(.*?)\\].*?\\[(.*?)\\]");
-        Matcher matcher = pattern.matcher(errorMessage);
-
-        while (matcher.find()) {
-            map.put(matcher.group(1), matcher.group(2));
-        }
-
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            System.out.println("Field: " + entry.getKey() + ", Message: " + entry.getValue());
-        }
-
         ErrorMessage error = new ErrorMessage(errorMessage);
         return ResponseEntity.badRequest().body(error);
     }
