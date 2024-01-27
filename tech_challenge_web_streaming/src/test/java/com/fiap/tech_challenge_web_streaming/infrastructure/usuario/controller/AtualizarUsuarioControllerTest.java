@@ -12,14 +12,14 @@ import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.*;
 
-public class AtualizarUsuarioControllerTest {
+class AtualizarUsuarioControllerTest {
 
     @Test
-    public void testAtualizarUsuario() {
+    void testAtualizarUsuario() {
         AtualizarUsuarioUseCase atualizarUsuarioUseCase = mock(AtualizarUsuarioUseCase.class);
         AtualizarUsuarioController controller = new AtualizarUsuarioController(atualizarUsuarioUseCase);
 
-        UsuarioUpdateData updateData = new UsuarioUpdateData("nome", "email", null, null );
+        UsuarioUpdateData updateData = new UsuarioUpdateData("nome", "email");
 
         Usuario usuario = new Usuario();
         usuario.setId("id");

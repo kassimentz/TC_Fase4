@@ -9,10 +9,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UsuarioEntityTest {
+ class UsuarioEntityTest {
 
     @Test
-    public void testFields() {
+     void testFields() {
         String expectedId = "testId";
         String expectedNome = "testNome";
         String expectedEmail = "testEmail";
@@ -29,7 +29,7 @@ public class UsuarioEntityTest {
     }
 
     @Test
-    public void testAddFavorito() {
+     void testAddFavorito() {
         UsuarioEntity usuarioEntity = new UsuarioEntity();
         Video video = new Video();
         usuarioEntity.addFavorito(video);
@@ -39,7 +39,7 @@ public class UsuarioEntityTest {
     }
 
     @Test
-    public void testToUsuario() {
+     void testToUsuario() {
         String expectedId = "testId";
         String expectedNome = "testNome";
         String expectedEmail = "testEmail";

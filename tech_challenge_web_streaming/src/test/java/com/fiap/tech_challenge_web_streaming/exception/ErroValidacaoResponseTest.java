@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ErroValidacaoResponseTest {
+class ErroValidacaoResponseTest {
 
     @Test
-    public void testGetSetStatus() {
+    void testGetSetStatus() {
         ErroValidacaoResponse erroValidacaoResponse = new ErroValidacaoResponse();
         int expectedStatus = 400;
         erroValidacaoResponse.setStatus(expectedStatus);
@@ -16,7 +16,7 @@ public class ErroValidacaoResponseTest {
     }
 
     @Test
-    public void testGetSetMensagem() {
+    void testGetSetMensagem() {
         ErroValidacaoResponse erroValidacaoResponse = new ErroValidacaoResponse();
         String expectedMensagem = "Test Message";
         erroValidacaoResponse.setMensagem(expectedMensagem);
@@ -24,7 +24,7 @@ public class ErroValidacaoResponseTest {
     }
 
     @Test
-    public void testGetSetErros() {
+    void testGetSetErros() {
         ErroValidacaoResponse erroValidacaoResponse = new ErroValidacaoResponse();
         List<String> expectedErros = Arrays.asList("Error 1", "Error 2");
         erroValidacaoResponse.setErros(expectedErros);

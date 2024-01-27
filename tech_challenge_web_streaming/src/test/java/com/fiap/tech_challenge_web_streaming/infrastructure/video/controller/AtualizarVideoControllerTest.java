@@ -23,7 +23,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-public class AtualizarVideoControllerTest {
+class AtualizarVideoControllerTest {
 
     @Mock
     private AtualizarVideoUseCase atualizarVideoUseCase;
@@ -37,17 +37,16 @@ public class AtualizarVideoControllerTest {
     }
 
     @Test
-    public void testAtualizarVideo() {
-        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS);
-        IVideoUpdateData dados = new VideoUpdateData("Titulo", "Descricao", "Pets", LocalDate.now());
-        IVideoPublicData videoPublicData = new VideoPublicData(video);
+    void testAtualizarVideo() {
+        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS, "url");
+        VideoPublicData videoPublicData = new VideoPublicData(video);
+        when(atualizarVideoUseCase.execute(anyString(), any(IVideoUpdateData.class))).thenReturn(Mono.just(video));
 
-        when(atualizarVideoUseCase.execute(anyString(), any())).thenReturn(Mono.just(video));
+        Mono<ResponseEntity<VideoPublicData>> result = controller.atualizarVideo(new VideoUpdateData("Titulo", "Descricao", "Pets", LocalDate.now()),"testId");
 
-        ResponseEntity<IVideoPublicData> result = controller.atualizarVideo(dados, "testId").block();
-
-        Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
-        Assertions.assertEquals(videoPublicData, result.getBody());
+        StepVerifier.create(result)
+                .expectNext(new ResponseEntity<>(videoPublicData, HttpStatus.OK))
+                .verifyComplete();
 
     }
 }

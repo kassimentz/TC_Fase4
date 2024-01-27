@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CriteriosBuscaVideoTest {
+class CriteriosBuscaVideoTest {
 
     private CriteriosBuscaVideo criteriosBuscaVideo;
 
@@ -21,17 +21,17 @@ public class CriteriosBuscaVideoTest {
     }
 
     @Test
-    public void testGetTitulo() {
+    void testGetTitulo() {
         assertEquals("Test Video", criteriosBuscaVideo.getTitulo());
     }
 
     @Test
-    public void testGetDataPublicacao() {
+    void testGetDataPublicacao() {
         assertEquals(LocalDate.now(), criteriosBuscaVideo.getDataPublicacao());
     }
 
     @Test
-    public void testGetCategoria() {
+    void testGetCategoria() {
         assertEquals("Test Category", criteriosBuscaVideo.getCategoria());
     }
 }

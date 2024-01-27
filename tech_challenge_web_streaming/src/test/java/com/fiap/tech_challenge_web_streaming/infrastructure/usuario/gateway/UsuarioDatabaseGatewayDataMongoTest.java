@@ -15,7 +15,7 @@ import reactor.test.StepVerifier;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataMongoTest
-public class UsuarioDatabaseGatewayDataMongoTest {
+ class UsuarioDatabaseGatewayDataMongoTest {
 
     @Autowired
     private UsuarioRepository repository;
@@ -26,7 +26,7 @@ public class UsuarioDatabaseGatewayDataMongoTest {
     private UsuarioDatabaseGateway usuarioDatabaseGateway;
 
     @BeforeEach
-    public void setUp() {
+     void setUp() {
         usuarioDatabaseGateway = new UsuarioDatabaseGateway(repository);
         for (int i = 1; i <= 5; i++) {
             UsuarioEntity usuarioEntity = new UsuarioEntity();
@@ -36,7 +36,7 @@ public class UsuarioDatabaseGatewayDataMongoTest {
     }
 
     @Test
-    public void testCriar() {
+     void testCriar() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 
@@ -48,7 +48,7 @@ public class UsuarioDatabaseGatewayDataMongoTest {
     }
 
     @Test
-    public void testAtualizar() {
+     void testAtualizar() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 
@@ -60,7 +60,7 @@ public class UsuarioDatabaseGatewayDataMongoTest {
     }
 
     @Test
-    public void testDeletar() {
+     void testDeletar() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 
@@ -71,7 +71,7 @@ public class UsuarioDatabaseGatewayDataMongoTest {
     }
 
     @Test
-    public void testListar() {
+     void testListar() {
         Flux<Usuario> result = usuarioDatabaseGateway.listar();
 
         StepVerifier.create(result.collectList())
@@ -80,7 +80,7 @@ public class UsuarioDatabaseGatewayDataMongoTest {
     }
 
     @Test
-    public void testBuscarPorId() {
+     void testBuscarPorId() {
         Mono<Usuario> result = usuarioDatabaseGateway.buscarPorId("1");
 
         StepVerifier.create(result)

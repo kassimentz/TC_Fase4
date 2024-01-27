@@ -18,7 +18,7 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class UsuarioDatabaseGatewayTest {
+ class UsuarioDatabaseGatewayTest {
 
     @Mock
     private UsuarioRepository repository;
@@ -26,13 +26,13 @@ public class UsuarioDatabaseGatewayTest {
     private UsuarioDatabaseGateway gateway;
 
     @BeforeEach
-    public void setup() {
+     void setup() {
         MockitoAnnotations.openMocks(this);
         gateway = new UsuarioDatabaseGateway(repository);
     }
 
     @Test
-    public void testCriar() {
+     void testCriar() {
         Usuario usuario = new Usuario();
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
         when(repository.save(any(UsuarioEntity.class))).thenReturn(Mono.just(usuarioEntity));
@@ -43,7 +43,7 @@ public class UsuarioDatabaseGatewayTest {
     }
 
     @Test
-    public void testAtualizar() {
+     void testAtualizar() {
         Usuario usuario = new Usuario();
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
         usuarioEntity.setNome("Teste Atualizado");
@@ -57,7 +57,7 @@ public class UsuarioDatabaseGatewayTest {
     }
 
     @Test
-    public void testDeletar() {
+     void testDeletar() {
         Usuario usuario = new Usuario();
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
         when(repository.delete(any(UsuarioEntity.class))).thenReturn(Mono.empty());
@@ -67,7 +67,7 @@ public class UsuarioDatabaseGatewayTest {
     }
 
     @Test
-    public void testListar() {
+     void testListar() {
         Usuario usuario = new Usuario();
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
         when(repository.findAll()).thenReturn(Flux.fromIterable(Collections.singletonList(usuarioEntity)));
@@ -79,7 +79,7 @@ public class UsuarioDatabaseGatewayTest {
     }
 
     @Test
-    public void testBuscarPorId() {
+     void testBuscarPorId() {
         Usuario usuario = new Usuario();
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
         when(repository.findById(any(String.class))).thenReturn(Mono.just(usuarioEntity));

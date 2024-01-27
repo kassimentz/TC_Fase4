@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-public class BuscarTodosOsVideosPorAtributoComPaginacaoUseCaseTest {
+class BuscarTodosOsVideosPorAtributoComPaginacaoUseCaseTest {
 
     @Mock
     private VideoGateway videoGateway;
@@ -35,7 +35,7 @@ public class BuscarTodosOsVideosPorAtributoComPaginacaoUseCaseTest {
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Video video1 = new Video("1", "Test Video 1", "This is a test video", "www.test.com", LocalDate.now(), Categoria.PETS);
         Video video2 = new Video("2", "Test Video 2", "This is another test video", "www.test.com", LocalDate.now(), Categoria.TECNOLOGIA);
         Flux<Video> videos = Flux.just(video1, video2);

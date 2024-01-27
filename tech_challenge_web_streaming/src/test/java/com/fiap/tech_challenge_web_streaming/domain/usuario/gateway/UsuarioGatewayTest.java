@@ -10,7 +10,7 @@ import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.when;
 
-public class UsuarioGatewayTest {
+ class UsuarioGatewayTest {
 
     @Mock
     private UsuarioGateway usuarioGateway;
@@ -19,7 +19,7 @@ public class UsuarioGatewayTest {
     private Usuario usuario;
 
     @BeforeEach
-    public void setUp() {
+     void setUp() {
         MockitoAnnotations.openMocks(this);
         when(usuarioGateway.criar(usuario)).thenReturn(Mono.just(usuario));
         when(usuarioGateway.atualizar(usuario)).thenReturn(Mono.just(usuario));
@@ -28,27 +28,27 @@ public class UsuarioGatewayTest {
     }
 
     @Test
-    public void testCriar() {
+     void testCriar() {
         StepVerifier.create(usuarioGateway.criar(usuario))
                 .expectNext(usuario)
                 .verifyComplete();
     }
 
     @Test
-    public void testAtualizar() {
+     void testAtualizar() {
         StepVerifier.create(usuarioGateway.atualizar(usuario))
                 .expectNext(usuario)
                 .verifyComplete();
     }
 
     @Test
-    public void testDeletar() {
+     void testDeletar() {
         StepVerifier.create(usuarioGateway.deletar(usuario))
                 .verifyComplete();
     }
 
     @Test
-    public void testBuscarPorId() {
+     void testBuscarPorId() {
         StepVerifier.create(usuarioGateway.buscarPorId("1"))
                 .expectNext(usuario)
                 .verifyComplete();

@@ -13,7 +13,7 @@ import reactor.test.StepVerifier;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
-public class BuscarUsuarioUseCaseTest {
+class BuscarUsuarioUseCaseTest {
 
     @Mock
     private UsuarioGateway usuarioGateway;
@@ -27,7 +27,7 @@ public class BuscarUsuarioUseCaseTest {
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
 
@@ -41,7 +41,7 @@ public class BuscarUsuarioUseCaseTest {
     }
 
     @Test
-    public void testExecuteUsuarioNaoEncontrado() {
+    void testExecuteUsuarioNaoEncontrado() {
         when(usuarioGateway.buscarPorId(anyString())).thenReturn(Mono.empty());
 
         Mono<Usuario> result = buscarUsuarioUseCase.execute("1");

@@ -11,7 +11,7 @@ import reactor.test.StepVerifier;
 
 import static org.mockito.Mockito.when;
 
-public class BuscarTodosOsVideosUseCaseTest {
+class BuscarTodosOsVideosUseCaseTest {
 
     @Mock
     private VideoGateway videoGateway;
@@ -25,7 +25,7 @@ public class BuscarTodosOsVideosUseCaseTest {
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Video video = new Video();
         video.setId("1");
 

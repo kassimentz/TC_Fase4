@@ -10,10 +10,10 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 
-public class MvcConfigTest {
+ class MvcConfigTest {
 
     @Test
-    public void testCriarUsuarioUseCase() {
+     void testCriarUsuarioUseCase() {
         UsuarioRepository repository = mock(UsuarioRepository.class);
         MvcConfig mvcConfig = new MvcConfig();
         CriarUsuarioUseCase useCase = mvcConfig.criarUsuarioUseCase(repository);
@@ -21,7 +21,7 @@ public class MvcConfigTest {
     }
 
     @Test
-    public void testBuscarUsuarioUseCase() {
+     void testBuscarUsuarioUseCase() {
         UsuarioRepository repository = mock(UsuarioRepository.class);
         MvcConfig mvcConfig = new MvcConfig();
         BuscarUsuarioUseCase useCase = mvcConfig.buscarUsuarioUseCase(repository);
@@ -29,7 +29,7 @@ public class MvcConfigTest {
     }
 
     @Test
-    public void testBuscarTodosUsuariosUseCase() {
+     void testBuscarTodosUsuariosUseCase() {
         UsuarioRepository repository = mock(UsuarioRepository.class);
         MvcConfig mvcConfig = new MvcConfig();
         BuscarTodosUsuariosUseCase useCase = mvcConfig.buscarTodosUsuariosUseCase(repository);
@@ -37,7 +37,7 @@ public class MvcConfigTest {
     }
 
     @Test
-    public void testAtualizarUsuarioUseCase() {
+     void testAtualizarUsuarioUseCase() {
         UsuarioRepository repository = mock(UsuarioRepository.class);
         MvcConfig mvcConfig = new MvcConfig();
         AtualizarUsuarioUseCase useCase = mvcConfig.atualizarUsuarioUseCase(repository);
@@ -45,7 +45,7 @@ public class MvcConfigTest {
     }
 
     @Test
-    public void testDeletarUsuarioUseCase() {
+     void testDeletarUsuarioUseCase() {
         UsuarioRepository repository = mock(UsuarioRepository.class);
         MvcConfig mvcConfig = new MvcConfig();
         DeletarUsuarioUseCase useCase = mvcConfig.deletarUsuarioUseCase(repository);
@@ -53,7 +53,7 @@ public class MvcConfigTest {
     }
 
     @Test
-    public void testAddFavoritoUseCase() {
+     void testAddFavoritoUseCase() {
         UsuarioRepository usuarioRepository = mock(UsuarioRepository.class);
         VideoRepository videoRepository = mock(VideoRepository.class);
         ReactiveMongoTemplate reactiveMongoTemplate = mock(ReactiveMongoTemplate.class);
@@ -63,7 +63,7 @@ public class MvcConfigTest {
     }
 
     @Test
-    public void testBuscarRecomendacoesUseCase() {
+     void testBuscarRecomendacoesUseCase() {
         UsuarioRepository usuarioRepository = mock(UsuarioRepository.class);
         VideoRepository videoRepository = mock(VideoRepository.class);
         ReactiveMongoTemplate reactiveMongoTemplate = mock(ReactiveMongoTemplate.class);
@@ -73,7 +73,7 @@ public class MvcConfigTest {
     }
 
     @Test
-    public void testBuscarVideoUseCase() {
+     void testBuscarVideoUseCase() {
         VideoRepository repository = mock(VideoRepository.class);
         ReactiveMongoTemplate template = mock(ReactiveMongoTemplate.class);
         MvcConfig mvcConfig = new MvcConfig();
@@ -82,7 +82,7 @@ public class MvcConfigTest {
     }
 
     @Test
-    public void testBuscarTodosOsVideosUseCase() {
+     void testBuscarTodosOsVideosUseCase() {
         VideoRepository repository = mock(VideoRepository.class);
         ReactiveMongoTemplate template = mock(ReactiveMongoTemplate.class);
         MvcConfig mvcConfig = new MvcConfig();
@@ -91,7 +91,7 @@ public class MvcConfigTest {
     }
 
     @Test
-    public void testBuscarTodosOsVideosPorAtributoComPaginacaoUseCase() {
+     void testBuscarTodosOsVideosPorAtributoComPaginacaoUseCase() {
         VideoRepository repository = mock(VideoRepository.class);
         ReactiveMongoTemplate template = mock(ReactiveMongoTemplate.class);
         MvcConfig mvcConfig = new MvcConfig();
@@ -100,7 +100,7 @@ public class MvcConfigTest {
     }
 
     @Test
-    public void testCriarVideoUseCase() {
+     void testCriarVideoUseCase() {
         VideoRepository repository = mock(VideoRepository.class);
         ReactiveMongoTemplate template = mock(ReactiveMongoTemplate.class);
         MvcConfig mvcConfig = new MvcConfig();
@@ -109,7 +109,7 @@ public class MvcConfigTest {
     }
 
     @Test
-    public void testDeletarVideoUseCase() {
+     void testDeletarVideoUseCase() {
         VideoRepository repository = mock(VideoRepository.class);
         ReactiveMongoTemplate template = mock(ReactiveMongoTemplate.class);
         MvcConfig mvcConfig = new MvcConfig();
@@ -118,7 +118,7 @@ public class MvcConfigTest {
     }
 
     @Test
-    public void testAtualizarVideoUseCase() {
+     void testAtualizarVideoUseCase() {
         VideoRepository repository = mock(VideoRepository.class);
         ReactiveMongoTemplate template = mock(ReactiveMongoTemplate.class);
         MvcConfig mvcConfig = new MvcConfig();
