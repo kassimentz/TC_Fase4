@@ -8,6 +8,7 @@ import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.repository.U
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.gateway.VideoDatabaseGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.gateway.VideoSaveLocalFileGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.repository.VideoRepository;
+import com.fiap.tech_challenge_web_streaming.usecase.estatistica.BuscaEstatisticaUseCase;
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.*;
 import com.fiap.tech_challenge_web_streaming.usecase.video.*;
 import org.springframework.context.annotation.Bean;
@@ -69,6 +70,11 @@ public class MvcConfig {
         return new BuscarVideoUseCase(videoGateway);
     }
 
+    @Bean
+    public BuscaEstatisticaUseCase buscaEstatisticaUseCase(VideoRepository repository, ReactiveMongoTemplate template) {
+        VideoGateway videoGateway = new VideoDatabaseGateway(repository, template);
+        return new BuscaEstatisticaUseCase(videoGateway);
+    }
     @Bean
     public BuscarTodosOsVideosUseCase buscarTodosOsVideosUseCase(VideoRepository repository, ReactiveMongoTemplate template) {
         VideoGateway videoGateway = new VideoDatabaseGateway(repository, template);

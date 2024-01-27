@@ -17,6 +17,7 @@ public class VideoEntity {
     private String titulo;
     private String descricao;
     private String url;
+    private Long qtVisualizacao;
     private LocalDate dataPublicacao;
     private Categoria categoria;
 
@@ -30,13 +31,15 @@ public class VideoEntity {
         this.url = video.getUrl();
         this.dataPublicacao = video.getDataPublicacao();
         this.categoria = video.getCategoria();
+ this.qtVisualizacao = video.getQtVisualizacao();
+
     }
 
-    public Video toVideo(){
+    public Video toVideo() {
 
 
         return new Video(
-                this.id, this.titulo, this.descricao, this.url,  this.categoria);
+                this.id, this.titulo, this.descricao, this.url, this.dataPublicacao, this.categoria, this.qtVisualizacao);
     }
 
     public String getId() {

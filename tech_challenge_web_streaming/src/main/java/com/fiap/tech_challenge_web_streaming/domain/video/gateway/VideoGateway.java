@@ -27,4 +27,6 @@ public interface VideoGateway {
 
     Mono<Long> count();
 
+    Mono<Long> buscarQuantidadeVisualizacoes();
+
 }

@@ -6,10 +6,12 @@ import com.fiap.tech_challenge_web_streaming.domain.video.factories.PageData;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.entityschema.VideoEntity;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.repository.VideoRepository;
+import org.bson.Document;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import reactor.core.publisher.Flux;
@@ -91,4 +93,15 @@ public class VideoDatabaseGateway implements VideoGateway {
     public Mono<Long> count() {
         return this.repository.count();
     }
+
+
+    @Override
+    public Mono<Long> buscarQuantidadeVisualizacoes() {
+        return this.reactiveMongoTemplate.aggregate(
+                Aggregation.newAggregation(
+                        Aggregation.group().sum("qtVisualizacao").as("qtVisualizacao")
+                ), VideoEntity.class, Document.class
+        ).map(document -> document.getLong("qtVisualizacao")).next();
+    }
+
 }

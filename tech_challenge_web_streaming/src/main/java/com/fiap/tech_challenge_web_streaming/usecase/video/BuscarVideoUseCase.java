@@ -15,6 +15,10 @@ public class BuscarVideoUseCase {
 
     public Mono<Video> execute(String id) throws VideoNaoEncontradoException {
         return videoGateway.buscarPorId(id)
+                .flatMap(video -> {
+                    video.setQtVisualizacao(video.getQtVisualizacao() + 1L);
+                    return videoGateway.atualizar(video);
+                })
                 .switchIfEmpty(Mono.error(VideoNaoEncontradoException::new));
     }
 }
