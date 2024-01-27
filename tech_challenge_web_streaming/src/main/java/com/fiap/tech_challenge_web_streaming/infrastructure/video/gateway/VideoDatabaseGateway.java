@@ -57,8 +57,7 @@ public class VideoDatabaseGateway implements VideoGateway {
 
     @Override
     public Flux<Video> buscarTodos() {
-        Flux<VideoEntity> videoEntityFlux = this.repository.findAll();
-        return videoEntityFlux.map(VideoEntity::toVideo);
+        return this.repository.findAll().map(VideoEntity::toVideo);
     }
 
     @Override

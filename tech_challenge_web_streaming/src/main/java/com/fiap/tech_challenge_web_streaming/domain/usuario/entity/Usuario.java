@@ -15,6 +15,8 @@ public class Usuario {
         private List<Video> recomendados;
 
         public Usuario(){
+            this.favoritos = new ArrayList<>();
+            this.recomendados = new ArrayList<>();
         }
 
         public Usuario(String id, String nome, String email, List<Video> favoritos, List<Video> recomendados){
@@ -92,5 +94,3 @@ public class Usuario {
 
 
     }
-
-
