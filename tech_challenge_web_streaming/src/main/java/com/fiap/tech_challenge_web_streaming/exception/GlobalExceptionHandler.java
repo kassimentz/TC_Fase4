@@ -1,5 +1,4 @@
 package com.fiap.tech_challenge_web_streaming.exception;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.validation.FieldError;
@@ -9,7 +8,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -43,6 +46,7 @@ public class GlobalExceptionHandler {
         ErrorMessage error = new ErrorMessage(errorMessage);
         return ResponseEntity.badRequest().body(error);
     }
+
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErrorMessage> runtimeException(RuntimeException ex) {
         String errorMessage = ex.getMessage();
@@ -50,7 +54,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(error);
     }
 
-//    @ExceptionHandler(MissingServletRequestParameterException.class)
+//    @ExceptionHandler({MissingServletRequestParameterException.class})
 //    public ResponseEntity<ErroValidacaoResponse> handleValidationParameterException(MissingServletRequestParameterException ex) {
 //        ErroValidacaoResponse response = new ErroValidacaoResponse();
 //        response.setStatus(400);

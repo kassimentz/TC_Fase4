@@ -12,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -35,9 +37,10 @@ class AddFavoritoUseCaseTest {
     void testExecute() {
         Usuario usuario = new Usuario();
         usuario.setId("1");
+
         Video video = new Video();
         video.setId("1");
-
+        usuario.addFavorito(video);
         when(usuarioGateway.buscarPorId(any(String.class))).thenReturn(Mono.just(usuario));
         when(videoGateway.buscarPorId(any(String.class))).thenReturn(Mono.just(video));
         when(usuarioGateway.atualizar(any(Usuario.class))).thenReturn(Mono.just(usuario));

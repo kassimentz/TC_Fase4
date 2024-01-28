@@ -9,12 +9,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.codec.multipart.FilePart;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.io.File;
 import java.time.LocalDate;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class CriarVideoUseCaseTest {
@@ -34,10 +37,13 @@ class CriarVideoUseCaseTest {
 
     @Test
     void testExecute() {
-        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS, "url");
+        Video video = new Video("Titulo", "Descricao",  Categoria.PETS, "url");
+        String mockUrl = "filePathMock";
+        FilePart part = mock(FilePart.class);
         when(videoGateway.criar(any(Video.class))).thenReturn(Mono.just(video));
+        when(videoFileGateway.salvarArquivoVideo(any(FilePart.class))).thenReturn(Mono.just(mockUrl));
 
-        Mono<Video> result = criarVideoUseCase.execute(new VideoRequestData("Titulo", "Descricao", "Pets", LocalDate.now()), null);
+        Mono<Video> result = criarVideoUseCase.execute(new VideoRequestData("Titulo", "Descricao", "PETS"), part);
 
         StepVerifier.create(result)
                 .expectNext(video)

@@ -3,6 +3,7 @@ package com.fiap.tech_challenge_web_streaming.domain.video.entity;
 import com.fiap.tech_challenge_web_streaming.domain.categoria.entity.Categoria;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Video {
@@ -13,19 +14,31 @@ public class Video {
     private String url;
     private LocalDate dataPublicacao;
     private Categoria categoria;
-    private Long qtVisualizacao;
-    private List<String> usuariosQueFavoritaram;
+    private Long qtVisualizacao = 0L;
+    private List<String> usuariosQueFavoritaram = new ArrayList<>();
 
-    public Video() {}
+    public Video() {
+        this.dataPublicacao = LocalDate.now();
+    }
 
 
-    public Video(String titulo, String descricao, LocalDate dataPublicacao, Categoria categoria, String url, Long qtVisualizacao) {
+
+    public Video(String titulo, String descricao, Categoria categoria, String url) {
         this.titulo = titulo;
         this.descricao = descricao;
-        this.dataPublicacao = dataPublicacao;
         this.categoria = categoria;
         this.url = url;
-        this.qtVisualizacao = qtVisualizacao;
+        this.dataPublicacao = LocalDate.now();
+        this.qtVisualizacao = 0L;
+    }
+
+    public Video(String id, String titulo, String descricao, String url, Categoria categoria) {
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.url = url;
+        this.categoria = categoria;
+        this.dataPublicacao = LocalDate.now();
     }
 
     public Video(String id, String titulo, String descricao, String url, LocalDate dataPublicacao, Categoria categoria, Long qtVisualizacao) {
@@ -37,6 +50,7 @@ public class Video {
         this.categoria = categoria;
         this.qtVisualizacao = qtVisualizacao;
     }
+
 
 
 
@@ -95,6 +109,7 @@ public class Video {
     public void setUsuariosQueFavoritaram(List<String> usuariosQueFavoritaram){
         this.usuariosQueFavoritaram = usuariosQueFavoritaram;
     }
+
 
     public Long getQtVisualizacao() {
         return qtVisualizacao;

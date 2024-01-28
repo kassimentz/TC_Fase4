@@ -32,7 +32,7 @@ public class UsuarioDatabaseGateway implements UsuarioGateway {
     @Override
     public Mono<Void> deletar(Usuario usuario) {
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
-        return repository.delete(usuarioEntity);
+        return repository.delete(usuarioEntity).then();
     }
 
     @Override

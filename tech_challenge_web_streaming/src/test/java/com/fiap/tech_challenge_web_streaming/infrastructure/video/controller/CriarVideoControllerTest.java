@@ -36,11 +36,11 @@ class CriarVideoControllerTest {
 
     @Test
     void testCreateVideo() throws JsonProcessingException{
-        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS, "url");
+        Video video = new Video("Titulo", "Descricao", Categoria.PETS, "url");
         VideoPublicData videoPublicData = new VideoPublicData(video);
         when(criarVideoUseCase.execute(any(IVideoRequestData.class), any())).thenReturn(Mono.just(video));
 
-        Mono<ResponseEntity<VideoPublicData>> result = controller.createVideo(new VideoRequestData("Titulo", "Descricao",  "Pets", LocalDate.now()), null);
+        Mono<ResponseEntity<VideoPublicData>> result = controller.createVideo(new VideoRequestData("Titulo", "Descricao",  "Pets"), null);
 
         StepVerifier.create(result)
                 .expectNext(new ResponseEntity<>(videoPublicData, HttpStatus.CREATED))

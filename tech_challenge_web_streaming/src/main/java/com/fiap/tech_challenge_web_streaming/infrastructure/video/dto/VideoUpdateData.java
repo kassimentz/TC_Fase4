@@ -6,10 +6,10 @@ import java.time.LocalDate;
 
 public record VideoUpdateData(
 
-        //TODO validações entram aqui
         String titulo,
         String descricao,
-        String categoria,
-        LocalDate dataPublicacao
+        String categoria
 
-) implements IVideoUpdateData{}
+) implements IVideoUpdateData {
+
+}

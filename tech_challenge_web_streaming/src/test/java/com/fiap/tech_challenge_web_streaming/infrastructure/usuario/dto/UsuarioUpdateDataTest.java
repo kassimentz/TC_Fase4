@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         List<Video> expectedFavoritos = new ArrayList<>();
         List<Video> expectedRecomendados = new ArrayList<>();
 
-        UsuarioUpdateData updateData = new UsuarioUpdateData(expectedNome, expectedEmail);
+        UsuarioRequestData updateData = new UsuarioRequestData(expectedNome, expectedEmail);
 
         assertEquals(expectedNome, updateData.nome());
         assertEquals(expectedEmail, updateData.email());

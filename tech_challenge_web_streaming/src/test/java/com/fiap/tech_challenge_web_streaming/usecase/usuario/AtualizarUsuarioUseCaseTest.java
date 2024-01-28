@@ -2,7 +2,9 @@ package com.fiap.tech_challenge_web_streaming.usecase.usuario;
 
 import com.fiap.tech_challenge_web_streaming.domain.usuario.entity.Usuario;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.gateway.UsuarioGateway;
+import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioRequestData;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioUpdateData;
+import com.fiap.tech_challenge_web_streaming.usecase.usuario.dto.IUsuarioRequestData;
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.dto.IUsuarioUpdateData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

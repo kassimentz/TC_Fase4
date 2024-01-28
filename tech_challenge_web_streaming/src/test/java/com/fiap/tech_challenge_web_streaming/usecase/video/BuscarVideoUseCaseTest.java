@@ -30,13 +30,15 @@ class BuscarVideoUseCaseTest {
     void testExecute() {
         Video video = new Video();
         video.setId("1");
+        video.setQtVisualizacao(0L);
 
         when(videoGateway.buscarPorId(anyString())).thenReturn(Mono.just(video));
+        when(videoGateway.atualizar(video)).thenReturn(Mono.just(video));
 
         Mono<Video> result = buscarVideoUseCase.execute("1");
 
         StepVerifier.create(result)
-                .expectNext(video)
+                .expectNextMatches(returnedVideo -> returnedVideo.getQtVisualizacao() == 1L)
                 .verifyComplete();
     }
 

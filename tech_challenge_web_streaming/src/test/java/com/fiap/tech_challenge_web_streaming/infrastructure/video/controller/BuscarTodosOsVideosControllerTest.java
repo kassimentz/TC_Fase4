@@ -31,7 +31,7 @@ class BuscarTodosOsVideosControllerTest {
 
     @Test
     void testGetAllVideos() {
-        Video video = new Video("Titulo", "Descricao", LocalDate.now(), Categoria.PETS, "url");
+        Video video = new Video("Titulo", "Descricao", Categoria.PETS, "url");
         VideoPublicData videoPublicData = new VideoPublicData(video);
         when(buscarTodosOsVideosUseCase.execute()).thenReturn(Flux.just(video));
 

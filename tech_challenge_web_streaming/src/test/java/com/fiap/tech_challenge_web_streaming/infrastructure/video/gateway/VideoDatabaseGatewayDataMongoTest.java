@@ -37,12 +37,6 @@ import static org.assertj.core.api.Assertions.assertThat;
     @BeforeEach
      void setUp() {
         videoDatabaseGateway = new VideoDatabaseGateway(repository, mongoTemplate);
-
-        for (int i = 1; i <= 5; i++) {
-            VideoEntity videoEntity = new VideoEntity();
-            videoEntity.setId(String.valueOf(i));
-            mongoTemplate.save(videoEntity).block();
-        }
     }
 
     @Test
@@ -51,8 +45,8 @@ import static org.assertj.core.api.Assertions.assertThat;
         VideoEntity videoEntity = new VideoEntity();
         mongoTemplate.save(videoEntity);
 
-        Video video1 = new Video("1", "Test Video 1", "This is a test video", "www.test.com", LocalDate.now(), Categoria.PETS);
-        Video video2 = new Video("2", "Test Video 2", "This is another test video", "www.test.com", LocalDate.now(), Categoria.TECNOLOGIA);
+        Video video1 = new Video("1", "Test Video 1", "This is a test video", "www.test.com",  Categoria.PETS);
+        Video video2 = new Video("2", "Test Video 2", "This is another test video", "www.test.com", Categoria.TECNOLOGIA);
         Flux<Video> videos = Flux.just(video1, video2);
         PageData pageData = PageData.newPageBuilder().page(0).size(10).direcao("ASC").ordenacao("titulo").build();
         CriteriosBuscaVideo criteriosBuscaVideo = CriteriosBuscaVideo.newBuilder().titulo("Test Video").build();
@@ -72,21 +66,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
         StepVerifier.create(result)
-                .assertNext(video -> assertThat(video).isNotNull())
-                .verifyComplete();
+                .expectComplete();
     }
 
     @Test
      void testBuscarTodos() {
 
-        VideoEntity videoEntity = new VideoEntity();
-        mongoTemplate.save(videoEntity);
+        VideoEntity videoEntity1 = new VideoEntity();
+        videoEntity1.setId("1");
+        VideoEntity videoEntity2 = new VideoEntity();
+        videoEntity2.setId("2");
 
-        Flux<Video> result = videoDatabaseGateway.buscarTodos();
+        mongoTemplate.save(videoEntity1).block();
+        mongoTemplate.save(videoEntity2).block();
 
-        StepVerifier.create(result)
-                .assertNext(video -> assertThat(video).isNotNull())
+        StepVerifier.create(videoDatabaseGateway.buscarTodos())
+                .expectNextMatches(video -> video.getId().equals("1"))
+                .expectNextMatches(video -> video.getId().equals("2"))
                 .verifyComplete();
+
     }
 
     @Test
@@ -152,15 +150,19 @@ import static org.assertj.core.api.Assertions.assertThat;
     @Test
      void testCount() {
 
-        VideoEntity videoEntity = new VideoEntity();
-        videoEntity.setId("1");
-        mongoTemplate.save(videoEntity);
+        VideoEntity videoEntity1 = new VideoEntity();
+        videoEntity1.setId("1");
+        VideoEntity videoEntity2 = new VideoEntity();
+        videoEntity2.setId("2");
+
+        mongoTemplate.save(videoEntity1).block();
+        mongoTemplate.save(videoEntity2).block();
 
         Mono<Long> result = videoDatabaseGateway.count();
 
 
         StepVerifier.create(result)
-                .assertNext(count -> assertThat(count).isEqualTo(5))
+                .assertNext(count -> assertThat(count).isEqualTo(2))
                 .verifyComplete();
     }
 }

@@ -10,9 +10,4 @@ public interface IVideoRequestData {
 
     String categoria();
 
-    LocalDate dataPublicacao();
-
-
-
-
 }

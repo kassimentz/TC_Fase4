@@ -6,6 +6,7 @@ import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoReque
 import com.fiap.tech_challenge_web_streaming.usecase.video.CriarVideoUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class CriarVideoController {
 
     @PostMapping(value = "/videos", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @Operation(summary = "Criar Vídeo")
-    public Mono<ResponseEntity<VideoPublicData>> createVideo(@RequestPart VideoRequestData videoMetadata, @RequestPart FilePart videoFile) throws JsonProcessingException {
+    public Mono<ResponseEntity<VideoPublicData>> createVideo(@Valid @RequestPart VideoRequestData videoMetadata, @RequestPart FilePart videoFile) throws JsonProcessingException {
 
 
         /* Caso queiramos receber uma string e converter aqui, descomentar essas linhas
