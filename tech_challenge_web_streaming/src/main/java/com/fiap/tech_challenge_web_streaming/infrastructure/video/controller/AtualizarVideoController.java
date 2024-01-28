@@ -31,10 +31,6 @@ public class AtualizarVideoController {
     public Mono<ResponseEntity<VideoPublicData>> atualizarVideo(@Valid @RequestBody VideoUpdateData dados, @PathVariable String id) {
         return this.atualizarVideoUseCase.execute(id, dados)
                 .map(video -> new ResponseEntity(new VideoPublicData(video), HttpStatus.OK));
-
-
     }
-
-
 
 }

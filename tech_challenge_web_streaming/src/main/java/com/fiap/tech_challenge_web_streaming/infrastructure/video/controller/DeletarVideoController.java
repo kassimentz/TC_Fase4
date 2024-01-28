@@ -25,7 +25,8 @@ public class DeletarVideoController {
     @DeleteMapping("/videos/{id}")
     @Operation(summary = "Deletar Vídeo por ID")
     public Mono<ResponseEntity<Void>> deletarVideo(@PathVariable String id) {
-        return this.deletarVideoUseCase.execute(id).map(v -> new ResponseEntity<>(HttpStatus.NO_CONTENT));
+        return deletarVideoUseCase.execute(id)
+                .then(Mono.just(new ResponseEntity<Void>(HttpStatus.NO_CONTENT)));
     }
 
 }
