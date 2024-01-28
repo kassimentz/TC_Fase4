@@ -8,6 +8,6 @@ services:
     
         
   tech-challenge: 
-    image: tech-challenge:1.0.0
+    image: tech-challenge:latest
     ports:
       - 8080:8080  

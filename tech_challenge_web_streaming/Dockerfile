@@ -20,4 +20,4 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.fiap.tech_challenge_web_streaming.TechChallengeWebStreamingApplication"]
+ENTRYPOINT ["java","-cp","app:app/lib/*","-Dspring.data.mongodb.uri=mongodb://mongo:27017/db_web_streaming" ,"com.fiap.tech_challenge_web_streaming.TechChallengeWebStreamingApplication"]

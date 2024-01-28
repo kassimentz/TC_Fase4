@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.support.WebExchangeBindException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ class GlobalExceptionHandlerTest {
 
     @Test
     void testHandleValidationException() {
-        MethodArgumentNotValidException ex = mock(MethodArgumentNotValidException.class);
+        WebExchangeBindException ex = mock(WebExchangeBindException.class);
         BindingResult bindingResult = mock(BindingResult.class);
         FieldError fieldError = new FieldError("objectName", "field", "defaultMessage");
         List<ObjectError> errors = new ArrayList<>();
