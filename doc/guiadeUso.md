@@ -2,6 +2,10 @@
 
 ## 1 - Provisionamento da Infra 
 
+### Pré-Requisitos
+- Possuir o Docker instalado em uma versão que já possua o compose embarcado (para testar basta executar docker compose version)
+- Possuir o Make instalado (caso queira rodar os targets do Makefile) se estiver utilizando o Windows
+
 ### Makefile
 Escolhemos abstrair os comandos necessários para compilar, testar, buildar a imagem e rodar a aplicação através do Make e seus targets no arquivo Makefile.
 
@@ -48,8 +52,14 @@ make test-coverage
 ```
 O teste será salvo em target/site/jacoco/index.html
 
+Caso deseje chegar ao mesmo resultado sem utilizar o make, executar 
+```bash 
+./mvnw clean test
+./mvnw test -P integration-test
+./mvnw jacoco:reports
+```
 ---
-## Endpoints da aplicação 
+## 2 - Endpoints da aplicação 
 A aplicação está configurada para utilizar o Swagger, portanto, toda a documentação dos endpoints estará acessível através da url: 
 http://localhost:8080/webjars/swagger-ui/index.html#/
 
