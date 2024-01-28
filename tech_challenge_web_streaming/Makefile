@@ -21,6 +21,9 @@ integration-test:
 
 test-all:  unit-test integration-test
 
+test-coverage: unit-test integration-test
+	@./mvnw $(MVN_ARGS) jacoco:report
+
 run: 
 	@./mvnw $(MVN_ARGS) clean spring-boot:run
 
