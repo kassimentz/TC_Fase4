@@ -2,8 +2,8 @@ package com.fiap.tech_challenge_web_streaming.usecase.video;
 
 import com.fiap.tech_challenge_web_streaming.domain.categoria.entity.Categoria;
 import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
-import com.fiap.tech_challenge_web_streaming.domain.video.factories.PageData;
 import com.fiap.tech_challenge_web_streaming.domain.video.factories.CriteriosBuscaVideo;
+import com.fiap.tech_challenge_web_streaming.domain.video.factories.PageData;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -6,7 +6,6 @@ import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoPublicData;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoRequestData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.CriarVideoUseCase;
-import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoPublicData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoRequestData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

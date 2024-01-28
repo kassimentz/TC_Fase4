@@ -3,10 +3,12 @@ package com.fiap.tech_challenge_web_streaming.infrastructure.config;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.gateway.UsuarioGateway;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoFileGateway;
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
+import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoStreamGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.gateway.UsuarioDatabaseGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.repository.UsuarioRepository;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.gateway.VideoDatabaseGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.gateway.VideoSaveLocalFileGateway;
+import com.fiap.tech_challenge_web_streaming.infrastructure.video.gateway.VideoStreamGatewayImpl;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.repository.VideoRepository;
 import com.fiap.tech_challenge_web_streaming.usecase.estatistica.BuscaEstatisticaUseCase;
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.*;
@@ -108,4 +110,10 @@ public class MvcConfig {
         return new AtualizarVideoUseCase(videoGateway);
     }
 
+
+    @Bean
+    public VideoStreamUseCase videoStreamUseCase(VideoRepository repository)  {
+        VideoStreamGateway videoGateway = new VideoStreamGatewayImpl(repository);
+        return new VideoStreamUseCase(videoGateway);
+    }
 }

@@ -1,6 +1,5 @@
 package com.fiap.tech_challenge_web_streaming.infrastructure.video.controller;
 
-import com.fiap.tech_challenge_web_streaming.domain.video.entity.Video;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoPublicData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.BuscarTodosOsVideosUseCase;
 import io.swagger.v3.oas.annotations.Operation;

@@ -90,6 +90,14 @@ public class VideoEntity {
         this.categoria = categoria;
     }
 
+    public Long getQtVisualizacao() {
+        return qtVisualizacao;
+    }
+
+    public void setQtVisualizacao(Long qtVisualizacao) {
+        this.qtVisualizacao = qtVisualizacao;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

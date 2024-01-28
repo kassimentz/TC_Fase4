@@ -6,12 +6,10 @@ import com.fiap.tech_challenge_web_streaming.domain.video.factories.CriteriosBus
 import com.fiap.tech_challenge_web_streaming.domain.video.factories.PageData;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoPublicData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.BuscarTodosOsVideosPorAtributoComPaginacaoUseCase;
-import com.fiap.tech_challenge_web_streaming.usecase.video.dto.IVideoPublicData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;

@@ -15,7 +15,6 @@ public class VideoSaveLocalFileGateway implements VideoFileGateway {
     private static final String VIDEO_DIRECTORY = "src/main/resources/videos";
 
     @Override
-
     public Mono<String> salvarArquivoVideo(FilePart videoFile) {
 
         Path destinationDirectory = Paths.get(VIDEO_DIRECTORY);

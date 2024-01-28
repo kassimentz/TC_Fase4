@@ -1,7 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.infrastructure.video.controller;
 
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoPublicData;
-import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoRequestData;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.dto.VideoUpdateData;
 import com.fiap.tech_challenge_web_streaming.usecase.video.AtualizarVideoUseCase;
 

@@ -3,7 +3,6 @@ package com.fiap.tech_challenge_web_streaming.infrastructure.usuario.controller;
 import com.fiap.tech_challenge_web_streaming.domain.usuario.entity.Usuario;
 import com.fiap.tech_challenge_web_streaming.infrastructure.usuario.dto.UsuarioPublicData;
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.BuscarUsuarioUseCase;
-import com.fiap.tech_challenge_web_streaming.usecase.usuario.dto.IUsuarioPublicData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
