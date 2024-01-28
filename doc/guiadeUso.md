@@ -54,7 +54,7 @@ A aplicação está configurada para utilizar o Swagger, portanto, toda a docume
 http://localhost:8080/webjars/swagger-ui/index.html#/
 
 seguem imagens com os endpoints disponíveis 
-![](![](2024-01-28-18-33-39.png).png)
+![](2024-01-28-18-33-39.png)
 
 ![](image.png.png)
 
