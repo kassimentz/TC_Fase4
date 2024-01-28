@@ -67,3 +67,4 @@ https://github.com/kassimentz/TC_Fase4/tree/main/tech_challenge_web_streaming
 ### Decisões Técnicas Relevantes 
 [Decisões Técnicas Relevantes](./doc/decisoesTecnicas.md)
 ### Guia de Uso da Aplicação
+[Guia de Uso da Aplicação](./doc/guiadeUso.md)
