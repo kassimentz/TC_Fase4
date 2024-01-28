@@ -1,4 +1,4 @@
-package com.fiap.tech_challenge_web_streaming.usecase.estatistica;
+package com.fiap.tech_challenge_web_streaming.usecase.estatisticas;
 
 import com.fiap.tech_challenge_web_streaming.domain.video.gateway.VideoGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.estatistica.dto.EstatisticaPublicData;

@@ -1,4 +1,4 @@
-package com.fiap.tech_challenge_web_streaming.exception;
+package com.fiap.tech_challenge_web_streaming.infrastructure.config.exception;
 
 import java.util.List;
 

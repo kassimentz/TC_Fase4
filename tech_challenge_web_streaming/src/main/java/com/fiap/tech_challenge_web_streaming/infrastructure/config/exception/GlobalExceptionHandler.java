@@ -1,19 +1,14 @@
-package com.fiap.tech_challenge_web_streaming.exception;
+package com.fiap.tech_challenge_web_streaming.infrastructure.config.exception;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.support.WebExchangeBindException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

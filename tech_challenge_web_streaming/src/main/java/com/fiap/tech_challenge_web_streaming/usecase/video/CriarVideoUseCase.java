@@ -10,7 +10,6 @@ import reactor.core.publisher.Mono;
 
 public class CriarVideoUseCase {
 
-    //talvez para a lógica de salvar o vídeo criar um FileVideoGateway em adição a esse
 
     private final VideoGateway videoGateway;
     private final VideoFileGateway videoFileGateway;
@@ -21,8 +20,6 @@ public class CriarVideoUseCase {
     }
 
     public Mono<Video> execute(IVideoRequestData videoMetadata, FilePart videoFile) {
-
-        //TODO é aqui que entrará a lógica para salvar o arquivo do vídeo
 
         return videoFileGateway.salvarArquivoVideo(videoFile)
                 .flatMap(videoUrl -> {

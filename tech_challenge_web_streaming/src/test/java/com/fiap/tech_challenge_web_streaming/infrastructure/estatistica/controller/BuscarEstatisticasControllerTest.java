@@ -1,7 +1,7 @@
 package com.fiap.tech_challenge_web_streaming.infrastructure.estatistica.controller;
 
 import com.fiap.tech_challenge_web_streaming.infrastructure.estatistica.dto.EstatisticaPublicData;
-import com.fiap.tech_challenge_web_streaming.usecase.estatistica.BuscaEstatisticaUseCase;
+import com.fiap.tech_challenge_web_streaming.usecase.estatisticas.BuscaEstatisticaUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;

@@ -1,5 +1,6 @@
 package com.fiap.tech_challenge_web_streaming.exception;
 
+import com.fiap.tech_challenge_web_streaming.infrastructure.config.exception.ErrorMessage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,12 +1,14 @@
 package com.fiap.tech_challenge_web_streaming.exception;
 
+import com.fiap.tech_challenge_web_streaming.infrastructure.config.exception.ErroValidacaoResponse;
+import com.fiap.tech_challenge_web_streaming.infrastructure.config.exception.ErrorMessage;
+import com.fiap.tech_challenge_web_streaming.infrastructure.config.exception.GlobalExceptionHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.support.WebExchangeBindException;
 
 import java.util.ArrayList;

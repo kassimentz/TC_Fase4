@@ -10,7 +10,7 @@ import com.fiap.tech_challenge_web_streaming.infrastructure.video.gateway.VideoD
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.gateway.VideoSaveLocalFileGateway;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.gateway.VideoStreamGatewayImpl;
 import com.fiap.tech_challenge_web_streaming.infrastructure.video.repository.VideoRepository;
-import com.fiap.tech_challenge_web_streaming.usecase.estatistica.BuscaEstatisticaUseCase;
+import com.fiap.tech_challenge_web_streaming.usecase.estatisticas.BuscaEstatisticaUseCase;
 import com.fiap.tech_challenge_web_streaming.usecase.usuario.*;
 import com.fiap.tech_challenge_web_streaming.usecase.video.*;
 import org.springframework.context.annotation.Bean;
