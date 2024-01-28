@@ -47,7 +47,7 @@ Reforçando que nesse ponto definimos apenas os contratos, o Gateway por si só 
 
 ----
 
-**Use Cases**
+### Use Cases
 
 A camada de Use Case é a grande orquestradora de nossa aplicação, através dela realizaremos as ações que nossa aplicação deve prover para atender sua razão de existir.  
 Basicamente realizamos a divisão de pacotes entre os Use Cases propriamente ditos e a especificação dos DTOs que serão usados para comunicação com a camada acima 

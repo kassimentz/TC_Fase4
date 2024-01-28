@@ -29,7 +29,7 @@ public class CriarVideoController {
 
     @PostMapping(value = "/videos", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @Operation(summary = "Criar Vídeo")
-    public Mono<ResponseEntity<VideoPublicData>> createVideo(@Valid @RequestPart VideoRequestData videoMetadata, @RequestPart FilePart videoFile) throws JsonProcessingException {
+    public Mono<ResponseEntity<VideoPublicData>> createVideo(@Valid @RequestPart VideoRequestData videoMetadata, @RequestPart FilePart videoFile)  {
 
 
         /* Caso queiramos receber uma string e converter aqui, descomentar essas linhas
