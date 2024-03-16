@@ -81,6 +81,6 @@ curl --location 'localhost:8080/videos' \
 --form 'videoFile=@"coloque o caminho do arquivo aqui"'
 ```
 Ou, para simplificar, disponibilizamos um arquivo a ser importando no Postman que contempla o upload 
-[Faça o Download aqui](./Video%20API.postman_collection.json)
+[Faça o Download aqui](https://github.com/kassimentz/TC_Fase4/blob/main/doc/Video%20API.postman_collection.json)
 
 

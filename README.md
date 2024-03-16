@@ -59,12 +59,16 @@ Desenvolver uma aplicação web de streaming de vídeos utilizando as tecnologia
 
 https://github.com/kassimentz/TC_Fase4/tree/main/tech_challenge_web_streaming
 
+## Vídeo com a Apresentação: 
+[Vídeo Apresentação](https://www.youtube.com/watch?v=8hgNE2Uv_XE)
+
+
 ## Documentação: 
 
 ### Arquitetura
-[Documentação da Arquitetura](./doc/Arquitetura.md)
+[Documentação da Arquitetura](https://github.com/kassimentz/TC_Fase4/blob/main/doc/Arquitetura.md)
 
 ### Decisões Técnicas Relevantes 
-[Decisões Técnicas Relevantes](./doc/decisoesTecnicas.md)
+[Decisões Técnicas Relevantes](https://github.com/kassimentz/TC_Fase4/blob/main/doc/decisoesTecnicas.md)
 ### Guia de Uso da Aplicação
-[Guia de Uso da Aplicação](./doc/guiadeUso.md)
+[Guia de Uso da Aplicação](https://github.com/kassimentz/TC_Fase4/blob/main/doc/guiadeUso.md)

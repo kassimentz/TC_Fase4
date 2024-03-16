@@ -2,7 +2,8 @@
 
 ## Arquitetura 
 Conforme já descrito no decorrer do documento de arquitetura, utilizamos a CleanArch e por estarmos utilizando o paradigma reativo através do WebFlux, optamos por fazer com que os Controllers retornem as respectivas representações reativas Mono e Flux, a justificativa para tal (e contexto) foi dado na própria documentação de arquitetura, especificamente na área de Use Cases: 
-[Arquitetura](./Arquitetura.md)
+[Arquitetura](https://github.com/kassimentz/TC_Fase4/blob/main/doc/Arquitetura.md)
+
 ![](2024-01-28-16-53-30.png)
 
 ---
